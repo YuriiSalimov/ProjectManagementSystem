@@ -9,24 +9,6 @@ CREATE TABLE IF NOT EXISTS companies (
 )
   ENGINE = InnoDB;
 
--- developers
-CREATE TABLE IF NOT EXISTS developers (
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
-  company_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (company_id) REFERENCES companies (id)
-)
-  ENGINE = InnoDB;
-
--- skills
-CREATE TABLE IF NOT EXISTS skills (
-  id INT NOT NULL AUTO_INCREMENT,
-  skill VARCHAR(25) NOT NULL,
-  PRIMARY KEY (id)
-)
-  ENGINE = InnoDB;
-
 -- customers
 CREATE TABLE IF NOT EXISTS customers (
   id INT NOT NULL AUTO_INCREMENT,
@@ -46,6 +28,26 @@ CREATE TABLE IF NOT EXISTS projects (
 )
   ENGINE = InnoDB;
 
+-- developers
+CREATE TABLE IF NOT EXISTS developers (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  company_id INT NOT NULL,
+  project_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (company_id) REFERENCES companies (id),
+  FOREIGN KEY (project_id) REFERENCES projects (id)
+)
+  ENGINE = InnoDB;
+
+-- skills
+CREATE TABLE IF NOT EXISTS skills (
+  id INT NOT NULL AUTO_INCREMENT,
+  skill VARCHAR(25) NOT NULL,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB;
+
 -- developers_skills
 CREATE TABLE IF NOT EXISTS developers_skills(
   developer_id INT NOT NULL ,
@@ -56,12 +58,3 @@ CREATE TABLE IF NOT EXISTS developers_skills(
 )
   ENGINE = InnoDB;
 
--- developers_projects
-CREATE TABLE IF NOT EXISTS developers_projects (
-  developer_id INT NOT NULL ,
-  project_id INT NOT NULL ,
-  PRIMARY KEY (developer_id, project_id),
-  FOREIGN KEY (developer_id) REFERENCES developers (id),
-  FOREIGN KEY (project_id) REFERENCES projects (id)
-)
-  ENGINE = InnoDB;
