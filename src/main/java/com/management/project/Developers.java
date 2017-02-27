@@ -3,6 +3,8 @@ package main.java.com.management.project;
 /**
  * Created by Aleksey on 27.02.2017.
  */
+
+/* Class Developers*/
 public class Developers {
     private int ID;
     private String firstName;
@@ -66,5 +68,28 @@ public class Developers {
                 ", salary=" + salary +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Developers)) return false;
+
+        Developers that = (Developers) o;
+
+        if (getID() != that.getID()) return false;
+        if (getSalary() != that.getSalary()) return false;
+        if (!getFirstName().equals(that.getFirstName())) return false;
+        if (!getLastName().equals(that.getLastName())) return false;
+        return getCity().equals(that.getCity());
+
+    }
+
+    public int hashCode() {
+        int result = getID();
+        result = 31 * result + getFirstName().hashCode();
+        result = 31 * result + getLastName().hashCode();
+        result = 31 * result + getSalary();
+        result = 31 * result + getCity().hashCode();
+        return result;
     }
 }
