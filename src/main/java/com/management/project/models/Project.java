@@ -7,7 +7,7 @@ package main.java.com.management.project.models;
 /**
  * Class project
  */
-public class Projects {
+public class Project {
 
     /**
      * @param ID. Is the first int field of projects class. Contain id of project.
@@ -25,20 +25,20 @@ public class Projects {
     private String costs;
 
     /**
-     * public constructor Projects with all fields.
+     * public constructor Project with all fields.
      *
      * @param id
      * @param project
      * @param costs
      */
-    public Projects(int id, String project, String costs) {
+    public Project(int id, String project, String costs) {
         this.id = id;
         this.project = project;
         this.costs = costs;
     }
 
     /**
-     * Getters and setters methods by all fields of Projects
+     * Getters and setters methods by all fields of Project
      **/
     public int getId() {
         return id;
@@ -65,10 +65,10 @@ public class Projects {
     }
 
     /**
-     * @override method toString (implementation of object Projects)
+     * @override method toString (implementation of object Project)
      */
     public String toString() {
-        return "Projects{" +
+        return "Project{" +
                 "id=" + id +
                 ", project='" + project + '\'' +
                 ", costs='" + costs + '\'' +
@@ -82,7 +82,7 @@ public class Projects {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Projects projects = (Projects) o;
+        Project projects = (Project) o;
 
         if (id != projects.id) return false;
         if (!project.equals(projects.project)) return false;

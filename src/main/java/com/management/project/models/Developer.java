@@ -4,8 +4,8 @@ package com.management.project;
  * Created by Aleksey on 27.02.2017.
  */
 
-    /* Class Developers*/
-public class Developers {
+    /* Class Developer*/
+public class Developer {
 
 
     /**
@@ -35,14 +35,14 @@ public class Developers {
 
 
     /**
-     * public constructor Developers with all fields.
+     * public constructor Developer with all fields.
      * @param ID
      * @param firstName
      * @param lastName
      * @param salary
      * @param city
      */
-    public Developers(int ID, String firstName, String lastName, int salary, String city) {
+    public Developer(int ID, String firstName, String lastName, int salary, String city) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,7 +52,7 @@ public class Developers {
 
 
     /**
-     * Getters and setters methods by all fields of Developers
+     * Getters and setters methods by all fields of Developer
      **/
 
     public int getID() {
@@ -96,10 +96,10 @@ public class Developers {
     }
 
     /**
-     * @override method toString (implementation of object Developers)
+     * @override method toString (implementation of object Developer)
      * */
     public String toString() {
-        return "Developers{" +
+        return "Developer{" +
                 "ID=" + ID +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -113,24 +113,24 @@ public class Developers {
      * */
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Developers)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Developers that = (Developers) o;
+        Developer developer = (Developer) o;
 
-        if (getID() != that.getID()) return false;
-        if (getSalary() != that.getSalary()) return false;
-        if (!getFirstName().equals(that.getFirstName())) return false;
-        if (!getLastName().equals(that.getLastName())) return false;
-        return getCity().equals(that.getCity());
+        if (ID != developer.ID) return false;
+        if (salary != developer.salary) return false;
+        if (!firstName.equals(developer.firstName)) return false;
+        if (!lastName.equals(developer.lastName)) return false;
+        return city.equals(developer.city);
 
     }
 
     public int hashCode() {
-        int result = getID();
-        result = 31 * result + getFirstName().hashCode();
-        result = 31 * result + getLastName().hashCode();
-        result = 31 * result + getSalary();
-        result = 31 * result + getCity().hashCode();
+        int result = ID;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + salary;
+        result = 31 * result + city.hashCode();
         return result;
     }
 }
