@@ -21,7 +21,6 @@ public class Company {
 
     /**
      * public constructor Company with all fields.
-     *
      * @param id
      * @param company
      */
