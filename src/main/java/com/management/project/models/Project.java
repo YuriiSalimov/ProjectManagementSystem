@@ -10,9 +10,9 @@ package main.java.com.management.project.models;
 public class Project {
 
     /**
-     * @param ID. Is the first int field of projects class. Contain id of project.
+     * @param ID. Is the first field of projects class. Contain id of project.
      */
-    private int id;
+    private long id;
 
     /**
      * @param projects. Is the second string field of projects class. Contain name of project.
@@ -40,7 +40,7 @@ public class Project {
     /**
      * Getters and setters methods by all fields of Project
      **/
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -82,15 +82,16 @@ public class Project {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Project projects = (Project) o;
+        Project project1 = (Project) o;
 
-        if (id != projects.id) return false;
-        if (!project.equals(projects.project)) return false;
-        return costs.equals(projects.costs);
+        if (id != project1.id) return false;
+        if (!project.equals(project1.project)) return false;
+        return costs.equals(project1.costs);
+
     }
 
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + project.hashCode();
         result = 31 * result + costs.hashCode();
         return result;

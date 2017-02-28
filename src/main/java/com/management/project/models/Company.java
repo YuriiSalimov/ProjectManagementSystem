@@ -10,9 +10,9 @@ package main.java.com.management.project.models;
 public class Company {
 
     /**
-     * @param ID. Is the first int field of projects class. Contain id of Company.
+     * @param ID. Is the first field of projects class. Contain id of Company.
      */
-    private int id;
+    private long id;
 
     /**
      * @param company. Is the second string field of projects class. Contain name of Company.
@@ -32,7 +32,7 @@ public class Company {
     /**
      * Getters and setters methods by all fields of Company.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -73,7 +73,7 @@ public class Company {
     }
 
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + company.hashCode();
         return result;
     }

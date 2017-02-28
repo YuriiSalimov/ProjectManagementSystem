@@ -9,12 +9,12 @@ package main.java.com.management.project.models;
  */
 public class Customer {
     /**
-     *  @param id. Is the first int field of projects class. Contain id of Customer.
+     *  @param id. Is the first field of customer class. Contain id of Customer.
      */
-    private int id;
+    private long id;
 
     /**
-     * @param customer.Is the second string field of projects class. Contain name of Customer.
+     * @param customer.Is the second string field of customer class. Contain name of Customer.
      */
     private String customer;
 
@@ -31,7 +31,7 @@ public class Customer {
     /**
      *Getters and setters methods by all fields of Customer.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -73,7 +73,7 @@ public class Customer {
     }
 
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + customer.hashCode();
         return result;
     }

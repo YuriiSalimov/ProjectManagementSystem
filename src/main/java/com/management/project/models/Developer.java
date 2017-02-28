@@ -9,9 +9,9 @@ public class Developer {
 
 
     /**
-     * @param ID. Is the first int field of developers class.
+     * @param ID. Is the first field of developers class.
      */
-    private int ID;
+    private long ID;
 
     /**
      * @param firstName. Is the second string field of developers class.
@@ -55,7 +55,7 @@ public class Developer {
      * Getters and setters methods by all fields of Developer
      **/
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 
@@ -126,7 +126,7 @@ public class Developer {
     }
 
     public int hashCode() {
-        int result = ID;
+        int result = (int) (ID ^ (ID >>> 32));
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
         result = 31 * result + salary;
