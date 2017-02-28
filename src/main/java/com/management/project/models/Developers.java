@@ -7,23 +7,41 @@ package main.java.com.management.project.models;
     /* Class Developers*/
 public class Developers {
 
-    /*private fields Developers
-    *@param ID. Is the first int field of developers class.
-    *@param firstName. Is the second string field of developers class.
-    *@param secondName. Is the third string field of developers class.
-    *@param salary. Is the fourth int field of developers class.
-    * @param city. Is the fifth string field of developers class.
-    * */
 
+    /**
+     * @param ID. Is the first int field of developers class.
+     */
     private int ID;
+
+    /**
+     * @param firstName. Is the second string field of developers class.
+     */
     private String firstName;
+
+    /**
+     * @param lastName. Is the third string field of developers class.
+     */
     private String lastName;
+
+    /**
+     * @param salary. Is the fourth int field of developers class.
+     */
     private int salary;
+
+    /**
+     * @param city. Is the fifth string field of developers class.
+     */
     private String city;
 
 
-    /*public constructor Developers with all fields*/
-
+    /**
+     * public constructor Developers with all fields
+     * @param ID
+     * @param firstName
+     * @param lastName
+     * @param salary
+     * @param city
+     */
     public Developers(int ID, String firstName, String lastName, int salary, String city) {
         this.ID = ID;
         this.firstName = firstName;
@@ -33,7 +51,8 @@ public class Developers {
     }
 
 
-    /*Getters and setters methods by all fields of Developers*/
+    /**
+     * Getters and setters methods by all fields of Developers*/
 
     public int getID() {
         return ID;
@@ -75,7 +94,8 @@ public class Developers {
         this.city = city;
     }
 
-    /*@override method toString (implementation of object Developers)*/
+    /**
+     * @override method toString (implementation of object Developers)*/
     public String toString() {
         return "Developers{" +
                 "ID=" + ID +
@@ -86,7 +106,8 @@ public class Developers {
                 '}';
     }
 
-    /*equals and hashCode methods with check null */
+    /**
+     * equals and hashCode methods with check null */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Developers)) return false;
