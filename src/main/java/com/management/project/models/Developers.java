@@ -35,7 +35,7 @@ public class Developers {
 
 
     /**
-     * public constructor Developers with all fields
+     * public constructor Developers with all fields.
      * @param ID
      * @param firstName
      * @param lastName
@@ -52,7 +52,8 @@ public class Developers {
 
 
     /**
-     * Getters and setters methods by all fields of Developers*/
+     * Getters and setters methods by all fields of Developers
+     **/
 
     public int getID() {
         return ID;
@@ -95,7 +96,8 @@ public class Developers {
     }
 
     /**
-     * @override method toString (implementation of object Developers)*/
+     * @override method toString (implementation of object Developers)
+     * */
     public String toString() {
         return "Developers{" +
                 "ID=" + ID +
@@ -107,7 +109,8 @@ public class Developers {
     }
 
     /**
-     * equals and hashCode methods with check null */
+     * equals and hashCode methods with check null
+     * */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Developers)) return false;
