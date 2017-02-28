@@ -1,3 +1,4 @@
+USE projectManagementDB;
 
 -- insert data into table customers
 INSERT INTO customers VALUES (1, 'Regeneron Pharmaceuticals Inc');
