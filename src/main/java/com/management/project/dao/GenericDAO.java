@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public interface GenericDAO<T, ID extends Serializable> {
 
-    void makePersistent(T obj);
+    ID makePersistent(T obj);
 
     T findById(ID id);
 
