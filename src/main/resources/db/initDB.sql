@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS projectManagementDB;
 CREATE DATABASE IF NOT EXISTS projectManagementDB DEFAULT CHARACTER SET utf8;
 USE projectManagementDB;
 
