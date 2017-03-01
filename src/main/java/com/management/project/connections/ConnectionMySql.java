@@ -21,7 +21,6 @@ public class ConnectionMySql implements ConnectionDB {
 
         try {
                 Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver is loading");
         } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -38,9 +37,7 @@ public class ConnectionMySql implements ConnectionDB {
     @Override
     public Connection getConnection() throws SQLException {
 
-        Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-        System.out.println("connection is good");
-        return connection;
+        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
     }
 
