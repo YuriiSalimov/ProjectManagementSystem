@@ -1,4 +1,4 @@
-package main.java.com.management.project.connections;
+package com.management.project.connections;
 
 import java.sql.Connection;
 import java.sql.SQLException;
