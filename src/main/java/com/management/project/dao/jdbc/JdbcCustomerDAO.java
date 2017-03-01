@@ -27,7 +27,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     @Override
-    public Long makePersistent(Customer obj) {
+    public Long save(Customer obj) {
         Long id = null;
         try (PreparedStatement preparedStatement1 = connection.prepareStatement(MAKE_PERSISTENT);
              PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
@@ -86,7 +86,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     @Override
-    public void makeTransient(Customer obj) {
+    public void delete(Customer obj) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(MAKE_TRANSIENT)) {
             preparedStatement.setLong(1, obj.getId());
             preparedStatement.execute();

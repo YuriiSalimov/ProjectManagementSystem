@@ -10,13 +10,13 @@ import java.util.Set;
  */
 public interface GenericDAO<T, ID extends Serializable> {
 
-    ID makePersistent(T obj);
+    ID save(T obj);
 
     T findById(ID id);
 
     void update(T obj);
 
-    void makeTransient(T obj);
+    void delete(T obj);
 
     List<T> findAll();
 
