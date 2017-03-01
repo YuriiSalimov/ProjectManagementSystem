@@ -7,13 +7,15 @@ import java.sql.SQLException;
 /**
  * Created by Вадим on 28.02.2017.
  */
-public class MySQLConnection implements ConnectionDB {
+public class ConnectionMySql implements ConnectionDB {
 
     private final String USER = "root";
     private final String PASSWORD = "root";
     private final String DB_URL = "jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true&useSSL=false";
 
-    private static MySQLConnection mySQLConnection;
+    private static ConnectionMySql connectionMySql;
+
+    private ConnectionMySql(){}
 
     static {
 
@@ -26,11 +28,11 @@ public class MySQLConnection implements ConnectionDB {
 
     }
 
-    public static MySQLConnection getInstance() {
-        if(mySQLConnection == null) {
-            mySQLConnection = new MySQLConnection();
+    public static ConnectionMySql getInstance() {
+        if(connectionMySql == null) {
+            connectionMySql = new ConnectionMySql();
         }
-        return mySQLConnection;
+        return connectionMySql;
     }
 
     @Override
