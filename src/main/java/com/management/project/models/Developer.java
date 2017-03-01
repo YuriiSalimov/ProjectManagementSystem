@@ -1,4 +1,4 @@
-package com.management.project;
+package main.java.com.management.project.models;
 
 /**
  * Created by Aleksey on 27.02.2017.
