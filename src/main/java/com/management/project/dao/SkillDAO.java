@@ -1,6 +1,7 @@
-package dao;
+package com.management.project.dao;
 
-import model.Skill;
+
+
 
 /**
  * Created by Perevoznyk  Pavel on 20.02.2017.

@@ -1,8 +1,9 @@
-package dao.jdbc;
+package com.management.project.dao.jdbc;
 
-import dao.CustomerDAO;
-import model.Customer;
-import utils.Constants;
+
+
+import com.management.project.dao.CustomerDAO;
+import com.management.project.models.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;

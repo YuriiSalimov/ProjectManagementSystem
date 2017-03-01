@@ -1,6 +1,7 @@
-package dao;
+package com.management.project.dao;
 
-import model.Company;
+
+import com.management.project.models.Company;
 
 /**
  * Created by Perevoznyk Pavel on 17.02.2017.

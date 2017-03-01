@@ -1,6 +1,7 @@
-package dao;
+package com.management.project.dao;
 
-import model.Developer;
+
+import com.management.project.models.Developer;
 
 /**
  * Created by Perevoznyk Pavel on 17.02.2017.
