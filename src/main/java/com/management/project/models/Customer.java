@@ -3,11 +3,12 @@ package com.management.project.models;
 /**
  * The class implements a set of standarts methods for working
  * with entity of the Customer.
+ *
  * @author Aleksey
  */
 public class Customer {
     /**
-     *  The unique identifier for each customer.
+     * The unique identifier for each customer.
      */
     private long id;
 
@@ -19,8 +20,8 @@ public class Customer {
     /**
      * Constructor
      *
-     * @param id    a unique identifier for the new customer.
-     * @param name  a name to the new customer.
+     * @param id   a unique identifier for the new customer.
+     * @param name a name to the new customer.
      */
     public Customer(int id, String name) {
         this.id = id;
@@ -28,7 +29,7 @@ public class Customer {
     }
 
     /**
-     *Getters and setters methods by all fields of Customer.
+     * Getters and setters methods by all fields of Customer.
      */
     public long getId() {
         return id;
@@ -68,11 +69,11 @@ public class Customer {
      * argument, otherwise returns false.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Customer customer1 = (Customer) o;
+        Customer customer1 = (Customer) object;
 
         if (id != customer1.id) return false;
         return name.equals(customer1.name);

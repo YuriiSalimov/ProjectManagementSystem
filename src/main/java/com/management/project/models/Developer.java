@@ -59,7 +59,7 @@ public class Developer {
     }
 
     public void setName(String name) {
-        if(name!=null) {
+        if (name != null) {
             this.name = name;
         } else {
             this.name = "";
@@ -87,7 +87,7 @@ public class Developer {
     }
 
     public void setSalary(int salary) {
-        this.salary = salary > 0 ? salary:0;
+        this.salary = salary > 0 ? salary : 0;
     }
 
     public Set<Skill> getSkills() {
@@ -95,18 +95,18 @@ public class Developer {
     }
 
     public void setSkills(Collection<Skill> skills) {
-        if (skills!=null){
+        if (skills != null) {
             this.skills = new HashSet<Skill>(skills);
         } else {
             skills = new HashSet<Skill>();
         }
     }
 
-    public boolean addSkill (Skill skill){
-        return (skill!=null)&&this.skills.add(skill);
+    public boolean addSkill(Skill skill) {
+        return (skill != null) && this.skills.add(skill);
     }
 
-    public boolean removeSkill (Skill skill){
+    public boolean removeSkill(Skill skill) {
         return (skill != null) && this.skills.remove(skill);
     }
 

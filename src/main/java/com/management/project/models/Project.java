@@ -3,12 +3,13 @@ package com.management.project.models;
 /**
  * The class implements a set of standarts methods for working
  * with entity of the Project.
+ *
  * @author Aleksey
  */
 public class Project {
 
     /**
-     *  The unique identifier for each project.
+     * The unique identifier for each project.
      */
     private long id;
 
@@ -35,11 +36,11 @@ public class Project {
     /**
      * Constructor
      *
-     * @param id        a unique identifier for the new project.
-     * @param name      a name to the new company.
-     * @param costs     a cost of the new project.
-     * @param company   a company executor of the new project.
-     * @param customer  a customer of the new project.
+     * @param id       a unique identifier for the new project.
+     * @param name     a name to the new company.
+     * @param costs    a cost of the new project.
+     * @param company  a company executor of the new project.
+     * @param customer a customer of the new project.
      */
     public Project(int id, String name, Integer costs, Company company, Customer customer) {
         this.id = id;
@@ -116,11 +117,11 @@ public class Project {
      * argument, otherwise returns false.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Project project = (Project) o;
+        Project project = (Project) object;
 
         if (id != project.id) return false;
         if (!name.equals(project.name)) return false;
