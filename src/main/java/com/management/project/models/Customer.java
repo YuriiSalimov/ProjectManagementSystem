@@ -1,31 +1,30 @@
 package com.management.project.models;
 
 /**
- * Created by Aleksey on 28.02.2017.
- */
-
-/**
- * class Customer
+ * The class implements a set of standarts methods for working
+ * with entity of the Customer.
+ * @author Aleksey
  */
 public class Customer {
     /**
-     *  @param id. Is the first field of customer class. Contain id of Customer.
+     *  The unique identifier for each customer.
      */
     private long id;
 
     /**
-     * @param customer.Is the second string field of customer class. Contain name of Customer.
+     * The name of this customer.
      */
-    private String customer;
+    private String name;
 
     /**
-     * public constructor Customer with all fields.
-     * @param id
-     * @param customer
+     * Constructor
+     *
+     * @param id    a unique identifier for the new customer.
+     * @param name  a name to the new customer.
      */
-    public Customer(int id, String customer) {
+    public Customer(int id, String name) {
         this.id = id;
-        this.customer = customer;
+        this.name = name;
     }
 
     /**
@@ -39,28 +38,36 @@ public class Customer {
         this.id = id;
     }
 
-    public String getCustomer() {
-        return customer;
+    public String getName() {
+        return name;
     }
 
     public void setCustomer(String customer) {
-        this.customer = customer;
+        this.name = customer;
     }
 
     /**
-     * @override method toString (implementation of object Customer).
+     * Returns a string representation of the customer.
+     *
+     * @return A string representation of the customer.
      */
+    @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", customer='" + customer + '\'' +
+                ", customer='" + name + '\'' +
                 '}';
     }
 
 
     /**
-     * equals and hashCode methods with check null
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return Returns true if this customer is the same as the object
+     * argument, otherwise returns false.
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -68,13 +75,19 @@ public class Customer {
         Customer customer1 = (Customer) o;
 
         if (id != customer1.id) return false;
-        return customer.equals(customer1.customer);
+        return name.equals(customer1.name);
 
     }
 
+    /**
+     * Returns a hash code value for the customer.
+     *
+     * @return A hash code value for this customer.
+     */
+    @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + customer.hashCode();
+        result = 31 * result + name.hashCode();
         return result;
     }
 }

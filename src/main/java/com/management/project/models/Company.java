@@ -1,32 +1,31 @@
 package com.management.project.models;
 
 /**
- * Created by Aleksey on 28.02.2017.
- */
-
-/**
- * class Company
+ * The class implements a set of standarts methods for working
+ * with entity of the Company.
+ * @author Aleksey
  */
 public class Company {
 
     /**
-     * @param ID. Is the first field of projects class. Contain id of Company.
+     *  The unique identifier for each company.
      */
     private long id;
 
     /**
-     * @param company. Is the second string field of projects class. Contain name of Company.
+     * The name of this company.
      */
-    private String company;
+    private String name;
 
     /**
-     * public constructor Company with all fields.
-     * @param id
-     * @param company
+     * Constructor
+     *
+     * @param id    a unique identifier for the new company.
+     * @param name  a name to the new company.
      */
-    public Company(int id, String company) {
+    public Company(int id, String name) {
         this.id = id;
-        this.company = company;
+        this.name = name;
     }
 
     /**
@@ -40,27 +39,35 @@ public class Company {
         this.id = id;
     }
 
-    public String getCompany() {
-        return company;
+    public String getName() {
+        return name;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @override method toString (implementation of object Company).
+     * Returns a string representation of the company.
+     *
+     * @return A string representation of the company.
      */
+    @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
-                ", company='" + company + '\'' +
+                ", company='" + name + '\'' +
                 '}';
     }
 
     /**
-     * equals and hashCode methods with check null
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return Returns true if this company is the same as the object
+     * argument, otherwise returns false.
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -68,13 +75,19 @@ public class Company {
         Company company1 = (Company) o;
 
         if (id != company1.id) return false;
-        return company.equals(company1.company);
+        return name.equals(company1.name);
 
     }
 
+    /**
+     * Returns a hash code value for the company.
+     *
+     * @return A hash code value for this company.
+     */
+    @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + company.hashCode();
+        result = 31 * result + name.hashCode();
         return result;
     }
 }
