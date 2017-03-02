@@ -20,7 +20,7 @@ public class Project {
     /**
      * The cost of this project.
      */
-    private Integer costs;
+    private int cost;
 
     /**
      * The company executor of this project.
@@ -37,14 +37,14 @@ public class Project {
      *
      * @param id        a unique identifier for the new project.
      * @param name      a name to the new company.
-     * @param costs     a cost of the new project.
+     * @param cost     a cost of the new project.
      * @param company   a company executor of the new project.
      * @param customer  a customer of the new project.
      */
-    public Project(int id, String name, Integer costs, Company company, Customer customer) {
+    public Project(int id, String name, int cost, Company company, Customer customer) {
         this.id = id;
         this.name = name;
-        this.costs = costs;
+        this.cost = cost;
         this.company = company;
         this.customer = customer;
     }
@@ -68,12 +68,12 @@ public class Project {
         this.name = name;
     }
 
-    public Integer getCosts() {
-        return costs;
+    public int getCost() {
+        return cost;
     }
 
-    public void setCosts(Integer costs) {
-        this.costs = costs;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public Company getCompany() {
@@ -102,7 +102,7 @@ public class Project {
         return "Project{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", costs='" + costs + '\'' +
+                ", cost='" + cost + '\'' +
                 ", company=" + company +
                 ", customer=" + customer +
                 '}';
@@ -123,8 +123,8 @@ public class Project {
         Project project = (Project) o;
 
         if (id != project.id) return false;
+        if (cost != project.cost) return false;
         if (!name.equals(project.name)) return false;
-        if (!costs.equals(project.costs)) return false;
         if (company != null ? !company.equals(project.company) : project.company != null) return false;
         return customer != null ? customer.equals(project.customer) : project.customer == null;
     }
@@ -137,8 +137,8 @@ public class Project {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (costs != null ? costs.hashCode() : 0);
+        result = 31 * result + name.hashCode();
+        result = 31 * result + cost;
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
         return result;
