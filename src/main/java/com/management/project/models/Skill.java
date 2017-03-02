@@ -5,22 +5,22 @@ package com.management.project.models;
  */
 public class Skill {
 
-    private Long id;
+    private long id;
     private String name;
 
     public Skill() {
     }
 
-    public Skill(Long id, String name) {
+    public Skill(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
