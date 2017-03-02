@@ -20,7 +20,7 @@ public class Project {
     /**
      * The cost of this project.
      */
-    private String costs;
+    private Integer costs;
 
     /**
      * The company executor of this project.
@@ -41,7 +41,7 @@ public class Project {
      * @param company   a company executor of the new project.
      * @param customer  a customer of the new project.
      */
-    public Project(int id, String name, String costs) {
+    public Project(int id, String name, Integer costs, Company company, Customer customer) {
         this.id = id;
         this.name = name;
         this.costs = costs;
@@ -68,11 +68,11 @@ public class Project {
         this.name = name;
     }
 
-    public String getCosts() {
+    public Integer getCosts() {
         return costs;
     }
 
-    public void setCosts(String costs) {
+    public void setCosts(Integer costs) {
         this.costs = costs;
     }
 
@@ -137,8 +137,8 @@ public class Project {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        result = 31 * result + costs.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (costs != null ? costs.hashCode() : 0);
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
         return result;
