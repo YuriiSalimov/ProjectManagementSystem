@@ -5,22 +5,22 @@ package com.management.project.models;
  */
 public class Skill {
 
-    private Long id;
+    private long id;
     private String name;
 
     public Skill() {
     }
 
-    public Skill(Long id, String name) {
+    public Skill(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -33,10 +33,37 @@ public class Skill {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Skill skill = (Skill) o;
+
+        if (id != skill.id) {
+            return false;
+        }
+        return name.equals(skill.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Skill{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

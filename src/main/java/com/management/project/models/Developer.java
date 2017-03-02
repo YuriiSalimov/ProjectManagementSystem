@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Developer {
 
-    private Long id;
+    private long id;
     private String name;
     private Company company;
     private Project project;
@@ -23,13 +23,13 @@ public class Developer {
         this.name = name;
     }
 
-    public Developer(Long id, String name, int salary) {
+    public Developer(long id, String name, int salary) {
         this.id = id;
         this.name = name;
         this.salary = salary;
     }
 
-    public Developer(Long id, String name, Company company, Project project, int salary) {
+    public Developer(long id, String name, Company company, Project project, int salary) {
         this.id = id;
         this.name = name;
         this.company = company;
@@ -37,7 +37,7 @@ public class Developer {
         this.salary = salary;
     }
 
-    public Developer(Long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
+    public Developer(long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
         this.id = id;
         this.name = name;
         this.company = company;
@@ -46,11 +46,11 @@ public class Developer {
         this.skills = skills;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -112,28 +112,38 @@ public class Developer {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Developer developer = (Developer) o;
 
-        if (salary != developer.salary) return false;
-        if (id != null ? !id.equals(developer.id) : developer.id != null) return false;
-        if (name != null ? !name.equals(developer.name) : developer.name != null) return false;
-        if (company != null ? !company.equals(developer.company) : developer.company != null) return false;
-        if (project != null ? !project.equals(developer.project) : developer.project != null) return false;
-        return skills != null ? skills.equals(developer.skills) : developer.skills == null;
+        if (id != developer.id) {
+            return false;
+        }
+        if (salary != developer.salary){
+            return false;
+        }
+        if (!name.equals(developer.name)) {
+            return false;
+        }
+        if (company != null ? !company.equals(developer.company) : developer.company != null) {
+            return false;
+        }
+        return project != null ? project.equals(developer.project) : developer.project == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (project != null ? project.hashCode() : 0);
         result = 31 * result + salary;
-        result = 31 * result + (skills != null ? skills.hashCode() : 0);
         return result;
     }
 
