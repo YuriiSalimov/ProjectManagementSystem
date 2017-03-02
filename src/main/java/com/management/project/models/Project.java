@@ -118,15 +118,27 @@ public class Project {
      */
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
 
         Project project = (Project) object;
 
-        if (id != project.id) return false;
-        if (cost != project.cost) return false;
-        if (!name.equals(project.name)) return false;
-        if (company != null ? !company.equals(project.company) : project.company != null) return false;
+        if (id != project.id){
+            return false;
+        }
+        if (cost != project.cost){
+            return false;
+        }
+        if (!name.equals(project.name)){
+            return false;
+        }
+        if (company != null ? !company.equals(project.company) : project.company != null){
+            return false;
+        }
         return customer != null ? customer.equals(project.customer) : project.customer == null;
     }
 

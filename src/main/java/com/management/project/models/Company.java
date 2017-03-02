@@ -70,12 +70,18 @@ public class Company {
      */
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
 
         Company company1 = (Company) object;
 
-        if (id != company1.id) return false;
+        if (id != company1.id){
+            return false;
+        }
         return name.equals(company1.name);
     }
 
@@ -90,4 +96,5 @@ public class Company {
         result = 31 * result + name.hashCode();
         return result;
     }
+
 }

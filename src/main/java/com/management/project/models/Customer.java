@@ -60,7 +60,6 @@ public class Customer {
                 '}';
     }
 
-
     /**
      * Indicates whether some other object is "equal to" this one.
      *
@@ -70,14 +69,19 @@ public class Customer {
      */
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
 
         Customer customer1 = (Customer) object;
 
-        if (id != customer1.id) return false;
+        if (id != customer1.id){
+            return false;
+        }
         return name.equals(customer1.name);
-
     }
 
     /**
