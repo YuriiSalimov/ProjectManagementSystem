@@ -3,12 +3,13 @@ package com.management.project.models;
 /**
  * The class implements a set of standarts methods for working
  * with entity of the Project.
+ *
  * @author Aleksey
  */
 public class Project {
 
     /**
-     *  The unique identifier for each project.
+     * The unique identifier for each project.
      */
     private long id;
 
@@ -116,11 +117,11 @@ public class Project {
      * argument, otherwise returns false.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Project project = (Project) o;
+        Project project = (Project) object;
 
         if (id != project.id) return false;
         if (cost != project.cost) return false;

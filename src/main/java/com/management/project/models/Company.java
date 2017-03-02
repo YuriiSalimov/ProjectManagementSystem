@@ -3,12 +3,13 @@ package com.management.project.models;
 /**
  * The class implements a set of standarts methods for working
  * with entity of the Company.
+ *
  * @author Aleksey
  */
 public class Company {
 
     /**
-     *  The unique identifier for each company.
+     * The unique identifier for each company.
      */
     private long id;
 
@@ -20,8 +21,8 @@ public class Company {
     /**
      * Constructor
      *
-     * @param id    a unique identifier for the new company.
-     * @param name  a name to the new company.
+     * @param id   a unique identifier for the new company.
+     * @param name a name to the new company.
      */
     public Company(int id, String name) {
         this.id = id;
@@ -68,15 +69,14 @@ public class Company {
      * argument, otherwise returns false.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Company company1 = (Company) o;
+        Company company1 = (Company) object;
 
         if (id != company1.id) return false;
         return name.equals(company1.name);
-
     }
 
     /**
