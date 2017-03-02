@@ -9,26 +9,73 @@ import java.util.Set;
  */
 public class Developer {
 
+    /**
+     * The unique identifier for each developer.
+     */
     private long id;
+
+    /**
+     * The name of this developer.
+     */
     private String name;
+
+    /**
+     * The company, which employs this developer.
+     */
     private Company company;
+
+    /**
+     * The project, that works the developer
+     */
     private Project project;
+
+    /**
+     * The salary of this developer
+     */
     private int salary;
+
+    /**
+     * Skills that have developer
+     */
     private Set<Skill> skills = new HashSet<Skill>();
+
+    /**
+     * Default constructor.
+     */
 
     public Developer() {
     }
 
+    /**
+     * Constructor.
+     *
+     * @param name a name of the new developer.
+     */
     public Developer(String name) {
         this.name = name;
     }
 
+
+    /**
+     *
+     * @param id The unique identifier for each developer.
+     * @param name a name of the new developer.
+     * @param salary The salary of this developer
+     */
     public Developer(long id, String name, int salary) {
         this.id = id;
         this.name = name;
         this.salary = salary;
     }
 
+    /**
+     *
+     * @param id The unique identifier for each developer.
+     * @param name a name of the new developer.
+     * @param company The company, which employs this developer.
+     * @param project The project, that works the developer
+     * @param salary The salary of this developer
+     */
     public Developer(long id, String name, Company company, Project project, int salary) {
         this.id = id;
         this.name = name;
@@ -37,6 +84,15 @@ public class Developer {
         this.salary = salary;
     }
 
+    /**
+     *
+     * @param id The unique identifier for each developer.
+     * @param name a name of the new developer.
+     * @param company The company, which employs this developer.
+     * @param project The project, that works the developer
+     * @param salary The salary of this developer
+     * @param skills Skills that have developer
+     */
     public Developer(long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
         this.id = id;
         this.name = name;
@@ -45,6 +101,10 @@ public class Developer {
         this.salary = salary;
         this.skills = skills;
     }
+
+    /**
+     * Getters and setters methods by all fields of developer.
+     */
 
     public long getId() {
         return id;
@@ -102,13 +162,33 @@ public class Developer {
         }
     }
 
+    /**
+     *
+     * @param skill a skill that you need to add the developer
+     * @return true if new skill was add  to developer successfully
+     * or false if the addition failed
+     */
     public boolean addSkill(Skill skill) {
         return (skill != null) && this.skills.add(skill);
     }
 
+    /**
+     *
+     * @param skill a skill that must be removed from developer
+     * @return true if new skill was remove from developer successfully
+     * or false if the removal failed
+     */
     public boolean removeSkill(Skill skill) {
         return (skill != null) && this.skills.remove(skill);
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return Returns true if this object is the same as the obj
+     * argument, otherwise returns false.
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -137,6 +217,11 @@ public class Developer {
 
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
@@ -147,6 +232,11 @@ public class Developer {
         return result;
     }
 
+    /**
+     * Returns a string representation of the developer.
+     *
+     * @return A string representation of the developer.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
