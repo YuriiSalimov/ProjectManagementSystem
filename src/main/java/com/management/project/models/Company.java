@@ -45,7 +45,11 @@ public class Company {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
     }
 
     /**

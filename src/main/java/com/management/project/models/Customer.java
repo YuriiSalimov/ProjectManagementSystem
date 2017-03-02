@@ -43,8 +43,12 @@ public class Customer {
         return name;
     }
 
-    public void setCustomer(String customer) {
-        this.name = customer;
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
     }
 
     /**
