@@ -1,4 +1,4 @@
-package utils;
+package com.management.project.utils;
 
 /**
  * Created by Perevoznyk Pavel on 17.02.2017.
