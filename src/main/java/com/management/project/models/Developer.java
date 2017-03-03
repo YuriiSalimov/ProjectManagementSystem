@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Вадим on 02.03.2017.
+ * The class implements a set of standarts methods for working
+ * with entity of the Developer.
+ *
+ * @author Вадим
  */
 public class Developer {
 
@@ -57,9 +60,10 @@ public class Developer {
 
 
     /**
+     * Constructor.
      *
-     * @param id The unique identifier for each developer.
-     * @param name a name of the new developer.
+     * @param id     The unique identifier for each developer.
+     * @param name   a name of the new developer.
      * @param salary The salary of this developer
      */
     public Developer(long id, String name, int salary) {
@@ -69,12 +73,13 @@ public class Developer {
     }
 
     /**
+     * Constructor.
      *
-     * @param id The unique identifier for each developer.
-     * @param name a name of the new developer.
+     * @param id      The unique identifier for each developer.
+     * @param name    a name of the new developer.
      * @param company The company, which employs this developer.
      * @param project The project, that works the developer
-     * @param salary The salary of this developer
+     * @param salary  The salary of this developer
      */
     public Developer(long id, String name, Company company, Project project, int salary) {
         this.id = id;
@@ -85,13 +90,14 @@ public class Developer {
     }
 
     /**
+     * Constructor.
      *
-     * @param id The unique identifier for each developer.
-     * @param name a name of the new developer.
+     * @param id      The unique identifier for each developer.
+     * @param name    a name of the new developer.
      * @param company The company, which employs this developer.
      * @param project The project, that works the developer
-     * @param salary The salary of this developer
-     * @param skills Skills that have developer
+     * @param salary  The salary of this developer
+     * @param skills  Skills that have developer
      */
     public Developer(long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
         this.id = id;
@@ -163,7 +169,6 @@ public class Developer {
     }
 
     /**
-     *
      * @param skill a skill that you need to add the developer
      * @return true if new skill was add  to developer successfully
      * or false if the addition failed
@@ -173,7 +178,6 @@ public class Developer {
     }
 
     /**
-     *
      * @param skill a skill that must be removed from developer
      * @return true if new skill was remove from developer successfully
      * or false if the removal failed
@@ -204,7 +208,7 @@ public class Developer {
         if (id != developer.id) {
             return false;
         }
-        if (salary != developer.salary){
+        if (salary != developer.salary) {
             return false;
         }
         if (!name.equals(developer.name)) {

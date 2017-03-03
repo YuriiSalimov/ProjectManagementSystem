@@ -4,6 +4,7 @@ package com.management.project.dao.jdbc;
 
 import com.management.project.dao.CustomerDAO;
 import com.management.project.models.Customer;
+import com.management.project.utils.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ import java.util.List;
  */
 public class JdbcCustomerDAO implements CustomerDAO {
 
-    private final String MAKE_PERSISTENT = "INSERT INTO customers (NAME) VALUES(?)";
+    private final String SAVE = "INSERT INTO customers (NAME) VALUES(?)";
     private final String FIND_BY_ID = "SELECT * FROM customers WHERE ID = ?";
     private final String UPDATE = "UPDATE customers SET NAME = ? WHERE ID = ?";
-    private final String MAKE_TRANSIENT = "DELETE FROM customers WHERE ID = ?";
+    private final String DELETE = "DELETE FROM customers WHERE ID = ?";
     private final String FIND_ALL = "SELECT * FROM customers";
     private final String FIND_BY_NAME = "SELECT * FROM customers WHERE NAME = ?";
 
@@ -30,7 +31,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
     @Override
     public Long save(Customer obj) {
         Long id = null;
-        try (PreparedStatement preparedStatement1 = connection.prepareStatement(MAKE_PERSISTENT);
+        try (PreparedStatement preparedStatement1 = connection.prepareStatement(SAVE);
              PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
             preparedStatement1.setString(1, obj.getName());
             preparedStatement1.execute();
@@ -88,7 +89,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 
     @Override
     public void delete(Customer obj) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(MAKE_TRANSIENT)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setLong(1, obj.getId());
             preparedStatement.execute();
             connection.commit();

@@ -23,7 +23,7 @@ public class Customer {
      * @param id   a unique identifier for the new customer.
      * @param name a name to the new customer.
      */
-    public Customer(int id, String name) {
+    public Customer(long id, String name) {
         this.id = id;
         this.name = name;
     }
