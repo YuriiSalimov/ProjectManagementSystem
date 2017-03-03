@@ -3,6 +3,8 @@ package com.management.project.models;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.HashSet;
+
 import static org.junit.Assert.*;
 
 /**
@@ -88,37 +90,100 @@ public class DeveloperTest {
 
     @Test
     public void getSkills() throws Exception {
+        HashSet<Skill> skills = new HashSet<>();
+        developer = new Developer(1l, "Den", null, null, 1, skills);
+        assertTrue(skills == developer.getSkills());
 
     }
 
     @Test
     public void setSkills() throws Exception {
+        developer = new Developer();
+        assertTrue(developer.getSkills() == null);
+        HashSet<Skill> skills = new HashSet<>();
+        developer.setSkills(skills);
+        assertTrue(developer.getSkills() == skills);
+    }
 
+    @Test
+    public void setSkillsNull() throws Exception {
+        developer = new Developer();
+        HashSet<Skill> skills = null;
+        developer.setSkills(skills);
+        assertNotNull(developer.getSkills());
     }
 
     @Test
     public void addSkill() throws Exception {
+        HashSet<Skill> skills = new HashSet<>();
+        developer = new Developer(1l, "Den", null, null, 1, skills);
+        Skill skill = new Skill(1,"Java");
+        developer.addSkill(skill);
+        assertTrue(developer.getSkills().contains(skill));
 
+        Skill skillNull = null;
+        assertFalse(developer.addSkill(skillNull));
     }
 
     @Test
     public void removeSkill() throws Exception {
+        Skill skill = new Skill(1,"Java");
+        HashSet<Skill> skills = new HashSet<>();
+        skills.add(skill);
+        developer = new Developer(1, "SomeName", null, null, 333, skills);
+        developer.removeSkill(skill);
+        assertFalse(developer.getSkills().contains(skill));
 
+        Skill skillNull = null;
+        assertFalse(developer.removeSkill(skillNull));
     }
 
     @Test
     public void equals() throws Exception {
+        company = new Company(1, "BMW");
+        project = new Project(7000, "NewGame", 3000, null, null);
+        developer = new Developer(100, "Pavel", company, project, 2000);
+        assertTrue(developer.equals(developer));
 
+        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
+        assertTrue(developer1.equals(developer));
+
+        developer1.setName("Petr");
+        assertFalse(developer1.equals(developer));
+
+        developer1.setName("Pavel");
+        assertEquals(developer1,developer);
+
+        developer.setCompany(null);
+        assertNotEquals(developer1, developer);
+
+        developer1.setCompany(null);
+        assertEquals(developer1, developer);
+
+        developer1.setId(50);
+        assertNotEquals(developer1, developer);
     }
 
     @Test
     public void testHashCode() throws Exception {
+        company = new Company(1, "BMW");
+        project = new Project(7000, "NewGame", 3000, null, null);
+        developer = new Developer(100, "Pavel", company, project, 2000);
+        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
+        assertTrue(developer1.hashCode() == developer.hashCode());
+        developer.setId(50);
+        assertFalse(developer.hashCode() == developer1.hashCode());
 
+        developer.setId(100);
+        developer1.setCompany(null);
+        assertFalse(developer1.hashCode() == developer.hashCode());
     }
 
     @Test
     public void testToString() throws Exception {
-
+        developer = new Developer(12345, "Dima", 5000);
+        assertTrue(developer.toString().contains("Dima"));
+        assertTrue(developer.toString().contains("12345"));
+        assertTrue(developer.toString().contains("5000"));
     }
-
 }

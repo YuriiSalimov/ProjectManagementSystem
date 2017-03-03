@@ -1,9 +1,10 @@
-package src.test.java.com.management.project.models;
+package com.management.project.models;
 
 import com.management.project.models.Company;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -44,7 +45,4 @@ class CompanyTest {
         assertEquals(some2,some);
     }
 
-//    public static void main(String[] args) {
-//        JUnit
-//    }
 }
