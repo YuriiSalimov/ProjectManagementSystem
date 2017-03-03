@@ -42,7 +42,7 @@ public class Project {
      * @param company   a company executor of the new project.
      * @param customer  a customer of the new project.
      */
-    public Project(int id, String name, int cost, Company company, Customer customer) {
+    public Project(long id, String name, int cost, Company company, Customer customer) {
         this.id = id;
         this.name = name;
         this.cost = cost;

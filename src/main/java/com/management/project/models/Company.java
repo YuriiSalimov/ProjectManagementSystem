@@ -24,7 +24,7 @@ public class Company {
      * @param id   a unique identifier for the new company.
      * @param name a name to the new company.
      */
-    public Company(int id, String name) {
+    public Company(long id, String name) {
         this.id = id;
         this.name = name;
     }
