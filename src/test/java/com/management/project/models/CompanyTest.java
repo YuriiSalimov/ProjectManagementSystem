@@ -1,11 +1,12 @@
 package com.management.project.models;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-class CompanyTest {
+public class CompanyTest {
 
     private Company some = new Company(4566, "Hair Fair");
 
@@ -42,5 +43,4 @@ class CompanyTest {
         Company some2 = new Company(4566, "Hair Fair");
         assertEquals(some2, some);
     }
-
 }
