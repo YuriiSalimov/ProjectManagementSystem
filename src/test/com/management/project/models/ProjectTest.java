@@ -1,10 +1,6 @@
-package java.com.management.project.models;
+package com.management.project.models;
 
-import com.management.project.models.Company;
-import com.management.project.models.Customer;
-import com.management.project.models.Project;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class ProjectTest {
