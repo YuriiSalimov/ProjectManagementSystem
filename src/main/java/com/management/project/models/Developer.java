@@ -67,8 +67,8 @@ public class Developer {
      * @param salary The salary of this developer
      */
     public Developer(long id, String name, int salary) {
+        this(name);
         this.id = id;
-        this.name = name;
         this.salary = salary;
     }
 
@@ -82,11 +82,9 @@ public class Developer {
      * @param salary  The salary of this developer
      */
     public Developer(long id, String name, Company company, Project project, int salary) {
-        this.id = id;
-        this.name = name;
+        this(id,name,salary);
         this.company = company;
         this.project = project;
-        this.salary = salary;
     }
 
     /**
@@ -100,11 +98,7 @@ public class Developer {
      * @param skills  Skills that have developer
      */
     public Developer(long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
-        this.id = id;
-        this.name = name;
-        this.company = company;
-        this.project = project;
-        this.salary = salary;
+        this(id,name,company,project,salary);
         this.skills = skills;
     }
 
@@ -164,7 +158,7 @@ public class Developer {
         if (skills != null) {
             this.skills = new HashSet<Skill>(skills);
         } else {
-            skills = new HashSet<Skill>();
+            this.skills = new HashSet<Skill>();
         }
     }
 
