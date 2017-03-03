@@ -1,7 +1,10 @@
 package com.management.project.models;
 
 /**
- * Created by Вадим on 02.03.2017.
+ * The class implements a set of standarts methods for working
+ * with entity of the Developer.
+ *
+ * @author Вадим
  */
 public class Skill {
 
@@ -22,8 +25,9 @@ public class Skill {
     }
 
     /**
+     * Constructor.
      *
-     * @param id The unique identifier for each skill.
+     * @param id   The unique identifier for each skill.
      * @param name a name of skill.
      */
     public Skill(long id, String name) {
@@ -87,6 +91,7 @@ public class Skill {
         result = 31 * result + name.hashCode();
         return result;
     }
+
     /**
      * Returns a string representation of a skill.
      *
