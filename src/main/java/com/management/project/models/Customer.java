@@ -79,13 +79,8 @@ public class Customer {
         if (object == null || getClass() != object.getClass()){
             return false;
         }
-
-        Customer customer1 = (Customer) object;
-
-        if (id != customer1.id){
-            return false;
-        }
-        return name.equals(customer1.name);
+        Customer customer = (Customer) object;
+        return name.equals(customer.name);
     }
 
     /**
@@ -95,8 +90,6 @@ public class Customer {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
     }
 }

@@ -80,13 +80,8 @@ public class Company {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-
-        Company company1 = (Company) object;
-
-        if (id != company1.id){
-            return false;
-        }
-        return name.equals(company1.name);
+        Company company = (Company) object;
+        return name.equals(company.name);
     }
 
     /**
@@ -96,9 +91,6 @@ public class Company {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
     }
-
 }

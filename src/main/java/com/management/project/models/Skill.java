@@ -70,12 +70,7 @@ public class Skill {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Skill skill = (Skill) o;
-
-        if (id != skill.id) {
-            return false;
-        }
         return name.equals(skill.name);
 
     }
@@ -87,9 +82,7 @@ public class Skill {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
     }
 
     /**
@@ -104,6 +97,4 @@ public class Skill {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-
 }

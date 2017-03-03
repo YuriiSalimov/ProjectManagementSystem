@@ -130,10 +130,6 @@ public class Project {
         }
 
         Project project = (Project) object;
-
-        if (id != project.id){
-            return false;
-        }
         if (cost != project.cost){
             return false;
         }
@@ -153,8 +149,7 @@ public class Project {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
+        int result = name.hashCode();
         result = 31 * result + cost;
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
