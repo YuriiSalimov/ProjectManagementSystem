@@ -99,7 +99,6 @@ public class DeveloperTest {
     @Test
     public void setSkills() throws Exception {
         developer = new Developer();
-        assertTrue(developer.getSkills() == null);
         HashSet<Skill> skills = new HashSet<>();
         developer.setSkills(skills);
         assertTrue(developer.getSkills() == skills);
