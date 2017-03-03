@@ -154,7 +154,7 @@ public class Developer {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(HashSet<Skill> skills) {
         if (skills != null) {
             this.skills = new HashSet<Skill>(skills);
         } else {
