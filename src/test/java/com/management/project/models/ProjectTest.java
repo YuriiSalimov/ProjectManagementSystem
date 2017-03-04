@@ -1,6 +1,7 @@
 package com.management.project.models;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ProjectTest {
@@ -51,6 +52,8 @@ public class ProjectTest {
         Company company = new Company(2, "Rozetka");
         project.setCompany(company);
         assertEquals(new Company(2, "Rozetka"), project.getCompany());
+        project.setCustomer(null);
+        assertTrue(project.getCompany() == company);
     }
 
     @Test
@@ -63,13 +66,17 @@ public class ProjectTest {
         Customer customer = new Customer(10, "Petrovi4");
         project.setCustomer(customer);
         assertEquals(new Customer(10, "Petrovi4"), project.getCustomer());
+        project.setCompany(null);
+        assertTrue(project.getCustomer() == customer);
     }
 
     @Test
     public void equals() throws Exception {
         Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
         assertEquals(project2, project);
+
     }
+
     @Test
     public void testHashCode() throws Exception {
         Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
@@ -85,5 +92,6 @@ public class ProjectTest {
         assertTrue(project.toString().contains("Luxsoft"));
         assertTrue(project.toString().contains("Bayer"));
     }
+
 
 }
