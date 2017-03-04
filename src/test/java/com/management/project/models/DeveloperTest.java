@@ -100,8 +100,9 @@ public class DeveloperTest {
     public void setSkills() throws Exception {
         developer = new Developer();
         HashSet<Skill> skills = new HashSet<>();
+        skills.add(new Skill(1,"wqaef"));
         developer.setSkills(skills);
-        assertTrue(developer.getSkills() == skills);
+        assertTrue(developer.getSkills().equals(skills));
     }
 
     @Test

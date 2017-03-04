@@ -8,39 +8,45 @@ import static org.junit.Assert.assertTrue;
 
 public class CompanyTest {
 
-    private Company some = new Company(4566, "Hair Fair");
+    private Company testCompany = new Company(4566, "Hair Fair");
 
     @Test
     public void getId() {
-        assertTrue(some.getId() == 4566);
+        assertTrue(testCompany.getId() == 4566);
     }
 
     @Test
     public void setId() {
-        some.setId(5555);
-        assertTrue(some.getId() == 5555);
+        testCompany.setId(5555);
+        assertTrue(testCompany.getId() == 5555);
     }
 
     @Test
     public void getName() {
-        assertTrue(some.getName() == "Hair Fair");
+        assertTrue(testCompany.getName().equals("Hair Fair"));
     }
 
     @Test
     public void setName() {
-        some.setName("British Airlines");
-        assertTrue(some.getName() == "British Airlines");
+        testCompany.setName("British Airlines");
+        assertTrue(testCompany.getName().equals("British Airlines"));
     }
 
     @Test
     public void setNullName() {
-        some.setName(null);
-        assertNotNull(some.getName());
+        testCompany.setName(null);
+        assertNotNull(testCompany.getName());
     }
 
     @Test
     public void equals() {
         Company some2 = new Company(4566, "Hair Fair");
-        assertEquals(some2, some);
+        assertEquals(some2, testCompany);
+    }
+
+    @Test
+    public void testToString() {
+        assertTrue(testCompany.toString().contains("Hair Fair"));
+        assertTrue(testCompany.toString().contains("4566"));
     }
 }
