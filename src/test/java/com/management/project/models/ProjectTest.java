@@ -70,6 +70,20 @@ public class ProjectTest {
         Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
         assertEquals(project2, project);
     }
+    @Test
+    public void testHashCode() throws Exception {
+        Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
+        assertTrue(project2.hashCode() == project.hashCode());
+        project2.setName("New app");
+        assertFalse(project2.hashCode() == project.hashCode());
+    }
 
+    @Test
+    public void testToString() throws Exception {
+        assertTrue(project.toString().contains("Android app"));
+        assertTrue(project.toString().contains("3000"));
+        assertTrue(project.toString().contains("Luxsoft"));
+        assertTrue(project.toString().contains("Bayer"));
+    }
 
 }
