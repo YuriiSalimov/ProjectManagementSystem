@@ -196,12 +196,7 @@ public class Developer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Developer developer = (Developer) o;
-
-        if (id != developer.id) {
-            return false;
-        }
         if (salary != developer.salary) {
             return false;
         }
@@ -222,8 +217,7 @@ public class Developer {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
+        int result = name.hashCode();
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (project != null ? project.hashCode() : 0);
         result = 31 * result + salary;

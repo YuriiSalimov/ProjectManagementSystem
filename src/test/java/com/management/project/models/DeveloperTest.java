@@ -146,9 +146,22 @@ public class DeveloperTest {
         company = new Company(1, "BMW");
         project = new Project(7000, "NewGame", 3000, null, null);
         developer = new Developer(100, "Pavel", company, project, 2000);
+        Developer developer1 = new Developer(50, "Pavel", company, project, 2000);
+        Developer developer2 = new Developer(150, "Pavel", company, project, 2000);
+
+        //reflexive
         assertTrue(developer.equals(developer));
 
-        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
+        //symmetric
+        assertTrue(developer1.equals(developer));
+        assertTrue(developer.equals(developer1));
+
+        //transitive
+        assertTrue(developer.equals(developer2));
+        assertTrue(developer1.equals(developer2));
+
+        //consistent
+        assertTrue(developer1.equals(developer));
         assertTrue(developer1.equals(developer));
 
         developer1.setName("Petr");
@@ -159,11 +172,29 @@ public class DeveloperTest {
 
         developer.setCompany(null);
         assertNotEquals(developer1, developer);
+        assertNotEquals(developer, developer1);
 
         developer1.setCompany(null);
         assertEquals(developer1, developer);
 
+        developer1.setSalary(1000);
+        assertNotEquals(developer1, developer);
+        developer.setSalary(1000);
+
+
         assertFalse(developer.equals(null));
+
+        assertFalse(developer.equals(new String("developer")));
+
+        developer1.setProject(new Project(1, "Some Project", 159, null, null));
+        assertFalse(developer1.equals(developer));
+
+        developer1.setProject(null);
+        assertFalse(developer1.equals(developer));
+
+        developer.setProject(null);
+        assertTrue(developer1.equals(developer));
+
     }
 
     @Test
@@ -171,21 +202,27 @@ public class DeveloperTest {
         company = new Company(1, "BMW");
         project = new Project(7000, "NewGame", 3000, null, null);
         developer = new Developer(100, "Pavel", company, project, 2000);
-        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
-        assertTrue(developer1.hashCode() == developer.hashCode());
-        developer.setId(50);
-        assertFalse(developer.hashCode() == developer1.hashCode());
+        Developer developer1 = new Developer(500, "Pavel", company, project, 2000);
+        assertTrue(developer.hashCode() == developer.hashCode());
+        assertTrue(developer.hashCode() == developer1.hashCode());
 
-        developer.setId(100);
         developer1.setCompany(null);
+        assertFalse(developer1.hashCode() == developer.hashCode());
+
+        developer.setCompany(null);
+        assertTrue(developer1.hashCode() == developer.hashCode());
+
+        developer1.setProject(null);
         assertFalse(developer1.hashCode() == developer.hashCode());
     }
 
     @Test
     public void testToString() throws Exception {
         developer = new Developer(12345, "Dima", 5000);
+        developer.addSkill(new Skill(1, "java"));
         assertTrue(developer.toString().contains("Dima"));
         assertTrue(developer.toString().contains("12345"));
         assertTrue(developer.toString().contains("5000"));
+        assertTrue(developer.toString().contains("java"));
     }
 }
