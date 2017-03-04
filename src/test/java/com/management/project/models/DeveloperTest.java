@@ -86,6 +86,8 @@ public class DeveloperTest {
         developer = new Developer("Joe");
         developer.setSalary(6001);
         assertEquals(6001, developer.getSalary());
+        developer.setSalary(-123);
+        assertEquals(developer.getSalary(), 0);
     }
 
     @Test
@@ -118,11 +120,11 @@ public class DeveloperTest {
         HashSet<Skill> skills = new HashSet<>();
         developer = new Developer(1l, "Den", null, null, 1, skills);
         Skill skill = new Skill(1,"Java");
-        developer.addSkill(skill);
+        assertTrue(developer.addSkill(skill));
+        assertFalse(developer.addSkill(skill));
         assertTrue(developer.getSkills().contains(skill));
 
-        Skill skillNull = null;
-        assertFalse(developer.addSkill(skillNull));
+        assertFalse(developer.addSkill(null));
     }
 
     @Test
@@ -131,8 +133,9 @@ public class DeveloperTest {
         HashSet<Skill> skills = new HashSet<>();
         skills.add(skill);
         developer = new Developer(1, "SomeName", null, null, 333, skills);
-        developer.removeSkill(skill);
+        assertTrue(developer.removeSkill(skill));
         assertFalse(developer.getSkills().contains(skill));
+        assertFalse(developer.removeSkill(skill));
 
         Skill skillNull = null;
         assertFalse(developer.removeSkill(skillNull));
@@ -160,8 +163,7 @@ public class DeveloperTest {
         developer1.setCompany(null);
         assertEquals(developer1, developer);
 
-        developer1.setId(50);
-        assertNotEquals(developer1, developer);
+        assertFalse(developer.equals(null));
     }
 
     @Test
