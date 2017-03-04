@@ -27,13 +27,13 @@ public class SkillTest {
         assertEquals("Java", skill.getName());
     }
 
-//    @Test
-//    public void setName() throws Exception {
-//        skill.setName("Java Android");
-//        assertEquals("Java Android", skill.getName());
-//        skill.setName(null);
-//        assertEquals("", skill.getName());
-//    }
+    @Test
+    public void setName() throws Exception {
+        skill.setName("Java Android");
+        assertEquals("Java Android", skill.getName());
+        skill.setName(null);
+        assertEquals("", skill.getName());
+    }
 
     @Test
     public void equals() throws Exception {
