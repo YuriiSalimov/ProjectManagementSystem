@@ -51,9 +51,8 @@ public class Skill {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = (name != null) ? name : "";
     }
-
 
     /**
      * Indicates whether some other object is "equal to" this one.
@@ -72,7 +71,6 @@ public class Skill {
         }
         Skill skill = (Skill) o;
         return name.equals(skill.name);
-
     }
 
     /**
