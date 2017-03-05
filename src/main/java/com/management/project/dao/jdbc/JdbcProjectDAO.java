@@ -4,6 +4,7 @@ import com.management.project.dao.ProjectDAO;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
+import com.management.project.utils.Constants;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,13 +21,18 @@ public class JdbcProjectDAO implements ProjectDAO {
     private static final String FIND_BY_ID = "SELECT * FROM project WHERE ID = ?";
     private static final String UPDATE = "UPDATE project SET NAME = ? WHERE ID = ?";
     private static final String DELETE = "DELETE FROM project WHERE ID = ?";
-    private static final String FIND_ALL = "SELECT * FROM project";
+    private static final String FIND_ALL = "SELECT * FROM projects";
     private static final String FIND_BY_NAME = "SELECT * FROM project WHERE NAME = ?";
+
+    private JdbcCompanyDAO jdbcCompanyDAO;
+    private JdbcCustomerDAO jdbcCustomerDAO;
 
     private Connection connection;
 
     public JdbcProjectDAO(Connection connection) {
         this.connection = connection;
+        jdbcCompanyDAO = new JdbcCompanyDAO(connection);
+        jdbcCustomerDAO = new JdbcCustomerDAO(connection);
     }
 
 
@@ -61,16 +67,19 @@ public class JdbcProjectDAO implements ProjectDAO {
         try (Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery(FIND_ALL);
             projects = getProjectsListFromResultSet(resultSet);
+            resultSet.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);            }
+            System.out.println("SQL exception has occur while trying to find all Projects\n " + e);
         }
         return projects;
     }
 
     private List<Project> getProjectsListFromResultSet(ResultSet resultSet) throws SQLException {
         List<Project> projects = new ArrayList<>();
-        JdbcCompanyDAO jdbcCompanyDAO = new JdbcCompanyDAO(connection);
-        JdbcCustomerDAO jdbcCustomerDAO = new JdbcCustomerDAO(connection);
         Company company;
         Customer customer;
         long id;
