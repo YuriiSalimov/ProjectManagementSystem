@@ -1,6 +1,5 @@
 package com.management.project.dao;
 
-
 import com.management.project.models.Project;
 
 /**
@@ -8,5 +7,6 @@ import com.management.project.models.Project;
  * V 1.0a
  */
 public interface ProjectDAO extends GenericDAO<Project, Long> {
+
     Project findByName(String name);
 }

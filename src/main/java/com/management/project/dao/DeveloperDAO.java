@@ -1,6 +1,5 @@
 package com.management.project.dao;
 
-
 import com.management.project.models.Developer;
 
 /**
@@ -8,5 +7,6 @@ import com.management.project.models.Developer;
  * V 1.0a
  */
 public interface DeveloperDAO extends GenericDAO<Developer, Long> {
+
     Developer findDeveloperByName(String firstName, String lastName);
 }

@@ -1,7 +1,7 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Customer.
  *
  * @author Aleksey
@@ -29,29 +29,6 @@ public class Customer {
     }
 
     /**
-     * Getters and setters methods by all fields of Customer.
-     */
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null) {
-            this.name = name;
-        } else {
-            this.name = "";
-        }
-    }
-
-    /**
      * Returns a string representation of the customer.
      *
      * @return A string representation of the customer.
@@ -73,10 +50,10 @@ public class Customer {
      */
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Customer customer = (Customer) object;
@@ -91,5 +68,28 @@ public class Customer {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    /**
+     * Getters and setters methods by all fields of Customer.
+     */
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
     }
 }

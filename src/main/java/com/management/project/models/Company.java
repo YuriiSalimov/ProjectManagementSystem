@@ -1,7 +1,7 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Company.
  *
  * @author Aleksey
@@ -27,29 +27,6 @@ public class Company {
     public Company(long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    /**
-     * Getters and setters methods by all fields of Company.
-     */
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null) {
-            this.name = name;
-        } else {
-            this.name = "";
-        }
     }
 
     /**
@@ -92,5 +69,28 @@ public class Company {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    /**
+     * Getters and setters methods by all fields of Company.
+     */
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
     }
 }

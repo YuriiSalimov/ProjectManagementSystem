@@ -17,13 +17,13 @@ public class DeveloperTest {
 
     @Test
     public void getId() throws Exception {
-        developer = new Developer(123l, "Nata", 60000);
-        assertEquals(123l, developer.getId());
+        developer = new Developer(123L, "Nata", 60000);
+        assertEquals(123L, developer.getId());
     }
 
     @Test
     public void setId() throws Exception {
-        developer = new Developer(123l, "Nata", 60000);
+        developer = new Developer(123L, "Nata", 60000);
         developer.setId(555);
         assertTrue(developer.getId() == 555);
     }
@@ -93,7 +93,7 @@ public class DeveloperTest {
     @Test
     public void getSkills() throws Exception {
         HashSet<Skill> skills = new HashSet<>();
-        developer = new Developer(1l, "Den", null, null, 1, skills);
+        developer = new Developer(1L, "Den", null, null, 1, skills);
         assertTrue(skills == developer.getSkills());
 
     }
@@ -118,7 +118,7 @@ public class DeveloperTest {
     @Test
     public void addSkill() throws Exception {
         HashSet<Skill> skills = new HashSet<>();
-        developer = new Developer(1l, "Den", null, null, 1, skills);
+        developer = new Developer(1L, "Den", null, null, 1, skills);
         Skill skill = new Skill(1,"Java");
         assertTrue(developer.addSkill(skill));
         assertFalse(developer.addSkill(skill));

@@ -1,7 +1,7 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Developer.
  *
  * @author Вадим
@@ -36,6 +36,48 @@ public class Skill {
     }
 
     /**
+     * Returns a string representation of a skill.
+     *
+     * @return A string representation of a skill.
+     */
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return Returns true if this object is the same as the obj
+     * argument, otherwise returns false.
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Skill skill = (Skill) object;
+        return name.equals(skill.name);
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    /**
      * Getters and setters methods by all fields of developer.
      */
     public long getId() {
@@ -52,47 +94,5 @@ public class Skill {
 
     public void setName(String name) {
         this.name = (name != null) ? name : "";
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param o The reference object with which to compare.
-     * @return Returns true if this object is the same as the obj
-     * argument, otherwise returns false.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Skill skill = (Skill) o;
-        return name.equals(skill.name);
-    }
-
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return A hash code value for this object.
-     */
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
-
-    /**
-     * Returns a string representation of a skill.
-     *
-     * @return A string representation of a skill.
-     */
-    @Override
-    public String toString() {
-        return "Skill{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

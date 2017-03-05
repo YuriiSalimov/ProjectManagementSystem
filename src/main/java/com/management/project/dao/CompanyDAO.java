@@ -1,6 +1,5 @@
 package com.management.project.dao;
 
-
 import com.management.project.models.Company;
 
 /**
@@ -8,5 +7,6 @@ import com.management.project.models.Company;
  * V 1.0a
  */
 public interface CompanyDAO extends GenericDAO<Company, Long> {
-    public Company findCompanyByName(String companyName);
+
+    Company findCompanyByName(String companyName);
 }

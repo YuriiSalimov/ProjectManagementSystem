@@ -1,6 +1,5 @@
 package com.management.project.dao;
 
-
 import com.management.project.models.Skill;
 
 /**
@@ -8,5 +7,4 @@ import com.management.project.models.Skill;
  * V 1.0a
  */
 public interface SkillDAO extends GenericDAO<Skill, Long> {
-
 }

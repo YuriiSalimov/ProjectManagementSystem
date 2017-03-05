@@ -1,7 +1,7 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Project.
  *
  * @author Aleksey
@@ -36,11 +36,11 @@ public class Project {
     /**
      * Constructor
      *
-     * @param id        a unique identifier for the new project.
-     * @param name      a name to the new company.
+     * @param id       a unique identifier for the new project.
+     * @param name     a name to the new project.
      * @param cost     a cost of the new project.
-     * @param company   a company executor of the new project.
-     * @param customer  a customer of the new project.
+     * @param company  a company executor of the new project.
+     * @param customer a customer of the new project.
      */
     public Project(long id, String name, int cost, Company company, Customer customer) {
         this.id = id;
@@ -48,6 +48,64 @@ public class Project {
         this.cost = cost;
         this.company = company;
         this.customer = customer;
+    }
+
+    /**
+     * Returns a string representation of the project.
+     *
+     * @return A string representation of the project.
+     */
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cost='" + cost + '\'' +
+                ", company=" + company +
+                ", customer=" + customer +
+                '}';
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return Returns true if this project is the same as the object
+     * argument, otherwise returns false.
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Project project = (Project) object;
+        if (cost != project.cost) {
+            return false;
+        }
+        if (!name.equals(project.name)) {
+            return false;
+        }
+        if (company != null ? !company.equals(project.company) : project.company != null) {
+            return false;
+        }
+        return customer != null ? customer.equals(project.customer) : project.customer == null;
+    }
+
+    /**
+     * Returns a hash code value for the project.
+     *
+     * @return A hash code value for this project.
+     */
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + cost;
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (customer != null ? customer.hashCode() : 0);
+        return result;
     }
 
     /**
@@ -78,7 +136,7 @@ public class Project {
     }
 
     public void setCost(int cost) {
-        this.cost = cost;
+        this.cost = cost > 0 ? cost : 0;
     }
 
     public Company getCompany() {
@@ -95,64 +153,5 @@ public class Project {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    /**
-     * Returns a string representation of the project.
-     *
-     * @return A string representation of the project.
-     */
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cost='" + cost + '\'' +
-                ", company=" + company +
-                ", customer=" + customer +
-                '}';
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param object The reference object with which to compare.
-     * @return Returns true if this project is the same as the object
-     * argument, otherwise returns false.
-     */
-    @Override
-    public boolean equals(Object object) {
-        if (this == object){
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()){
-            return false;
-        }
-
-        Project project = (Project) object;
-        if (cost != project.cost){
-            return false;
-        }
-        if (!name.equals(project.name)){
-            return false;
-        }
-        if (company != null ? !company.equals(project.company) : project.company != null){
-            return false;
-        }
-        return customer != null ? customer.equals(project.customer) : project.customer == null;
-    }
-
-    /**
-     * Returns a hash code value for the project.
-     *
-     * @return A hash code value for this project.
-     */
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + cost;
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        result = 31 * result + (customer != null ? customer.hashCode() : 0);
-        return result;
     }
 }

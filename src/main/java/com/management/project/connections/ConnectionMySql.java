@@ -9,26 +9,26 @@ import java.sql.SQLException;
  */
 public class ConnectionMySql implements ConnectionDB {
 
-    private final String USER = "root";
-    private final String PASSWORD = "root";
-    private final String DB_URL = "jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true&useSSL=false";
+    private final static String USER = "root";
+    private final static String PASSWORD = "root";
+    private final static String DB_URL = "jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true&useSSL=false";
 
     private static ConnectionMySql connectionMySql;
 
-    private ConnectionMySql(){}
+    private ConnectionMySql() {
+    }
 
     static {
-
         try {
-                Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            throw new RuntimeException(e);
+        }
 
     }
 
     public static ConnectionMySql getInstance() {
-        if(connectionMySql == null) {
+        if (connectionMySql == null) {
             connectionMySql = new ConnectionMySql();
         }
         return connectionMySql;
@@ -36,9 +36,6 @@ public class ConnectionMySql implements ConnectionDB {
 
     @Override
     public Connection getConnection() throws SQLException {
-
         return DriverManager.getConnection(DB_URL, USER, PASSWORD);
-
     }
-
 }
