@@ -44,7 +44,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             } catch (SQLException e1) {
                 System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
             }
-            System.out.println("SQL exception has occur while trying to make persistent Customer: " + obj.getName() + "\n" + e);
+            System.out.println("SQL exception has occur while trying to save Customer: " + obj.getName() + "\n" + e);
         }
         return id;
     }
