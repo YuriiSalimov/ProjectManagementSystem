@@ -50,7 +50,7 @@ public final class FactoryDao {
     }
 
     private static DeveloperDAO createDeveloperDao() throws SQLException {
-        return new JdbcDeveloperDao(ConnectionMySql.getInstance().getConnection());
+        return new JdbcDeveloperDao(ConnectionMySql.getInstance());
     }
 
     public static ProjectDAO getProjectDAO() throws SQLException {

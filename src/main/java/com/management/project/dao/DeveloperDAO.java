@@ -8,5 +8,5 @@ import com.management.project.models.Developer;
  */
 public interface DeveloperDAO extends GenericDAO<Developer, Long> {
 
-    Developer findDeveloperByName(String firstName, String lastName);
+    Developer findDeveloperByName(String name);
 }
