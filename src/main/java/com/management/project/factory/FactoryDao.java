@@ -53,8 +53,15 @@ public final class FactoryDao {
         return new JdbcDeveloperDao(ConnectionMySql.getInstance().getConnection());
     }
 
-    public static ProjectDAO getProjectDAO() {
+    public static ProjectDAO getProjectDAO() throws SQLException {
+        if (projectDAO == null) {
+            projectDAO = createProjectDao();
+        }
         return projectDAO;
+    }
+
+    private static ProjectDAO createProjectDao() throws SQLException {
+        return new JdbcProjectDAO(ConnectionMySql.getInstance().getConnection());
     }
 
     public static SkillDAO getSkillDAO() throws SQLException {

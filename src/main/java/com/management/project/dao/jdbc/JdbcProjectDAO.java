@@ -1,10 +1,13 @@
 package com.management.project.dao.jdbc;
 
+import com.management.project.dao.*;
 import com.management.project.dao.ProjectDAO;
+import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
 import com.management.project.utils.Constants;
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,12 +29,12 @@ public class JdbcProjectDAO implements ProjectDAO {
     /**
      * an instance of JdbcCompanyDAO
      */
-    private JdbcCompanyDAO jdbcCompanyDAO;
+    private CompanyDAO companyDAO;
 
     /**
      * an instance of JdbcCustomerDAO
      */
-    private JdbcCustomerDAO jdbcCustomerDAO;
+    private CustomerDAO customerDAO;
 
     /**
      * a connection to database
@@ -43,10 +46,10 @@ public class JdbcProjectDAO implements ProjectDAO {
      *
      * @param connection a connection to database
      */
-    public JdbcProjectDAO(Connection connection) {
+    public JdbcProjectDAO(Connection connection) throws SQLException {
         this.connection = connection;
-        jdbcCompanyDAO = new JdbcCompanyDAO(connection);
-        jdbcCustomerDAO = new JdbcCustomerDAO(connection);
+        companyDAO = FactoryDao.getCompanyDAO();
+        customerDAO = FactoryDao.getCustomerDAO();
     }
 
     /**
@@ -217,8 +220,8 @@ public class JdbcProjectDAO implements ProjectDAO {
             id = resultSet.getLong("id");
             name = resultSet.getString("name");
             cost = resultSet.getInt("cost");
-            company = jdbcCompanyDAO.findById(resultSet.getLong("company_id"));
-            customer = jdbcCustomerDAO.findById(resultSet.getLong("customer_id"));
+            company = companyDAO.findById(resultSet.getLong("company_id"));
+            customer = customerDAO.findById(resultSet.getLong("customer_id"));
             projects.add(new Project(id, name, cost, company, customer));
         }
         return projects;
