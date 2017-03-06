@@ -2,9 +2,7 @@ package com.management.project.models;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class CompanyTest {
 
@@ -42,6 +40,8 @@ public class CompanyTest {
     public void equals() {
         Company some2 = new Company(4566, "Hair Fair");
         assertEquals(some2, testCompany);
+        assertNotEquals(testCompany,null);
+        assertFalse(testCompany.equals(new Integer(2)));
     }
 
     @Test
