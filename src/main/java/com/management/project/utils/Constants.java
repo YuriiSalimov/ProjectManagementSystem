@@ -9,5 +9,5 @@ public interface Constants {
 
     String ROLLBACK_EXCEPTION_MSG = "SQL exception has occur while trying to rollback";
 
-    String GET_LAST_ID = "SQL exception has occur while trying to rollback";
+    String GET_LAST_ID = "SELECT LAST_INSERT_ID()";
 }
