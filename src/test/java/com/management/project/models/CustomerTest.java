@@ -41,11 +41,11 @@ public class CustomerTest {
         assertNotNull(testCustomer.getName());
     }
 
-//    @Test
-//    public void equals() {
-//        Company some2 = new Company(11111, "Pierre Fermat");
-//        assertEquals(some2, testCustomer);
-//    }
+    @Test
+    public void equals() {
+        assertEquals(testCustomer, testCustomer);
+        assertFalse(testCustomer.equals(new Integer(1)));
+    }
 
     @Test
     public void testToString() {
