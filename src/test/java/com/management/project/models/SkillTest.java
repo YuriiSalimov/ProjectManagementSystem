@@ -39,6 +39,12 @@ public class SkillTest {
     public void equals() throws Exception {
         Skill skill_test = new Skill(1912, "Java");
         assertEquals(skill_test, skill);
+        assertEquals(skill,skill);
+
+        Skill skill1 = new Skill();
+        Skill skill2 = null;
+        assertNotEquals(skill1,skill2);
+        assertFalse(skill.equals(new Integer(2)));
     }
 
     @Test
