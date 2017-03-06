@@ -34,6 +34,8 @@ public class ProjectTest {
     @Test
     public void getCost() throws Exception {
         assertTrue(project.getCost() == 3000);
+        project.setCost(-5);
+        assertTrue(project.getCost() == 0);
     }
 
     @Test
@@ -74,6 +76,37 @@ public class ProjectTest {
     public void equals() throws Exception {
         Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
         assertEquals(project2, project);
+        assertEquals(project, project2);
+
+        assertFalse(project.equals(null));
+        assertFalse(project.equals(new Integer(1)));
+
+        project2.setName("Go");
+        assertFalse(project.equals(project2));
+
+        Project project1 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
+
+        project1.setCompany(new Company(1,"Test"));
+        assertNotEquals(project,project1);
+        assertNotEquals(project1,project);
+        project1.setCompany(null);
+        assertNotEquals(project,project1);
+        assertNotEquals(project1,project);
+        project.setCompany(null);
+        assertTrue(project.equals(project1));
+
+        project1.setCustomer(new Customer(1,"Test"));
+        assertNotEquals(project,project1);
+        assertNotEquals(project1,project);
+        project1.setCustomer(null);
+        assertNotEquals(project,project1);
+        assertNotEquals(project1,project);
+        project.setCustomer(null);
+        assertTrue(project.equals(project1));
+
+
+
+
 
     }
 
