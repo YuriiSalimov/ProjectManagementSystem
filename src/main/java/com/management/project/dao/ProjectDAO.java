@@ -8,5 +8,4 @@ import com.management.project.models.Project;
  */
 public interface ProjectDAO extends GenericDAO<Project, Long> {
 
-    Project findByName(String name);
 }
