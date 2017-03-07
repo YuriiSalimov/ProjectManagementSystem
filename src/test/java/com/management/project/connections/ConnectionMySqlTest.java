@@ -1,15 +1,15 @@
-package com.management.project.connections
+package com.management.project.connections;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
- * Created by Вадим on 06.03.2017.
+ * Created by Вадим on 07.03.2017.
  */
-class ConnectionMySqlTest {
+public class ConnectionMySqlTest {
 
     ConnectionMySql connectionMySql = ConnectionMySql.getInstance();
-
 
     @Test
     public void getInstance() throws Exception {
@@ -22,4 +22,5 @@ class ConnectionMySqlTest {
     public void getConnection() throws Exception {
         assertFalse(connectionMySql.getConnection().isClosed());
     }
+
 }
