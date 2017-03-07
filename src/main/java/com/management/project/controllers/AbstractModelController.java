@@ -60,6 +60,10 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.print("Delete by id. Input id: ");
         long id = new Scanner(System.in).nextLong();
         T model = dao.findById(id);
+        if (model == null) {
+            System.out.println("Model with this id is not found");
+            return;
+        }
         dao.delete(model);
     }
 
@@ -71,7 +75,12 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     private void update() {
         System.out.print("Update. Input id: ");
         long id = new Scanner(System.in).nextLong();
-        System.out.println("Input new information for " + dao.findById(id));
+        T oldModel = dao.findById(id);
+        if (oldModel == null){
+            System.out.println("Model with this id is not found");
+            return;
+        }
+        System.out.println("Input new information for " + oldModel);
         T model = getNewModel();
         model.setId(id);
         dao.update(model);
@@ -82,7 +91,6 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         long id = new Scanner(System.in).nextLong();
         T model = dao.findById(id);
         System.out.println(model);
-        System.out.println();
     }
 
     protected void findByNameAndOutput() {

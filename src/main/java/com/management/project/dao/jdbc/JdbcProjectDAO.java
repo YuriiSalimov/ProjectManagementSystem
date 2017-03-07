@@ -66,7 +66,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Project> projects = buildProjectsFromResultSet(resultSet);
-            if (projects.size() < 0) {
+            if (projects.size() > 0) {
                 project = projects.get(0);
             }
             resultSet.close();
@@ -126,7 +126,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Project> projects = buildProjectsFromResultSet(resultSet);
-            if (projects.size() < 0) {
+            if (projects.size() > 0) {
                 project = projects.get(0);
             }
             resultSet.close();

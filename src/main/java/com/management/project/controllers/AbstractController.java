@@ -24,7 +24,7 @@ public abstract class AbstractController {
 
     protected int readChoice() {
         int choice;
-        System.out.println("Input your choice111: ");
+        System.out.println("Input your choice: ");
         try {
             choice = new Scanner(System.in).nextInt();
         } catch (InputMismatchException e) {
