@@ -6,7 +6,7 @@ package com.management.project.models;
  *
  * @author Aleksey
  */
-public class Customer {
+public class Customer implements Model {
     /**
      * The unique identifier for each customer.
      */
@@ -77,7 +77,7 @@ public class Customer {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

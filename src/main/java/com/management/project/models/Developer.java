@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * @author Вадим
  */
-public class Developer {
+public class Developer implements Model {
 
     /**
      * The unique identifier for each developer.

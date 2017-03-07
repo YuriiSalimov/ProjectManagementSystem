@@ -6,7 +6,7 @@ package com.management.project.models;
  *
  * @author Aleksey
  */
-public class Project {
+public class Project implements Model {
 
     /**
      * The unique identifier for each project.
@@ -115,7 +115,7 @@ public class Project {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -6,7 +6,7 @@ package com.management.project.models;
  *
  * @author Вадим
  */
-public class Skill {
+public class Skill implements Model {
 
     /**
      * The unique identifier for each skill.
