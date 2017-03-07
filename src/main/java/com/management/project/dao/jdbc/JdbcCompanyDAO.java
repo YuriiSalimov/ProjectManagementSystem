@@ -29,13 +29,12 @@ public class JdbcCompanyDAO implements CompanyDAO {
 
     @Override
     public Company findByName(String companyName) {
-//        Company foundedCompany;
         try (Connection connection = connectionDB.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
                 preparedStatement.setString(1, companyName);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()){
-                    Company foundedCompany=new Company(resultSet.getInt("id"), resultSet.getString("name"));
+                    Company foundedCompany=new Company(resultSet.getLong("id"), resultSet.getString("name"));
                     return foundedCompany;
                 }else {
                     return null;
@@ -74,8 +73,10 @@ public class JdbcCompanyDAO implements CompanyDAO {
                 preparedStatement.setLong(1,aLong);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()){
-                    foundedCompany.setName(resultSet.getString("name"));
-                    foundedCompany.setId(resultSet.getInt("id"));
+                    foundedCompany = new Company(
+                            resultSet.getLong("id"), resultSet.getString("name"));
+//                    foundedCompany.setName(resultSet.getString("name"));
+//                    foundedCompany.setId(resultSet.getLong("id"));
                 }
             }
             return foundedCompany;
@@ -116,7 +117,7 @@ public class JdbcCompanyDAO implements CompanyDAO {
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()){
-                    allCompanies.add(new Company(resultSet.getInt("id"), resultSet.getString("name")));
+                    allCompanies.add(new Company(resultSet.getLong("id"), resultSet.getString("name")));
                 }
             }
             return allCompanies;
