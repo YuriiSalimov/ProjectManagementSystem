@@ -4,6 +4,7 @@ import com.management.project.dao.GenericDAO;
 import com.management.project.models.Model;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  * Created by Slava on 07.03.2017.
@@ -56,35 +57,37 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     private void deleteById() {
-        System.out.print("Input id: ");
-        long id = SCANNER.nextLong();
+        System.out.print("Delete by id. Input id: ");
+        long id = new Scanner(System.in).nextLong();
         T model = dao.findById(id);
         dao.delete(model);
     }
 
     protected void addNew() {
         T model = getNewModel();
-        dao.save(model);
+        System.out.println("Id of new model: " + dao.save(model));
     }
 
     private void update() {
-        System.out.print("Input id: ");
-        long id = SCANNER.nextLong();
+        System.out.print("Update. Input id: ");
+        long id = new Scanner(System.in).nextLong();
+        System.out.println("Input new information for " + dao.findById(id));
         T model = getNewModel();
         model.setId(id);
         dao.update(model);
     }
 
     protected void findByIdAndOutput() {
-        System.out.print("Input id: ");
-        long id = SCANNER.nextLong();
+        System.out.print("Find by id. Input id: ");
+        long id = new Scanner(System.in).nextLong();
         T model = dao.findById(id);
         System.out.println(model);
+        System.out.println();
     }
 
     protected void findByNameAndOutput() {
-        System.out.print("Input name: ");
-        String name = SCANNER.nextLine();
+        System.out.print("Find by name. Input name: ");
+        String name = new Scanner(System.in).nextLine();
         T model = dao.findByName(name);
         System.out.println(model);
     }

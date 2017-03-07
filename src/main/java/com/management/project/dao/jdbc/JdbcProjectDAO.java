@@ -65,7 +65,10 @@ public class JdbcProjectDAO implements ProjectDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)){
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            project = buildProjectsFromResultSet(resultSet).get(0);
+            List<Project> projects = buildProjectsFromResultSet(resultSet);
+            if (projects.size() < 0) {
+                project = projects.get(0);
+            }
             resultSet.close();
         } catch (SQLException e) {
             try {
@@ -122,7 +125,10 @@ public class JdbcProjectDAO implements ProjectDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)){
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            project = buildProjectsFromResultSet(resultSet).get(0);
+            List<Project> projects = buildProjectsFromResultSet(resultSet);
+            if (projects.size() < 0) {
+                project = projects.get(0);
+            }
             resultSet.close();
         } catch (SQLException e) {
             try {
@@ -209,7 +215,7 @@ public class JdbcProjectDAO implements ProjectDAO {
      * @param resultSet set that we get after execution SQL query
      * @return
      */
-    private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException {
+    private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException{
         List<Project> projects = new ArrayList<>();
         Company company;
         Customer customer;

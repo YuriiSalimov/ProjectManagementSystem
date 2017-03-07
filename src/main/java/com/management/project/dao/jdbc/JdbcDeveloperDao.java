@@ -64,7 +64,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * or null if developer with this name does not exist
      */
     @Override
-    public Developer findDeveloperByName(String name) {
+    public Developer findByName(String name) {
         try (Connection connection = connectionDB.getConnection()){
             Developer developer;
             try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {

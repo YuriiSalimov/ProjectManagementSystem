@@ -120,7 +120,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     @Override
-    public Customer findCustomerByName(String name) {
+    public Customer findByName(String name) {
         Customer customer = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);

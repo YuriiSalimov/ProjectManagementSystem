@@ -17,7 +17,7 @@ public class JdbcCompanyDAO implements CompanyDAO {
     }
 
     @Override
-    public Company findCompanyByName(String companyName) {
+    public Company findByName(String companyName) {
         return null;
     }
 

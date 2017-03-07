@@ -1,13 +1,14 @@
 package com.management.project.controllers;
 
+import jdk.internal.util.xml.impl.Input;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Created by Slava on 06.03.2017.
  */
 public abstract class AbstractController {
-
-    protected final Scanner SCANNER = new Scanner(System.in);
 
     public void start () {
         int choice;
@@ -23,10 +24,10 @@ public abstract class AbstractController {
 
     protected int readChoice() {
         int choice;
-        System.out.println("Input your choice: ");
+        System.out.println("Input your choice111: ");
         try {
-            choice = SCANNER.nextInt();
-        } catch (NumberFormatException e) {
+            choice = new Scanner(System.in).nextInt();
+        } catch (InputMismatchException e) {
             choice = -1;
         }
         return choice;
