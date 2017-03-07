@@ -246,7 +246,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             }
 
             try (PreparedStatement statement = connection.prepareStatement(DELETE)){
-                statement.setLong(1,obj.getCompany().getId());
+                statement.setLong(1,obj.getId());
                 statement.executeUpdate();
             }
 

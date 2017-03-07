@@ -64,6 +64,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
             System.out.println("Model with this id is not found");
             return;
         }
+        System.out.println("Delete: " + model);
         dao.delete(model);
     }
 
