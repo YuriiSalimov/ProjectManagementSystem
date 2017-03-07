@@ -7,6 +7,8 @@ import java.util.Scanner;
  */
 public abstract class AbstractController {
 
+    protected final Scanner SCANNER = new Scanner(System.in);
+
     public void start () {
         int choice;
         while (true){
@@ -21,9 +23,9 @@ public abstract class AbstractController {
 
     protected int readChoice() {
         int choice;
-        System.out.println("Input your choice:");
+        System.out.println("Input your choice: ");
         try {
-            choice = Integer.parseInt(new Scanner(System.in).nextLine());
+            choice = SCANNER.nextInt();
         } catch (NumberFormatException e) {
             choice = -1;
         }
