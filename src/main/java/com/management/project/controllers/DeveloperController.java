@@ -53,7 +53,7 @@ public class DeveloperController extends AbstractModelController<Developer> {
                 skillsSet.add(skill);
             }
         }
-        Company company = new Company(companyId, "bla-bla"); //companyDAO.findById(companyId);   -- эаменить когда допшут JdbcCompanyDAO
+        Company company = companyDAO.findById(companyId);
         Project project = projectDAO.findById(projectId);
         Developer developer = new Developer(-100, developerName, company, project, salary, skillsSet);
         return developer;

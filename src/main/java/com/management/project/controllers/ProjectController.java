@@ -42,7 +42,7 @@ public class ProjectController extends AbstractModelController<Project> {
         long companyId = new Scanner(System.in).nextLong();
         System.out.print("Input customer id: ");
         long customerId = new Scanner(System.in).nextLong();
-        Company company = new Company(companyId, "bla-bla"); //companyDAO.findById(companyId);   -- эаменить когда допшут JdbcCompanyDAO
+        Company company = companyDAO.findById(companyId);
         Customer customer = customerDAO.findById(customerId);
         Project project = new Project(-100, projectName, projectCost, company, customer);
         return project;

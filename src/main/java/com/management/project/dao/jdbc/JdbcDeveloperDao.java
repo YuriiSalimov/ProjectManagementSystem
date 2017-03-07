@@ -240,14 +240,16 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         try { connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
 
-            try (PreparedStatement statement = connection.prepareStatement(DELETE)){
-                statement.setLong(1,obj.getCompany().getId());
-                statement.executeUpdate();
-            }
             try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)){
                 statement.setLong(1,obj.getId());
                 statement.executeUpdate();
             }
+
+            try (PreparedStatement statement = connection.prepareStatement(DELETE)){
+                statement.setLong(1,obj.getCompany().getId());
+                statement.executeUpdate();
+            }
+
             connection.commit();
 
         } catch (Exception e) {
