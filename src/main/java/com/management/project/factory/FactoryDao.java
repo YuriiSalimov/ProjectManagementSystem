@@ -28,7 +28,7 @@ public final class FactoryDao {
     }
 
     private static CompanyDAO createCompanyDao() throws SQLException {
-        return new JdbcCompanyDAO(ConnectionMySql.getInstance().getConnection());
+        return new JdbcCompanyDAO(ConnectionMySql.getInstance());
     }
 
     public static CustomerDAO getCustomerDAO() throws SQLException {
