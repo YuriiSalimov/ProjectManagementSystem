@@ -1,12 +1,12 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Company.
  *
  * @author Aleksey
  */
-public class Company {
+public class Company implements Model {
 
     /**
      * The unique identifier for each company.
@@ -27,29 +27,6 @@ public class Company {
     public Company(long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    /**
-     * Getters and setters methods by all fields of Company.
-     */
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null) {
-            this.name = name;
-        } else {
-            this.name = "";
-        }
     }
 
     /**
@@ -80,13 +57,8 @@ public class Company {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-
-        Company company1 = (Company) object;
-
-        if (id != company1.id){
-            return false;
-        }
-        return name.equals(company1.name);
+        Company company = (Company) object;
+        return name.equals(company.name);
     }
 
     /**
@@ -96,9 +68,29 @@ public class Company {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
     }
 
+    /**
+     * Getters and setters methods by all fields of Company.
+     */
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
+    }
 }

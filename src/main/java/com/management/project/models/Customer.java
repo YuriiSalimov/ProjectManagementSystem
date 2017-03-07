@@ -1,12 +1,12 @@
 package com.management.project.models;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Customer.
  *
  * @author Aleksey
  */
-public class Customer {
+public class Customer implements Model {
     /**
      * The unique identifier for each customer.
      */
@@ -26,29 +26,6 @@ public class Customer {
     public Customer(long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    /**
-     * Getters and setters methods by all fields of Customer.
-     */
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null) {
-            this.name = name;
-        } else {
-            this.name = "";
-        }
     }
 
     /**
@@ -73,19 +50,14 @@ public class Customer {
      */
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
-
-        Customer customer1 = (Customer) object;
-
-        if (id != customer1.id){
-            return false;
-        }
-        return name.equals(customer1.name);
+        Customer customer = (Customer) object;
+        return name.equals(customer.name);
     }
 
     /**
@@ -95,8 +67,29 @@ public class Customer {
      */
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
+    }
+
+    /**
+     * Getters and setters methods by all fields of Customer.
+     */
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        } else {
+            this.name = "";
+        }
     }
 }

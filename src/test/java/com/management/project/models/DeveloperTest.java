@@ -17,13 +17,13 @@ public class DeveloperTest {
 
     @Test
     public void getId() throws Exception {
-        developer = new Developer(123l, "Nata", 60000);
-        assertEquals(123l, developer.getId());
+        developer = new Developer(123L, "Nata", 60000);
+        assertEquals(123L, developer.getId());
     }
 
     @Test
     public void setId() throws Exception {
-        developer = new Developer(123l, "Nata", 60000);
+        developer = new Developer(123L, "Nata", 60000);
         developer.setId(555);
         assertTrue(developer.getId() == 555);
     }
@@ -86,12 +86,14 @@ public class DeveloperTest {
         developer = new Developer("Joe");
         developer.setSalary(6001);
         assertEquals(6001, developer.getSalary());
+        developer.setSalary(-123);
+        assertEquals(developer.getSalary(), 0);
     }
 
     @Test
     public void getSkills() throws Exception {
         HashSet<Skill> skills = new HashSet<>();
-        developer = new Developer(1l, "Den", null, null, 1, skills);
+        developer = new Developer(1L, "Den", null, null, 1, skills);
         assertTrue(skills == developer.getSkills());
 
     }
@@ -100,8 +102,9 @@ public class DeveloperTest {
     public void setSkills() throws Exception {
         developer = new Developer();
         HashSet<Skill> skills = new HashSet<>();
+        skills.add(new Skill(1,"wqaef"));
         developer.setSkills(skills);
-        assertTrue(developer.getSkills() == skills);
+        assertTrue(developer.getSkills().equals(skills));
     }
 
     @Test
@@ -115,13 +118,13 @@ public class DeveloperTest {
     @Test
     public void addSkill() throws Exception {
         HashSet<Skill> skills = new HashSet<>();
-        developer = new Developer(1l, "Den", null, null, 1, skills);
+        developer = new Developer(1L, "Den", null, null, 1, skills);
         Skill skill = new Skill(1,"Java");
-        developer.addSkill(skill);
+        assertTrue(developer.addSkill(skill));
+        assertFalse(developer.addSkill(skill));
         assertTrue(developer.getSkills().contains(skill));
 
-        Skill skillNull = null;
-        assertFalse(developer.addSkill(skillNull));
+        assertFalse(developer.addSkill(null));
     }
 
     @Test
@@ -130,8 +133,9 @@ public class DeveloperTest {
         HashSet<Skill> skills = new HashSet<>();
         skills.add(skill);
         developer = new Developer(1, "SomeName", null, null, 333, skills);
-        developer.removeSkill(skill);
+        assertTrue(developer.removeSkill(skill));
         assertFalse(developer.getSkills().contains(skill));
+        assertFalse(developer.removeSkill(skill));
 
         Skill skillNull = null;
         assertFalse(developer.removeSkill(skillNull));
@@ -142,9 +146,22 @@ public class DeveloperTest {
         company = new Company(1, "BMW");
         project = new Project(7000, "NewGame", 3000, null, null);
         developer = new Developer(100, "Pavel", company, project, 2000);
+        Developer developer1 = new Developer(50, "Pavel", company, project, 2000);
+        Developer developer2 = new Developer(150, "Pavel", company, project, 2000);
+
+        //reflexive
         assertTrue(developer.equals(developer));
 
-        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
+        //symmetric
+        assertTrue(developer1.equals(developer));
+        assertTrue(developer.equals(developer1));
+
+        //transitive
+        assertTrue(developer.equals(developer2));
+        assertTrue(developer1.equals(developer2));
+
+        //consistent
+        assertTrue(developer1.equals(developer));
         assertTrue(developer1.equals(developer));
 
         developer1.setName("Petr");
@@ -155,12 +172,29 @@ public class DeveloperTest {
 
         developer.setCompany(null);
         assertNotEquals(developer1, developer);
+        assertNotEquals(developer, developer1);
 
         developer1.setCompany(null);
         assertEquals(developer1, developer);
 
-        developer1.setId(50);
+        developer1.setSalary(1000);
         assertNotEquals(developer1, developer);
+        developer.setSalary(1000);
+
+
+        assertFalse(developer.equals(null));
+
+        assertFalse(developer.equals(new String("developer")));
+
+        developer1.setProject(new Project(1, "Some Project", 159, null, null));
+        assertFalse(developer1.equals(developer));
+
+        developer1.setProject(null);
+        assertFalse(developer1.equals(developer));
+
+        developer.setProject(null);
+        assertTrue(developer1.equals(developer));
+
     }
 
     @Test
@@ -168,21 +202,27 @@ public class DeveloperTest {
         company = new Company(1, "BMW");
         project = new Project(7000, "NewGame", 3000, null, null);
         developer = new Developer(100, "Pavel", company, project, 2000);
-        Developer developer1 = new Developer(100, "Pavel", company, project, 2000);
-        assertTrue(developer1.hashCode() == developer.hashCode());
-        developer.setId(50);
-        assertFalse(developer.hashCode() == developer1.hashCode());
+        Developer developer1 = new Developer(500, "Pavel", company, project, 2000);
+        assertTrue(developer.hashCode() == developer.hashCode());
+        assertTrue(developer.hashCode() == developer1.hashCode());
 
-        developer.setId(100);
         developer1.setCompany(null);
+        assertFalse(developer1.hashCode() == developer.hashCode());
+
+        developer.setCompany(null);
+        assertTrue(developer1.hashCode() == developer.hashCode());
+
+        developer1.setProject(null);
         assertFalse(developer1.hashCode() == developer.hashCode());
     }
 
     @Test
     public void testToString() throws Exception {
         developer = new Developer(12345, "Dima", 5000);
+        developer.addSkill(new Skill(1, "java"));
         assertTrue(developer.toString().contains("Dima"));
         assertTrue(developer.toString().contains("12345"));
         assertTrue(developer.toString().contains("5000"));
+        assertTrue(developer.toString().contains("java"));
     }
 }

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The class implements a set of standarts methods for working
+ * The class implements a set of standard methods for working
  * with entity of the Developer.
  *
  * @author Вадим
  */
-public class Developer {
+public class Developer implements Model {
 
     /**
      * The unique identifier for each developer.
@@ -82,7 +82,7 @@ public class Developer {
      * @param salary  The salary of this developer
      */
     public Developer(long id, String name, Company company, Project project, int salary) {
-        this(id,name,salary);
+        this(id, name, salary);
         this.company = company;
         this.project = project;
     }
@@ -98,8 +98,74 @@ public class Developer {
      * @param skills  Skills that have developer
      */
     public Developer(long id, String name, Company company, Project project, int salary, Set<Skill> skills) {
-        this(id,name,company,project,salary);
+        this(id, name, company, project, salary);
         this.skills = skills;
+    }
+
+    /**
+     * Returns a string representation of the developer.
+     *
+     * @return A string representation of the developer.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Developer{")
+                .append(", id=").append(this.id)
+                .append(", name=").append(this.name)
+                .append(", salary=").append(this.salary)
+                .append(", company=").append(this.company)
+                .append(", project=").append(this.project)
+                .append(", skills:");
+        for (Skill skill : this.skills) {
+            sb.append(skill.getName()).append(", ");
+        }
+        sb.append('}');
+        return sb.toString();
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param object The reference object with which to compare.
+     * @return Returns true if this object is the same as the obj
+     * argument, otherwise returns false.
+     */
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Developer developer = (Developer) object;
+        if (salary != developer.salary) {
+            return false;
+        }
+        if (!name.equals(developer.name)) {
+            return false;
+        }
+        if (company != null ? !company.equals(developer.company) : developer.company != null) {
+            return false;
+        }
+        return project != null ? project.equals(developer.project) : developer.project == null;
+
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (project != null ? project.hashCode() : 0);
+        result = 31 * result + salary;
+        return result;
     }
 
     /**
@@ -154,7 +220,7 @@ public class Developer {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(HashSet<Skill> skills) {
         if (skills != null) {
             this.skills = new HashSet<Skill>(skills);
         } else {
@@ -178,77 +244,5 @@ public class Developer {
      */
     public boolean removeSkill(Skill skill) {
         return (skill != null) && this.skills.remove(skill);
-    }
-
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param o The reference object with which to compare.
-     * @return Returns true if this object is the same as the obj
-     * argument, otherwise returns false.
-     */
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Developer developer = (Developer) o;
-
-        if (id != developer.id) {
-            return false;
-        }
-        if (salary != developer.salary) {
-            return false;
-        }
-        if (!name.equals(developer.name)) {
-            return false;
-        }
-        if (company != null ? !company.equals(developer.company) : developer.company != null) {
-            return false;
-        }
-        return project != null ? project.equals(developer.project) : developer.project == null;
-
-    }
-
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return A hash code value for this object.
-     */
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        result = 31 * result + (project != null ? project.hashCode() : 0);
-        result = 31 * result + salary;
-        return result;
-    }
-
-    /**
-     * Returns a string representation of the developer.
-     *
-     * @return A string representation of the developer.
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Developer{")
-                .append(", id=").append(this.id)
-                .append(", name=").append(this.name)
-                .append(", salary=").append(this.salary)
-                .append(", company=").append(this.company)
-                .append(", project=").append(this.project)
-                .append(", skills:");
-        for (Skill skill : this.skills) {
-            sb.append(skill.getName()).append(", ");
-        }
-        sb.append('}');
-        return sb.toString();
     }
 }

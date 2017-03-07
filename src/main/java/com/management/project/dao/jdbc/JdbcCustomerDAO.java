@@ -1,7 +1,5 @@
 package com.management.project.dao.jdbc;
 
-
-
 import com.management.project.dao.CustomerDAO;
 import com.management.project.models.Customer;
 import com.management.project.utils.Constants;
@@ -15,12 +13,12 @@ import java.util.List;
  */
 public class JdbcCustomerDAO implements CustomerDAO {
 
-    private final String SAVE = "INSERT INTO customers (NAME) VALUES(?)";
-    private final String FIND_BY_ID = "SELECT * FROM customers WHERE ID = ?";
-    private final String UPDATE = "UPDATE customers SET NAME = ? WHERE ID = ?";
-    private final String DELETE = "DELETE FROM customers WHERE ID = ?";
-    private final String FIND_ALL = "SELECT * FROM customers";
-    private final String FIND_BY_NAME = "SELECT * FROM customers WHERE NAME = ?";
+    private static final String SAVE = "INSERT INTO customers (NAME) VALUES(?)";
+    private static final String FIND_BY_ID = "SELECT * FROM customers WHERE ID = ?";
+    private static final String UPDATE = "UPDATE customers SET NAME = ? WHERE ID = ?";
+    private static final String DELETE = "DELETE FROM customers WHERE ID = ?";
+    private static final String FIND_ALL = "SELECT * FROM customers";
+    private static final String FIND_BY_NAME = "SELECT * FROM customers WHERE NAME = ?";
 
     private Connection connection;
 
@@ -46,7 +44,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             } catch (SQLException e1) {
                 System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
             }
-            System.out.println("SQL exception has occur while trying to make persistent Customer: " + obj.getName() + "\n" + e);
+            System.out.println("SQL exception has occur while trying to save Customer: " + obj.getName() + "\n" + e);
         }
         return id;
     }
@@ -57,7 +55,10 @@ public class JdbcCustomerDAO implements CustomerDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            customer = buildCustomersFromResultSet(resultSet).get(0);
+            List<Customer> customers = buildCustomersFromResultSet(resultSet);
+            if (customers.size() > 0) {
+                customer = customers.get(0);
+            }
             resultSet.close();
         } catch (SQLException e) {
             try {
@@ -122,12 +123,15 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     @Override
-    public Customer findCustomerByName(String name) {
+    public Customer findByName(String name) {
         Customer customer = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            customer = buildCustomersFromResultSet(resultSet).get(0);
+            List<Customer> customers = buildCustomersFromResultSet(resultSet);
+            if (customers.size() > 0) {
+                customer = customers.get(0);
+            }
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -139,9 +143,9 @@ public class JdbcCustomerDAO implements CustomerDAO {
         return customer;
     }
 
-    private List<Customer> buildCustomersFromResultSet(ResultSet rs) throws SQLException {
+    private static List<Customer> buildCustomersFromResultSet(ResultSet rs) throws SQLException {
         List<Customer> customers = new ArrayList<>();
-        Customer customer = null;
+        Customer customer;
         while (rs.next()) {
             customer = new Customer(rs.getLong("id"), rs.getString("name"));
             customers.add(customer);

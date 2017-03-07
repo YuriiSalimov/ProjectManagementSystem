@@ -20,4 +20,5 @@ public interface GenericDAO<T, ID extends Serializable> {
 
     List<T> findAll();
 
+    T findByName (String name);
 }

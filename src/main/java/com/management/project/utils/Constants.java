@@ -5,7 +5,9 @@ package com.management.project.utils;
  * V 1.0a
  * Project's misc constants
  */
-public class Constants {
-    public static final String ROLLBACK_EXCEPTION_MSG = "SQL exception has occur while trying to rollback";
-    public static final String GET_LAST_ID = "SQL exception has occur while trying to rollback";
+public interface Constants {
+
+    String ROLLBACK_EXCEPTION_MSG = "SQL exception has occur while trying to rollback";
+
+    String GET_LAST_ID = "SELECT LAST_INSERT_ID()";
 }
