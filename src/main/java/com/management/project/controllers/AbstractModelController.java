@@ -83,6 +83,8 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.println("Input new information for " + oldModel);
         T model = getNewModel();
         model.setId(id);
+        System.out.println("New data: ");
+        System.out.println(model);
         dao.update(model);
     }
 

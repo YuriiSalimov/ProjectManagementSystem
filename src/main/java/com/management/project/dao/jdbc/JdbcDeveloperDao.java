@@ -188,6 +188,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.setString(1,obj.getName());
                 statement.setLong(2,obj.getCompany().getId());
                 statement.setLong(3,obj.getProject().getId());
+                statement.setLong(5,obj.getId());
                 statement.setInt(4,obj.getSalary());
                 statement.executeUpdate();
             }
@@ -311,7 +312,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 while (resultSet.next()){
                     Skill skill = new Skill();
                     skill.setId(resultSet.getLong("id"));
-                    skill.setName(resultSet.getString("skill"));
+                    skill.setName(resultSet.getString("name"));
                     skills.add(skill);
                 }
             }

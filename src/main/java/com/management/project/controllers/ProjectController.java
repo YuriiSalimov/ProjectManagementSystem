@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Created by Slava on 07.03.2017.
  */
-public class ProjectController extends AbstractModelController {
+public class ProjectController extends AbstractModelController<Project> {
 
     protected CompanyDAO companyDAO = FactoryDao.getCompanyDAO();
     protected CustomerDAO customerDAO = FactoryDao.getCustomerDAO();
@@ -33,8 +33,7 @@ public class ProjectController extends AbstractModelController {
     }
 
     @Override
-    protected Model getNewModel() {
-
+    protected Project getNewModel() {
         System.out.print("Input project name: ");
         String projectName = new Scanner(System.in).nextLine();
         System.out.print("Input project cost: ");
