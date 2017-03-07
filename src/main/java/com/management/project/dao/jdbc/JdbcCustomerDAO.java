@@ -55,7 +55,10 @@ public class JdbcCustomerDAO implements CustomerDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            customer = buildCustomersFromResultSet(resultSet).get(0);
+            List<Customer> customers = buildCustomersFromResultSet(resultSet);
+            if (customers.size() > 0) {
+                customer = customers.get(0);
+            }
             resultSet.close();
         } catch (SQLException e) {
             try {
@@ -125,7 +128,10 @@ public class JdbcCustomerDAO implements CustomerDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            customer = buildCustomersFromResultSet(resultSet).get(0);
+            List<Customer> customers = buildCustomersFromResultSet(resultSet);
+            if (customers.size() > 0) {
+                customer = customers.get(0);
+            }
         } catch (SQLException e) {
             try {
                 connection.rollback();
