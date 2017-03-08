@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class JdbcSkillDAO implements SkillDAO {
 
-    private final static String SAVE = "INSERT INTO skills (SKILL) VALUES(?)";
+    private final static String SAVE = "INSERT INTO skills (name) VALUES(?)";
     private final static String FIND_BY_ID = "SELECT * FROM skills WHERE ID = ?";
-    private final static String UPDATE = "UPDATE skills SET SKILL = ? WHERE ID = ?";
+    private final static String UPDATE = "UPDATE skills SET name = ? WHERE ID = ?";
     private final static String DELETE = "DELETE FROM skills WHERE ID = ?";
     private final static String FIND_ALL = "SELECT * FROM skills";
     private final static String FIND_BY_NAME = "SELECT * FROM skills WHERE NAME = ? ";
