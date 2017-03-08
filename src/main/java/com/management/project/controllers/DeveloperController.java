@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 07.03.2017.
+ * @author Slava Makhinich
  */
 public class DeveloperController extends AbstractModelController<Developer> {
 

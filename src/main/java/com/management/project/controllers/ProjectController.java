@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 07.03.2017.
+ * @author Slava Makhinich
  */
 public class ProjectController extends AbstractModelController<Project> {
 
