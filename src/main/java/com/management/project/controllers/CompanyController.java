@@ -16,4 +16,11 @@ public class CompanyController extends AbstractModelController<Company> {
     protected Company getNewModel() {
         return null;
     }
+
+    @Override
+    protected void printMenu() {
+        System.out.println();
+        System.out.println("ACTIONS WITH COMPANIES:");
+        super.printMenu();
+    }
 }

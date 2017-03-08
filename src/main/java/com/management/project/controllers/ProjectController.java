@@ -28,7 +28,7 @@ public class ProjectController extends AbstractModelController<Project> {
     @Override
     protected void printMenu() {
         System.out.println();
-        System.out.println("Actions with project:");
+        System.out.println("ACTIONS WITH PROJECTS:");
         super.printMenu();
     }
 

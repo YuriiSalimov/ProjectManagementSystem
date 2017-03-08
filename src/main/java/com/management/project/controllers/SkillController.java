@@ -15,4 +15,13 @@ public class SkillController extends AbstractModelController<Skill> {
     protected Skill getNewModel() {
         return null;
     }
+
+    @Override
+    protected void printMenu() {
+        System.out.println();
+        System.out.println("ACTIONS WITH SKILLS:");
+        super.printMenu();
+    }
 }
+
+

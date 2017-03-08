@@ -30,7 +30,7 @@ public class DeveloperController extends AbstractModelController<Developer> {
     @Override
     protected void printMenu() {
         System.out.println();
-        System.out.println("Actions with developer:");
+        System.out.println("ACTIONS WITH DEVELOPERS:");
         super.printMenu();
     }
 

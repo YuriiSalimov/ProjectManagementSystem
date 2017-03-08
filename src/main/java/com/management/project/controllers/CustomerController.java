@@ -16,4 +16,11 @@ public class CustomerController extends AbstractModelController<Customer> {
     protected Customer getNewModel() {
         return null;
     }
+
+    @Override
+    protected void printMenu() {
+        System.out.println();
+        System.out.println("ACTIONS WITH CUSTOMERS:");
+        super.printMenu();
+    }
 }
