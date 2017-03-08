@@ -1,10 +1,13 @@
 package com.management.project.controllers;
 
 import com.management.project.dao.GenericDAO;
+import com.management.project.models.Company;
 import com.management.project.models.Skill;
 
+import java.util.Scanner;
+
 /**
- * just a frame, need to fill
+ * @author Вадим
  */
 public class SkillController extends AbstractModelController<Skill> {
     public SkillController(GenericDAO<Skill, Long> dao) {
@@ -13,7 +16,10 @@ public class SkillController extends AbstractModelController<Skill> {
 
     @Override
     protected Skill getNewModel() {
-        return null;
+        System.out.print("Input skill name: ");
+        String skillName = new Scanner(System.in).nextLine();
+        Skill skill = new Skill(-100, skillName);
+        return skill;
     }
 
     @Override

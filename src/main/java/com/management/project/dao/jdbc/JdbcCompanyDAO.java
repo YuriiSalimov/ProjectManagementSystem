@@ -14,12 +14,12 @@ import java.util.List;
 public class JdbcCompanyDAO implements CompanyDAO {
 
     private final static String SAVE = "INSERT INTO companies (name) VALUES(?)";
-    private final static String LAST_INSERTED_ID = "INSERT INTO companies (name) VALUES(?)";
     private final static String FIND_BY_ID = "SELECT * FROM companies WHERE id = ?";
     private final static String UPDATE = "UPDATE companies SET name = ? WHERE id = ?";
     private final static String DELETE = "DELETE FROM companies WHERE id = ?";
     private final static String FIND_ALL = "SELECT * FROM companies";
     private final static String FIND_BY_NAME = "SELECT * FROM companies WHERE name = ? ";
+    private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
     private ConnectionDB connectionDB;
 
@@ -54,7 +54,7 @@ public class JdbcCompanyDAO implements CompanyDAO {
                 preparedStatement.executeUpdate();
             }
             try (Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(LAST_INSERTED_ID);
+                ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
                 resultSet.next();
                 id = resultSet.getLong(1);
             }
