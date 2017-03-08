@@ -33,7 +33,6 @@ public class JdbcCustomerDAO implements CustomerDAO {
              PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
             preparedStatement1.setString(1, obj.getName());
             preparedStatement1.execute();
-            connection.commit();
             ResultSet rs = preparedStatement2.executeQuery();
             rs.next();
             id = rs.getLong(1);
@@ -77,7 +76,6 @@ public class JdbcCustomerDAO implements CustomerDAO {
             preparedStatement.setString(1, obj.getName());
             preparedStatement.setLong(2, obj.getId());
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (SQLException e) {
             try {
                 connection.rollback();
@@ -93,7 +91,6 @@ public class JdbcCustomerDAO implements CustomerDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setLong(1, obj.getId());
             preparedStatement.execute();
-            connection.commit();
         } catch (SQLException e) {
             try {
                 connection.rollback();
