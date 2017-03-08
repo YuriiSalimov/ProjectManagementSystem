@@ -1,12 +1,10 @@
 package com.management.project.controllers;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 06.03.2017.
+ * @author Slava Makhinich
  */
 public abstract class AbstractController {
 
