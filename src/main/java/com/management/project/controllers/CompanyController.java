@@ -3,8 +3,10 @@ package com.management.project.controllers;
 import com.management.project.dao.GenericDAO;
 import com.management.project.models.Company;
 
+import java.util.Scanner;
+
 /**
- * just a frame, need to fill
+ * @author Вадим
  */
 public class CompanyController extends AbstractModelController<Company> {
 
@@ -14,7 +16,10 @@ public class CompanyController extends AbstractModelController<Company> {
 
     @Override
     protected Company getNewModel() {
-        return null;
+        System.out.print("Input company name: ");
+        String companyName = new Scanner(System.in).nextLine();
+        Company company = new Company(-100, companyName);
+        return company;
     }
 
     @Override
