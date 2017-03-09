@@ -6,8 +6,6 @@ import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
-import com.management.project.utils.Constants;
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,14 +14,40 @@ import java.util.List;
 import static com.management.project.utils.Constants.*;
 
 /**
+ * The class implements a set of methods for working with database, with Project entity.
+ *
  * @author Slava Makhinich
  */
 public class JdbcProjectDAO implements ProjectDAO {
+
+    /**
+     * A pattern of an SQL command (without particular values) for saving a project in the database
+     */
     private static final String SAVE = "INSERT INTO projects (name, cost, company_id, customer_id) VALUES(?, ?, ?, ?)";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in the database by id
+     */
     private static final String FIND_BY_ID = "SELECT * FROM projects WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular values) for update a project in the database
+     */
     private static final String UPDATE = "UPDATE projects SET name  = ?, cost = ?, company_id = ?, customer_id = ? WHERE id = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a project from the database by id
+     */
     private static final String DELETE = "DELETE FROM projects WHERE ID = ?";
+
+    /**
+     * An SQL command for getting all projects from the database
+     */
     private static final String FIND_ALL = "SELECT * FROM projects";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in the database by name
+     */
     private static final String FIND_BY_NAME = "SELECT * FROM projects WHERE NAME LIKE ?";
 
     /**
