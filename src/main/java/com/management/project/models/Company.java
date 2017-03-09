@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "company")
+@Table(name = "companies")
 public class Company implements Model {
 
     /**
