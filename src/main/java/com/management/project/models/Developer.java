@@ -111,12 +111,12 @@ public class Developer implements Model {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Developer{")
-                .append(", id=").append(this.id)
+                .append("id=").append(this.id)
                 .append(", name=").append(this.name)
                 .append(", salary=").append(this.salary)
                 .append(", company=").append(this.company)
                 .append(", project=").append(this.project)
-                .append(", skills:");
+                .append(", skills: ");
         for (Skill skill : this.skills) {
             sb.append(skill.getName()).append(", ");
         }
