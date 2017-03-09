@@ -1,21 +1,30 @@
 package com.management.project.models;
 
+import javax.persistence.*;
+
 /**
  * The class implements a set of standard methods for working
  * with entity of the Company.
  *
  * @author Aleksey
  */
+
+@Entity
+@Table(name = "company")
 public class Company implements Model {
 
     /**
      * The unique identifier for each company.
      */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     /**
      * The name of this company.
      */
+    @Column(name = "name")
     private String name;
 
     /**
@@ -27,6 +36,12 @@ public class Company implements Model {
     public Company(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    /**
+     * Constructor without parameters
+     */
+    public Company() {
     }
 
     /**
