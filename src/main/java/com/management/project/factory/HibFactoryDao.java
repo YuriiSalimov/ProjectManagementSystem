@@ -17,7 +17,7 @@ public final class HibFactoryDao {
     private HibFactoryDao() {
     }
 
-    private static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = new Configuration()
                     .configure("/META-INF/persistence.xml")

@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 
 /**
  * @author Slava Makhinich
@@ -19,9 +21,15 @@ public class MainTest {
 
     public static void main(String[] args) {
         companyDAO = HibFactoryDao.getCompanyDAO();
-        Company company = new Company(-1, "absolutelyNewCompany");
+        Company company = new Company(16, "changed");
         //System.out.println(companyDAO.save(company));
+        //System.out.println(companyDAO.findById(16l));
+        //companyDAO.update(company);
+        //companyDAO.delete(new Company(16, "changed"));
+        List<Company> companies = companyDAO.findAll();
+        companies.forEach(System.out::println);
 
 
+        HibFactoryDao.getSessionFactory().close();
     }
 }
