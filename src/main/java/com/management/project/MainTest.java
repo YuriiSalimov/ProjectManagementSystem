@@ -20,7 +20,8 @@ public class MainTest {
     public static void main(String[] args) {
         companyDAO = HibFactoryDao.getCompanyDAO();
         Company company = new Company(-1, "absolutelyNewCompany");
-        companyDAO.save(company);
+        //System.out.println(companyDAO.save(company));
+
 
     }
 }

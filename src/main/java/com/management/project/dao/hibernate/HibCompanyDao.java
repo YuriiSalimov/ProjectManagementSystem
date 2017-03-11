@@ -20,12 +20,14 @@ public class HibCompanyDao implements CompanyDAO {
 
     @Override
     public Long save(Company company) {
+        Long id;
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(company);
+        id = (Long) session.getIdentifier(company);
         transaction.commit();
         session.close();
-        return null;
+        return id;
     }
 
     @Override
