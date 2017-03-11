@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * @author Slava Makhinich
  */
-public class FactoryController {
+public final class FactoryController {
     private static CompanyController companyController;
     private static CustomerController customerController;
     private static DeveloperController developerController;
