@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.management.Query;
 import java.util.List;
 
 /**
@@ -61,18 +62,19 @@ public class HibCompanyDao implements CompanyDAO {
     public List<Company> findAll() {
         List<Company> companies;
         Session session = sessionFactory.openSession();
-        companies = session.createQuery("from com.management.project.models.Company").list();
+        companies = session.createQuery("from Company").list();
         session.close();
         return companies;
     }
 
     @Override
     public Company findByName(String name) {
-        List<Company> companies = findAll();
-        for (Company company: companies) {
-            if (company.getName().equals(name)) {
-                return company;
-            }
+        Session session = sessionFactory.openSession();
+        List<Company> companies = session.createQuery("select c from Company c where c.name like :name")
+                .setParameter("name", name).list();
+        session.close();
+        if (companies.size() != 0) {
+            return companies.get(0);
         }
         return null;
     }

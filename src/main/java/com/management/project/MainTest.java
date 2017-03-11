@@ -26,8 +26,13 @@ public class MainTest {
         //System.out.println(companyDAO.findById(16l));
         //companyDAO.update(company);
         //companyDAO.delete(new Company(16, "changed"));
-        List<Company> companies = companyDAO.findAll();
-        companies.forEach(System.out::println);
+
+//        List<Company> companies = companyDAO.findAll();
+//        companies.forEach(System.out::println);
+
+        System.out.println(companyDAO.findByName("hibComp"));
+
+
 
 
         HibFactoryDao.getSessionFactory().close();
