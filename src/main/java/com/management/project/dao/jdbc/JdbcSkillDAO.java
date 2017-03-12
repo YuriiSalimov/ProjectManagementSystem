@@ -9,17 +9,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The class implements a set of methods for working with database, with Skill entity.
  * @author Вадим
  */
 public class JdbcSkillDAO implements SkillDAO {
 
+    /**
+     * A pattern of an SQL command (without particular values) for saving a skill in a database
+     */
     private final static String SAVE = "INSERT INTO skills (name) VALUES(?)";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a skill in a database by id
+     */
     private final static String FIND_BY_ID = "SELECT * FROM skills WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular values) for update a skill in a database
+     */
     private final static String UPDATE = "UPDATE skills SET name = ? WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a skill from a database by id
+     */
     private final static String DELETE = "DELETE FROM skills WHERE ID = ?";
+
+    /**
+     * An SQL command for getting all skills from a database
+     */
     private final static String FIND_ALL = "SELECT * FROM skills";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a skill in a database by name
+     */
     private final static String FIND_BY_NAME = "SELECT * FROM skills WHERE NAME = ? ";
+
+
+    /**
+     * A pattern of an SQL command  for finding a id from the last inserted skill in a database
+     */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
+
 
     /**
      * a connection to database
@@ -61,7 +91,7 @@ public class JdbcSkillDAO implements SkillDAO {
     }
 
     /**
-     * Method looking skill in database for id of skill
+     * Method finding skill in database by id of skill
      *
      * @param aLong id of skill
      * @return a skill with entered id

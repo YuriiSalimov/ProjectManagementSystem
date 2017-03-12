@@ -6,8 +6,6 @@ import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
-import com.management.project.utils.Constants;
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,14 +14,40 @@ import java.util.List;
 import static com.management.project.utils.Constants.*;
 
 /**
+ * The class implements a set of methods for working with database, with Project entity.
+ *
  * @author Slava Makhinich
  */
 public class JdbcProjectDAO implements ProjectDAO {
+
+    /**
+     * A pattern of an SQL command (without particular values) for saving a project in a database
+     */
     private static final String SAVE = "INSERT INTO projects (name, cost, company_id, customer_id) VALUES(?, ?, ?, ?)";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in a database by id
+     */
     private static final String FIND_BY_ID = "SELECT * FROM projects WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular values) for update a project in a database
+     */
     private static final String UPDATE = "UPDATE projects SET name  = ?, cost = ?, company_id = ?, customer_id = ? WHERE id = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a project from a database by id
+     */
     private static final String DELETE = "DELETE FROM projects WHERE ID = ?";
+
+    /**
+     * An SQL command for getting all projects from a database
+     */
     private static final String FIND_ALL = "SELECT * FROM projects";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in a database by name
+     */
     private static final String FIND_BY_NAME = "SELECT * FROM projects WHERE NAME LIKE ?";
 
     /**
@@ -37,14 +61,14 @@ public class JdbcProjectDAO implements ProjectDAO {
     private CustomerDAO customerDAO;
 
     /**
-     * a connection to database
+     * a connection to a database
      */
     private Connection connection;
 
     /**
      * * Constructor.
      *
-     * @param connection a connection to database
+     * @param connection a connection to a database
      */
     public JdbcProjectDAO(Connection connection) throws SQLException {
         this.connection = connection;
@@ -53,7 +77,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method finds a project in database by name of project
+     * Method finds a project in database by name of the project
      *
      * @param name a name of a project
      * @return a project with entered name
@@ -78,10 +102,10 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method saves a new project in the database
+     * Method saves a new project in a database
      *
-     * @param project a project, which must be save in the database
-     * @return projects id if the project was add to database successfully
+     * @param project a project, which must be save in a database
+     * @return projects id if a project was add to database successfully
      */
     @Override
     public Long save(Project project) {
@@ -104,10 +128,10 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method finds a project in database by name of project
+     * Method finds a project in database by id of project
      *
      * @param id an id of a project
-     * @return a project with entered name
+     * @return a project with entered id
      * or null if project with this id does not exist
      */
     @Override
@@ -129,9 +153,9 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method updates a project in the database (finds project in the database by id and overwrites other fields)
+     * The method updates a project in a database (finds project in a database by id and overwrites other fields)
      *
-     * @param project skill with new name
+     * @param project project with new parameters
      */
     @Override
     public void update(Project project) {
@@ -149,7 +173,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method removes project from database
+     * The method removes a project from a database
      *
      * @param project project which must be removed
      */
@@ -165,9 +189,9 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method returns all projects from the database
+     * The method returns all projects from a database
      *
-     * @return list of all projects from the database
+     * @return list of all projects from a database
      */
     @Override
     public List<Project> findAll() {
@@ -184,10 +208,10 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method builds a list of projects from resultSet (set that we get after execution SQL query)
+     * The method builds a list of projects from resultSet (set that we get after execution SQL query)
      *
      * @param resultSet set that we get after execution SQL query
-     * @return
+     * @return a list of all projects from a database
      */
     private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException{
         List<Project> projects = new ArrayList<>();

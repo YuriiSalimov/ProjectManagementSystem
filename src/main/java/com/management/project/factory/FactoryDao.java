@@ -7,7 +7,7 @@ import com.management.project.dao.jdbc.*;
 import java.sql.SQLException;
 
 /**
- * Created by Slava on 06.03.2017.
+ * @author Slava Makhinich
  */
 public final class FactoryDao {
     private static CompanyDAO companyDAO;
