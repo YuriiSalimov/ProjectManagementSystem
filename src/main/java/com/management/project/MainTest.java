@@ -30,11 +30,11 @@ public class MainTest {
 //        List<Company> companies = companyDAO.findAll();
 //        companies.forEach(System.out::println);
 
-        System.out.println(companyDAO.findByName("hibComp"));
+        System.out.println(companyDAO.findByName("fff"));
 
 
 
 
-        HibFactoryDao.getSessionFactory().close();
+        HibFactoryDao.disconnect();
     }
 }
