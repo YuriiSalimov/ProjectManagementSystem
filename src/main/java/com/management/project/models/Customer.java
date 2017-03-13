@@ -23,6 +23,10 @@ public class Customer implements Model {
      * @param id   a unique identifier for the new customer.
      * @param name a name to the new customer.
      */
+    public Customer() {
+    }
+
+
     public Customer(long id, String name) {
         this.id = id;
         this.name = name;
