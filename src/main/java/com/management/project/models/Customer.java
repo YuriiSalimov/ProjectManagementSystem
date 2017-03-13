@@ -1,21 +1,44 @@
 package com.management.project.models;
 
+import javax.persistence.*;
+
 /**
  * The class implements a set of standard methods for working
  * with entity of the Customer.
  *
  * @author Aleksey
  */
+@Entity
+@Table (name = "customers")
 public class Customer implements Model {
     /**
      * The unique identifier for each customer.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     /**
      * The name of this customer.
      */
+    @Column (name = "name")
     private String name;
+
+    /**
+     * Default Constructor
+     */
+    public Customer() {
+    }
+
+    /**
+     * Constructor
+     *
+     * @param name a name to the new customer.
+     */
+    public Customer(String name) {
+        this.name = name;
+    }
 
     /**
      * Constructor
@@ -23,10 +46,6 @@ public class Customer implements Model {
      * @param id   a unique identifier for the new customer.
      * @param name a name to the new customer.
      */
-    public Customer() {
-    }
-
-
     public Customer(long id, String name) {
         this.id = id;
         this.name = name;

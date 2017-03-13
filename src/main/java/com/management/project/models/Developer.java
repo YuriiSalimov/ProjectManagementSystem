@@ -39,7 +39,7 @@ public class Developer implements Model {
     /**
      * The project, that works the developer
      */
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -52,7 +52,7 @@ public class Developer implements Model {
     /**
      * Skills which have developer
      */
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "developers_skills",
             joinColumns = {@JoinColumn(name = "developer_id")},
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
