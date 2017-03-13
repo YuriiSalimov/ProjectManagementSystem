@@ -1,8 +1,10 @@
 package com.management.project.factory;
 
 import com.management.project.dao.CompanyDAO;
+import com.management.project.dao.DeveloperDAO;
 import com.management.project.dao.hibernate.HibCompanyDao;
-import com.management.project.models.Company;
+import com.management.project.dao.hibernate.HibDeveloperDao;
+import com.management.project.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -23,6 +25,11 @@ public final class HibFactoryDao {
     private static CompanyDAO companyDAO;
 
     /**
+     * An instance of DeveloperDAO
+     */
+    private static DeveloperDAO developerDAO;
+
+    /**
      * Private constructor
      */
     private HibFactoryDao() {
@@ -38,6 +45,10 @@ public final class HibFactoryDao {
             sessionFactory = new Configuration()
                     .configure("/META-INF/persistence.xml")
                     .addAnnotatedClass(Company.class)
+                    .addAnnotatedClass(Developer.class)
+                    .addAnnotatedClass(Skill.class)
+                    .addAnnotatedClass(Project.class)
+                    .addAnnotatedClass(Customer.class)
                     .buildSessionFactory();
         }
         return sessionFactory;
@@ -53,6 +64,13 @@ public final class HibFactoryDao {
             companyDAO = new HibCompanyDao(getSessionFactory());
         }
         return companyDAO;
+    }
+
+    public static DeveloperDAO getDeveloperDAO() {
+        if (developerDAO == null) {
+            developerDAO = new HibDeveloperDao(getSessionFactory());
+        }
+        return developerDAO;
     }
 
     /**
