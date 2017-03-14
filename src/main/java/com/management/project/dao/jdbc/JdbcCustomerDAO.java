@@ -77,12 +77,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             id = rs.getLong(1);
             rs.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to save Customer: " + obj.getName() + "\n" + e);
+            throw new RuntimeException(e);
         }
         return id;
     }
@@ -106,12 +101,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to find Customer with ID: " + id + "\n " + e);
+            throw new RuntimeException(e);
         }
         return customer;
     }
@@ -128,12 +118,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             preparedStatement.setLong(2, obj.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to update Customer with ID: " + obj.getId() + "\n" + e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -148,12 +133,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             preparedStatement.setLong(1, obj.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to make transient Customer with ID: " + obj.getId());
+            throw new RuntimeException(e);
         }
     }
 
@@ -170,12 +150,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
             customers = buildCustomersFromResultSet(resultSet);
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to find all Customers\n " + e);
+            throw new RuntimeException(e);
         }
         return customers;
     }
@@ -198,12 +173,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
                 customer = customers.get(0);
             }
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to retrieve Customer with Name: " + name);
+            throw new RuntimeException(e);
         }
         return customer;
     }
