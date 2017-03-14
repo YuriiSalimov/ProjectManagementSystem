@@ -1,43 +1,70 @@
 package com.management.project.models;
 
+import javax.persistence.*;
+
 /**
  * The class implements a set of standard methods for working
  * with entity of the Project.
  *
  * @author Aleksey
  */
+@Entity
+@Table (name = "projects", schema = "projectManagementDB")
 public class Project implements Model {
 
     /**
      * The unique identifier for each project.
      */
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private long id;
 
     /**
      * The name of this project.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The cost of this project.
      */
+    @Column (name = "cost")
     private int cost;
 
     /**
      * The company executor of this project.
      */
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
 
     /**
      * The customer of this project.
      */
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-
     /**
-     * Constructor without parameters
+     * Default constructor
      */
     public Project() {
+    }
+
+    /**
+     * Constructor
+     *
+     * @param name     a name to the new project.
+     * @param cost     a cost of the new project.
+     * @param company  a company executor of the new project.
+     * @param customer a customer of the new project.
+     */
+    public Project(String name, int cost, Company company, Customer customer) {
+        this.name = name;
+        this.cost = cost;
+        this.company = company;
+        this.customer = customer;
     }
 
     /**
@@ -50,11 +77,8 @@ public class Project implements Model {
      * @param customer a customer of the new project.
      */
     public Project(long id, String name, int cost, Company company, Customer customer) {
+        this(name, cost, company, customer);
         this.id = id;
-        this.name = name;
-        this.cost = cost;
-        this.company = company;
-        this.customer = customer;
     }
 
     /**

@@ -46,7 +46,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * A pattern of an SQL command (without particular value) for removing a set skills of developer from a database by developer`sid
      */
     private final static String DELETE_SKILLS = "DELETE FROM developers_skills WHERE developer_id = ?";
-    
+
     /**
      * An SQL command for getting all developers from a database
      */
