@@ -95,7 +95,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + name);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + name);
             e.printStackTrace();
         }
         return project;
@@ -122,7 +122,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             id = resultSet.getLong(1);
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to save Customer: " + project.getName() + "\n" + e);
+            System.out.println("SQL exception occurred while trying to save Customer: " + project.getName() + "\n" + e);
         }
         return id;
     }
@@ -146,7 +146,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + id);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + id);
             e.printStackTrace();
         }
         return project;
@@ -167,7 +167,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(5, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to update Project with ID: " + project.getId() + "\n" + e);
+            System.out.println("SQL exception occurred while trying to update Project with ID: " + project.getId() + "\n" + e);
         }
 
     }
@@ -183,7 +183,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(1, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to delete Project with ID: " + project.getId());
+            System.out.println("SQL exception occurred while trying to delete Project with ID: " + project.getId());
             e.printStackTrace();
         }
     }
@@ -201,7 +201,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             projects = buildProjectsFromResultSet(resultSet);
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to find all Projects:");
+            System.out.println("SQL exception occurred while trying to find all Projects:");
             e.printStackTrace();
         }
         return projects;

@@ -38,10 +38,12 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public Long save(Company company) {
-        Long id;
-        Session session = sessionFactory.openSession();
-        id = (Long)session.save(company);
-        session.close();
+        Long id = null;
+        try (Session session = sessionFactory.openSession()) {
+            id = (Long)session.save(company);
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to save company " + company);
+            e.printStackTrace();        }
         return id;
     }
 
@@ -54,10 +56,13 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public Company findById(Long id) {
-        Company company;
-        Session session = sessionFactory.openSession();
-        company = session.get(Company.class, id);
-        session.close();
+        Company company = null;
+        try (Session session = sessionFactory.openSession()) {
+            company = session.get(Company.class, id);
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to find company with id: " + id);
+            e.printStackTrace();
+        }
         return company;
     }
 
@@ -68,13 +73,20 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public void update(Company company) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Company companyFromDb = session.get(Company.class, company.getId());
-        companyFromDb.setName(company.getName());
-        session.update(companyFromDb);
-        transaction.commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            Company companyFromDb = session.get(Company.class, company.getId());
+            companyFromDb.setName(company.getName());
+            session.update(companyFromDb);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to update company " + company);
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     /**
@@ -84,12 +96,19 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public void delete(Company company) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Company companyFromDb = session.get(Company.class, company.getId());
-        session.delete(companyFromDb);
-        transaction.commit();
-        session.close();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            Company companyFromDb = session.get(Company.class, company.getId());
+            session.delete(companyFromDb);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to delete company " + company);
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
     /**
@@ -99,10 +118,13 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public List<Company> findAll() {
-        List<Company> companies;
-        Session session = sessionFactory.openSession();
-        companies = session.createQuery("from Company").list();
-        session.close();
+        List<Company> companies = null;
+        try (Session session = sessionFactory.openSession()) {
+            companies = session.createQuery("from Company").list();
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to find all companies");
+            e.printStackTrace();
+        }
         return companies;
     }
 
@@ -115,13 +137,17 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public Company findByName(String name) {
-        Session session = sessionFactory.openSession();
-        List<Company> companies = session.createQuery("select c from Company c where c.name like :name")
-                .setParameter("name", name).list();
-        session.close();
-        if (companies.size() != 0) {
-            return companies.get(0);
+        Company company = null;
+        try (Session session = sessionFactory.openSession()) {
+            List<Company> companies = session.createQuery("select c from Company c where c.name like :name")
+                    .setParameter("name", name).list();
+            if (companies.size() != 0) {
+                company = companies.get(0);
+            }
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to find company with name: " + name);
+            e.printStackTrace();
         }
-        return null;
+        return company;
     }
 }
