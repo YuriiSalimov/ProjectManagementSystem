@@ -77,11 +77,11 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method finds a project in database by name of the project
+     * Method finds a project in a database by name of the project
      *
-     * @param name a name of a project
+     * @param name is a name of a project
      * @return a project with entered name
-     * or null if project with this name does not exist
+     * or null if project with this name does not exist in the database
      */
     @Override
     public Project findByName(String name) {
@@ -95,14 +95,14 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + name);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + name);
             e.printStackTrace();
         }
         return project;
     }
 
     /**
-     * Method saves a new project in a database
+     * The method saves a new project in a database
      *
      * @param project a project, which must be save in a database
      * @return projects id if a project was add to database successfully
@@ -122,13 +122,13 @@ public class JdbcProjectDAO implements ProjectDAO {
             id = resultSet.getLong(1);
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to save Customer: " + project.getName() + "\n" + e);
+            System.out.println("SQL exception occurred while trying to save Customer: " + project.getName() + "\n" + e);
         }
         return id;
     }
 
     /**
-     * Method finds a project in database by id of project
+     * The method finds a project in database by id of project
      *
      * @param id an id of a project
      * @return a project with entered id
@@ -146,7 +146,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + id);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + id);
             e.printStackTrace();
         }
         return project;
@@ -167,7 +167,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(5, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to update Project with ID: " + project.getId() + "\n" + e);
+            System.out.println("SQL exception occurred while trying to update Project with ID: " + project.getId() + "\n" + e);
         }
 
     }
@@ -175,7 +175,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     /**
      * The method removes a project from a database
      *
-     * @param project project which must be removed
+     * @param project is a project which must be removed
      */
     @Override
     public void delete(Project project) {
@@ -183,7 +183,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(1, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to delete Project with ID: " + project.getId());
+            System.out.println("SQL exception occurred while trying to delete Project with ID: " + project.getId());
             e.printStackTrace();
         }
     }
@@ -201,7 +201,7 @@ public class JdbcProjectDAO implements ProjectDAO {
             projects = buildProjectsFromResultSet(resultSet);
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception has occur while trying to find all Projects:");
+            System.out.println("SQL exception occurred while trying to find all Projects:");
             e.printStackTrace();
         }
         return projects;

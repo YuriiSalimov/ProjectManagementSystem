@@ -24,6 +24,15 @@
         <property name="hibernate.connection.password">
             root
         </property>
+        <property name="hibernate.show_sql">true</property>
 
+
+        <mapping class="com.management.project.models.Developer"></mapping>
+        <mapping class="com.management.project.models.Skill"></mapping>
+        <mapping class="com.management.project.models.Project"></mapping>
+        <mapping class="com.management.project.models.Company"></mapping>
+        <mapping class="com.management.project.models.Customer"></mapping>
     </session-factory>
+
+
 </hibernate-configuration>

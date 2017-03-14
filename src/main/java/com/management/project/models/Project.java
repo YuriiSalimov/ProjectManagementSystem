@@ -33,6 +33,13 @@ public class Project implements Model {
      */
     private Customer customer;
 
+
+    /**
+     * Constructor without parameters
+     */
+    public Project() {
+    }
+
     /**
      * Constructor
      *
