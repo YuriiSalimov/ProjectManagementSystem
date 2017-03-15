@@ -86,9 +86,6 @@ public class MainTest {
 //        System.out.println(developerDAO.findByName("Vdym"));
 //        developerDAO.findAll().forEach(System.out::println);
 
-        skillDAO.delete(skillDAO.findById(82L));
-        skillDAO.findAll().forEach(System.out::println);
-
 
         HibFactoryDao.disconnect();
 
