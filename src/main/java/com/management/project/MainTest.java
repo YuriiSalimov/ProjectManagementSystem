@@ -34,7 +34,7 @@ public class MainTest {
         companyDAO = HibFactoryDao.getCompanyDAO();
         developerDAO = HibFactoryDao.getDeveloperDAO();
         projectDAO = FactoryDao.getProjectDAO();
-        skillDAO = FactoryDao.getSkillDAO();
+        skillDAO = HibFactoryDao.getSkillDAO();
 
         Company company = new Company(25, "changed");
         //System.out.println(companyDAO.save(company));
@@ -78,13 +78,16 @@ public class MainTest {
 //        developerDAO.save(developer1);
 //        System.out.println(developerDAO.findById(28L));
 //        developer1.setId(28L);
-//        developerDAO.delete(developer1);
+//        developerDAO.delete(developerDAO.findById(26L));
 //        developer1.setName("Updated");
 //        developer1.setId(29L);
 //        developerDAO.update(developer1);
 
-        System.out.println(developerDAO.findByName("Vdym"));
-        developerDAO.findAll().forEach(System.out::println);
+//        System.out.println(developerDAO.findByName("Vdym"));
+//        developerDAO.findAll().forEach(System.out::println);
+
+        skillDAO.delete(skillDAO.findById(82L));
+        skillDAO.findAll().forEach(System.out::println);
 
 
         HibFactoryDao.disconnect();
