@@ -15,13 +15,26 @@ import java.util.List;
  */
 public class HibSkillDao implements SkillDAO{
 
-
+    /**
+     * An instance of SessionFactory
+     */
     private SessionFactory sessionFactory;
 
+    /**
+     * Constructor
+     *
+     * @param sessionFactory
+     */
     public HibSkillDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * The method saves a new skill in a database
+     *
+     * @param obj a skill, which must be save in a database
+     * @return skill`s id if a skill was add to database successfully
+     */
     @Override
     public Long save(Skill obj) {
         Long id;
@@ -34,7 +47,13 @@ public class HibSkillDao implements SkillDAO{
         }
         return id;
     }
-
+    /**
+     * The method finds a skill in database by id of skill
+     *
+     * @param aLong an id of a skill
+     * @return a skill with entered id
+     * or null if skill with this id does not exist in the database
+     */
     @Override
     public Skill findById(Long aLong) {
         Skill skill;
@@ -46,6 +65,11 @@ public class HibSkillDao implements SkillDAO{
         return skill;
     }
 
+    /**
+     * The method updates a skill in a database (finds skill in a database by id and overwrites other fields)
+     *
+     * @param obj  is a skill with new parameters
+     */
     @Override
     public void update(Skill obj) {
         try(Session session = sessionFactory.openSession()){
@@ -59,6 +83,12 @@ public class HibSkillDao implements SkillDAO{
         }
     }
 
+
+    /**
+     * The method removes a skill from a database
+     *
+     * @param obj is a skill which must be removed
+     */
     @Override
     public void delete(Skill obj) {
         try (Session session = sessionFactory.openSession()){
@@ -71,6 +101,11 @@ public class HibSkillDao implements SkillDAO{
         }
     }
 
+    /**
+     * The method returns all skills from a database
+     *
+     * @return list of all skills from a database
+     */
     @Override
     public List<Skill> findAll() {
         try (Session session = sessionFactory.openSession()){
@@ -80,6 +115,13 @@ public class HibSkillDao implements SkillDAO{
         }
     }
 
+    /**
+     * Method finds a skill in a database by name of the skill
+     *
+     * @param name is a name of a skill
+     * @return a skill with entered name
+     * or null if skill with this name does not exist in the database
+     */
     @Override
     public Skill findByName(String name) {
         try(Session session = sessionFactory.openSession()){
