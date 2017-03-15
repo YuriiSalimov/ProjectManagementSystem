@@ -17,7 +17,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     /**
      * An instance of SessionFactory
      */
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     /**
      * Constructor
@@ -66,6 +66,8 @@ public class HibDeveloperDao implements DeveloperDAO {
         Developer developer;
         try (Session session = sessionFactory.openSession()){
             developer = session.get(Developer.class,id);
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
         return developer;
     }

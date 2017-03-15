@@ -3,9 +3,11 @@ package com.management.project.factory;
 import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.CustomerDAO;
 import com.management.project.dao.DeveloperDAO;
+import com.management.project.dao.SkillDAO;
 import com.management.project.dao.hibernate.HibCompanyDao;
 import com.management.project.dao.hibernate.HibCustomerDao;
 import com.management.project.dao.hibernate.HibDeveloperDao;
+import com.management.project.dao.hibernate.HibSkillDao;
 import com.management.project.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -36,6 +38,11 @@ public final class HibFactoryDao {
      * An instance of DeveloperDAO
      */
     private static DeveloperDAO developerDAO;
+
+    /**
+     * An instance of SkillDAO
+     */
+    private static SkillDAO skillDAO;
 
     /**
      * Private constructor
@@ -91,6 +98,13 @@ public final class HibFactoryDao {
             developerDAO = new HibDeveloperDao(getSessionFactory());
         }
         return developerDAO;
+    }
+
+    public static SkillDAO getSkillDAO(){
+        if (skillDAO == null){
+            skillDAO = new HibSkillDao(getSessionFactory());
+        }
+        return skillDAO;
     }
 
     /**
