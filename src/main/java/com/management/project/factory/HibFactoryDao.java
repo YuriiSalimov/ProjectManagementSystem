@@ -1,8 +1,10 @@
 package com.management.project.factory;
 
 import com.management.project.dao.CompanyDAO;
+import com.management.project.dao.CustomerDAO;
 import com.management.project.dao.DeveloperDAO;
 import com.management.project.dao.hibernate.HibCompanyDao;
+import com.management.project.dao.hibernate.HibCustomerDao;
 import com.management.project.dao.hibernate.HibDeveloperDao;
 import com.management.project.models.*;
 import org.hibernate.SessionFactory;
@@ -19,10 +21,16 @@ public final class HibFactoryDao {
      * An instance of SessionFactory
      */
     private static SessionFactory sessionFactory;
+
     /**
      * An instance of CompanyDAO
      */
     private static CompanyDAO companyDAO;
+
+    /**
+     * An instance of CustomerDAO
+     */
+    private static CustomerDAO customerDAO;
 
     /**
      * An instance of DeveloperDAO
@@ -64,6 +72,18 @@ public final class HibFactoryDao {
             companyDAO = new HibCompanyDao(getSessionFactory());
         }
         return companyDAO;
+    }
+
+    /**
+     * The method returns an instance of CustomerDAO, and creates it if it is not exist
+     *
+     * @return an instance of CustomerDAO
+     */
+    public static CustomerDAO getCustomerDAO() {
+        if (customerDAO == null) {
+            customerDAO = new HibCustomerDao(getSessionFactory());
+        }
+        return customerDAO;
     }
 
     public static DeveloperDAO getDeveloperDAO() {

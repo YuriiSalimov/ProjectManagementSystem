@@ -43,12 +43,13 @@ public class HibCompanyDao implements CompanyDAO {
             id = (Long)session.save(company);
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to save company " + company);
-            e.printStackTrace();        }
+            e.printStackTrace();
+        }
         return id;
     }
 
     /**
-     * The method finds a company in database by id of company
+     * The method finds a company in database by id of the company
      *
      * @param id an id of a company
      * @return a company with entered id
@@ -77,6 +78,9 @@ public class HibCompanyDao implements CompanyDAO {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Company companyFromDb = session.get(Company.class, company.getId());
+            if (companyFromDb == null) {
+                return;
+            }
             companyFromDb.setName(company.getName());
             session.update(companyFromDb);
             transaction.commit();
@@ -100,6 +104,9 @@ public class HibCompanyDao implements CompanyDAO {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Company companyFromDb = session.get(Company.class, company.getId());
+            if (companyFromDb == null){
+                return;
+            }
             session.delete(companyFromDb);
             transaction.commit();
         } catch (Exception e) {
