@@ -25,9 +25,9 @@ public class JdbcProjectDAOTest {
     private ProjectDAO projectDAO;
     private CompanyDAO companyDAO;
     private CustomerDAO customerDAO;
-    Company company;
-    Customer customer;
-    Project project;
+    private Company company;
+    private Customer customer;
+    private Project project;
 
     public JdbcProjectDAOTest() throws SQLException {
         projectDAO = FactoryDao.getProjectDAO();
