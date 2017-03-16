@@ -1,13 +1,7 @@
 package com.management.project.factory;
 
-import com.management.project.dao.CompanyDAO;
-import com.management.project.dao.CustomerDAO;
-import com.management.project.dao.DeveloperDAO;
-import com.management.project.dao.SkillDAO;
-import com.management.project.dao.hibernate.HibCompanyDao;
-import com.management.project.dao.hibernate.HibCustomerDao;
-import com.management.project.dao.hibernate.HibDeveloperDao;
-import com.management.project.dao.hibernate.HibSkillDao;
+import com.management.project.dao.*;
+import com.management.project.dao.hibernate.*;
 import com.management.project.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -38,6 +32,11 @@ public final class HibFactoryDao {
      * An instance of DeveloperDAO
      */
     private static DeveloperDAO developerDAO;
+
+    /**
+     * An instance of ProjectDAO
+     */
+    private static ProjectDAO projectDAO;
 
     /**
      * An instance of SkillDAO
@@ -93,6 +92,11 @@ public final class HibFactoryDao {
         return customerDAO;
     }
 
+    /**
+     * The method returns an instance of DeveloperDAO, and creates it if it is not exist
+     *
+     * @return an instance of DeveloperDAO
+     */
     public static DeveloperDAO getDeveloperDAO() {
         if (developerDAO == null) {
             developerDAO = new HibDeveloperDao(getSessionFactory());
@@ -100,6 +104,23 @@ public final class HibFactoryDao {
         return developerDAO;
     }
 
+    /**
+     * The method returns an instance of ProjectDAO, and creates it if it is not exist
+     *
+     * @return an instance of ProjectDAO
+     */
+    public static ProjectDAO getProjectDAO() {
+        if (projectDAO == null) {
+            projectDAO = new HibProjectDao(getSessionFactory());
+        }
+        return projectDAO;
+    }
+
+    /**
+     * The method returns an instance of SkillDAO, and creates it if it is not exist
+     *
+     * @return an instance of SkillDAO
+     */
     public static SkillDAO getSkillDAO(){
         if (skillDAO == null){
             skillDAO = new HibSkillDao(getSessionFactory());
