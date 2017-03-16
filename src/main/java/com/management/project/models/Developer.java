@@ -32,14 +32,24 @@ public class Developer implements Model {
     /**
      * The company, which employs this developer.
      */
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
     @JoinColumn(name = "company_id")
     private Company company;
 
     /**
      * The project, that works the developer
      */
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
     @JoinColumn(name = "project_id")
     private Project project;
 
@@ -52,7 +62,12 @@ public class Developer implements Model {
     /**
      * Skills which have developer
      */
-    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    }, fetch = FetchType.EAGER)
     @JoinTable(name = "developers_skills",
             joinColumns = {@JoinColumn(name = "developer_id")},
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
