@@ -115,9 +115,6 @@ public class HibDeveloperDao implements DeveloperDAO {
         try{
             transaction = session.beginTransaction();
             Developer developer = session.get(Developer.class,obj.getId());
-            developer.setCompany(null);
-            developer.setProject(null);
-            developer.setSkills(null);
             session.delete(developer);
             transaction.commit();
         }catch (Exception e){
