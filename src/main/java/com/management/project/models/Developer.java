@@ -1,5 +1,6 @@
 package com.management.project.models;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,36 +11,67 @@ import java.util.Set;
  *
  * @author Вадим
  */
+@Entity
+@Table (name = "developers", schema = "projectManagementDB")
 public class Developer implements Model {
 
     /**
      * The unique identifier for each developer.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     /**
      * The name of this developer.
      */
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**
      * The company, which employs this developer.
      */
+    @ManyToOne (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "company_id")
     private Company company;
 
     /**
      * The project, that works the developer
      */
+    @ManyToOne (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "project_id")
     private Project project;
 
     /**
      * The salary of this developer
      */
+    @Column(name = "salary")
     private int salary;
 
     /**
-     * Skills that have developer
+     * Skills which have developer
      */
+    @ManyToMany (cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    }, fetch = FetchType.EAGER)
+    @JoinTable(name = "developers_skills",
+            joinColumns = {@JoinColumn(name = "developer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
     private Set<Skill> skills = new HashSet<Skill>();
 
     /**
@@ -111,12 +143,12 @@ public class Developer implements Model {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Developer{")
-                .append(", id=").append(this.id)
+                .append("id=").append(this.id)
                 .append(", name=").append(this.name)
                 .append(", salary=").append(this.salary)
                 .append(", company=").append(this.company)
                 .append(", project=").append(this.project)
-                .append(", skills:");
+                .append(", skills: ");
         for (Skill skill : this.skills) {
             sb.append(skill.getName()).append(", ");
         }

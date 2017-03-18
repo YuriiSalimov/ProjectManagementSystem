@@ -1,21 +1,30 @@
 package com.management.project.models;
 
+import javax.persistence.*;
+import java.util.Set;
+
 /**
  * The class implements a set of standard methods for working
  * with entity of the Developer.
  *
  * @author Вадим
  */
+@Entity
+@Table (name = "skills")
 public class Skill implements Model {
 
     /**
      * The unique identifier for each skill.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private long id;
 
     /**
      * a name of skill.
      */
+    @Column (name = "name")
     private String name;
 
     /**
@@ -27,12 +36,21 @@ public class Skill implements Model {
     /**
      * Constructor.
      *
+     * @param name a name of skill.
+     */
+    public Skill(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Constructor.
+     *
      * @param id   The unique identifier for each skill.
      * @param name a name of skill.
      */
     public Skill(long id, String name) {
+        this(name);
         this.id = id;
-        this.name = name;
     }
 
     /**

@@ -6,8 +6,6 @@ import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
-import com.management.project.utils.Constants;
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,14 +14,40 @@ import java.util.List;
 import static com.management.project.utils.Constants.*;
 
 /**
+ * The class implements a set of methods for working with database, with Project entity.
+ *
  * @author Slava Makhinich
  */
 public class JdbcProjectDAO implements ProjectDAO {
+
+    /**
+     * A pattern of an SQL command (without particular values) for saving a project in a database
+     */
     private static final String SAVE = "INSERT INTO projects (name, cost, company_id, customer_id) VALUES(?, ?, ?, ?)";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in a database by id
+     */
     private static final String FIND_BY_ID = "SELECT * FROM projects WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular values) for update a project in a database
+     */
     private static final String UPDATE = "UPDATE projects SET name  = ?, cost = ?, company_id = ?, customer_id = ? WHERE id = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a project from a database by id
+     */
     private static final String DELETE = "DELETE FROM projects WHERE ID = ?";
+
+    /**
+     * An SQL command for getting all projects from a database
+     */
     private static final String FIND_ALL = "SELECT * FROM projects";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a project in a database by name
+     */
     private static final String FIND_BY_NAME = "SELECT * FROM projects WHERE NAME LIKE ?";
 
     /**
@@ -37,14 +61,14 @@ public class JdbcProjectDAO implements ProjectDAO {
     private CustomerDAO customerDAO;
 
     /**
-     * a connection to database
+     * a connection to a database
      */
     private Connection connection;
 
     /**
      * * Constructor.
      *
-     * @param connection a connection to database
+     * @param connection a connection to a database
      */
     public JdbcProjectDAO(Connection connection) throws SQLException {
         this.connection = connection;
@@ -53,11 +77,11 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * Method finds a project in database by name of project
+     * Method finds a project in a database by name of the project
      *
-     * @param name a name of a project
+     * @param name is a name of a project
      * @return a project with entered name
-     * or null if project with this name does not exist
+     * or null if project with this name does not exist in the database
      */
     @Override
     public Project findByName(String name) {
@@ -71,21 +95,17 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + name);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + name);
+            e.printStackTrace();
         }
         return project;
     }
 
     /**
-     * Method saves a new project in the database
+     * The method saves a new project in a database
      *
-     * @param project a project, which must be save in the database
-     * @return projects id if the project was add to database successfully
+     * @param project a project, which must be save in a database
+     * @return projects id if a project was add to database successfully
      */
     @Override
     public Long save(Project project) {
@@ -102,21 +122,16 @@ public class JdbcProjectDAO implements ProjectDAO {
             id = resultSet.getLong(1);
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to save Customer: " + project.getName() + "\n" + e);
+            System.out.println("SQL exception occurred while trying to save Customer: " + project.getName() + "\n" + e);
         }
         return id;
     }
 
     /**
-     * Method finds a project in database by name of project
+     * The method finds a project in database by id of project
      *
      * @param id an id of a project
-     * @return a project with entered name
+     * @return a project with entered id
      * or null if project with this id does not exist
      */
     @Override
@@ -131,20 +146,16 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to retrieve Project with Name: " + id);
+            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + id);
+            e.printStackTrace();
         }
         return project;
     }
 
     /**
-     * Method updates a project in the database (finds project in the database by id and overwrites other fields)
+     * The method updates a project in a database (finds project in a database by id and overwrites other fields)
      *
-     * @param project skill with new name
+     * @param project project with new parameters
      */
     @Override
     public void update(Project project) {
@@ -156,21 +167,15 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(5, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(Constants.ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to update Project with ID: " + project.getId() + "\n" + e);
-
+            System.out.println("SQL exception occurred while trying to update Project with ID: " + project.getId() + "\n" + e);
         }
 
     }
 
     /**
-     * Method removes project from database
+     * The method removes a project from a database
      *
-     * @param project project which must be removed
+     * @param project is a project which must be removed
      */
     @Override
     public void delete(Project project) {
@@ -178,19 +183,15 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(1, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(ROLLBACK_EXCEPTION_MSG);
-            }
-            System.out.println("SQL exception has occur while trying to delete Project with ID: " + project.getId());
+            System.out.println("SQL exception occurred while trying to delete Project with ID: " + project.getId());
+            e.printStackTrace();
         }
     }
 
     /**
-     * Method returns all projects from the database
+     * The method returns all projects from a database
      *
-     * @return list of all projects from the database
+     * @return list of all projects from a database
      */
     @Override
     public List<Project> findAll() {
@@ -200,20 +201,17 @@ public class JdbcProjectDAO implements ProjectDAO {
             projects = buildProjectsFromResultSet(resultSet);
             resultSet.close();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-                System.out.println(ROLLBACK_EXCEPTION_MSG);            }
-            System.out.println("SQL exception has occur while trying to find all Projects\n " + e);
+            System.out.println("SQL exception occurred while trying to find all Projects:");
+            e.printStackTrace();
         }
         return projects;
     }
 
     /**
-     * Method builds a list of projects from resultSet (set that we get after execution SQL query)
+     * The method builds a list of projects from resultSet (set that we get after execution SQL query)
      *
      * @param resultSet set that we get after execution SQL query
-     * @return
+     * @return a list of all projects from a database
      */
     private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException{
         List<Project> projects = new ArrayList<>();

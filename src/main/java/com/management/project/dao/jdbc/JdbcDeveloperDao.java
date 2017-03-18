@@ -12,19 +12,59 @@ import java.sql.*;
 import java.util.*;
 
 /**
+ * The class implements a set of methods for working with database, with Developer entity.
  * @author Вадим
  */
 public class JdbcDeveloperDao implements DeveloperDAO {
 
+    /**
+     * A pattern of an SQL command (without particular values) for saving a developer in a database
+     */
     private final static String SAVE = "INSERT INTO developers(name, company_id, project_id,salary) VALUES(?,?,?,?)";
+
+    /**
+     * A pattern of an SQL command (without particular values) for saving a set skills of developer in a database
+     */
     private static final String SAVE_SKILLS = "INSERT developers_skills VALUES (?,?)";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a developer in a database by id
+     */
     private final static String FIND_BY_ID = "SELECT * FROM developers WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular values) for update a developer in a database
+     */
     private final static String UPDATE = "UPDATE developers SET name = ?, company_id = ?,project_id = ?,salary =? WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a developer from a database by id
+     */
     private final static String DELETE = "DELETE FROM developers WHERE ID = ?";
+
+    /**
+     * A pattern of an SQL command (without particular value) for removing a set skills of developer from a database by developer`sid
+     */
     private final static String DELETE_SKILLS = "DELETE FROM developers_skills WHERE developer_id = ?";
+
+    /**
+     * An SQL command for getting all developers from a database
+     */
     private final static String FIND_ALL = "SELECT * FROM developers";
+
+    /**
+     * A pattern of an SQL command (without particular value) for finding a developer in a database by name
+     */
     private final static String FIND_BY_NAME = "SELECT * FROM developers WHERE NAME = ?";
+
+    /**
+     * A pattern of an SQL command  for finding a id from the last inserted developer in a database
+     */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
+
+    /**
+     * An SQL command for getting set of developer`s skills from a database by developer`s id
+     */
     private final static String GET_SKILLS = "SELECT * FROM skills " +
             "JOIN developers_skills ON skills.ID = developers_skills.skill_id " +
             "JOIN developers ON developers_skills.developer_id = developers.id " +
@@ -188,6 +228,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.setString(1,obj.getName());
                 statement.setLong(2,obj.getCompany().getId());
                 statement.setLong(3,obj.getProject().getId());
+                statement.setLong(5,obj.getId());
                 statement.setInt(4,obj.getSalary());
                 statement.executeUpdate();
             }
@@ -239,14 +280,16 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         try { connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
 
-            try (PreparedStatement statement = connection.prepareStatement(DELETE)){
-                statement.setLong(1,obj.getCompany().getId());
-                statement.executeUpdate();
-            }
             try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)){
                 statement.setLong(1,obj.getId());
                 statement.executeUpdate();
             }
+
+            try (PreparedStatement statement = connection.prepareStatement(DELETE)){
+                statement.setLong(1,obj.getId());
+                statement.executeUpdate();
+            }
+
             connection.commit();
 
         } catch (Exception e) {
@@ -311,7 +354,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 while (resultSet.next()){
                     Skill skill = new Skill();
                     skill.setId(resultSet.getLong("id"));
-                    skill.setName(resultSet.getString("skill"));
+                    skill.setName(resultSet.getString("name"));
                     skills.add(skill);
                 }
             }

@@ -7,7 +7,7 @@ import com.management.project.dao.jdbc.*;
 import java.sql.SQLException;
 
 /**
- * Created by Slava on 06.03.2017.
+ * @author Slava Makhinich
  */
 public final class FactoryDao {
     private static CompanyDAO companyDAO;
@@ -28,7 +28,7 @@ public final class FactoryDao {
     }
 
     private static CompanyDAO createCompanyDao() throws SQLException {
-        return new JdbcCompanyDAO(ConnectionMySql.getInstance().getConnection());
+        return new JdbcCompanyDAO(ConnectionMySql.getInstance());
     }
 
     public static CustomerDAO getCustomerDAO() throws SQLException {

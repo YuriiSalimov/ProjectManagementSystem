@@ -14,9 +14,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 07.03.2017.
+ * @author Slava Makhinich
  */
-public class ProjectController extends AbstractModelController {
+public class ProjectController extends AbstractModelController<Project> {
 
     protected CompanyDAO companyDAO = FactoryDao.getCompanyDAO();
     protected CustomerDAO customerDAO = FactoryDao.getCustomerDAO();
@@ -28,13 +28,12 @@ public class ProjectController extends AbstractModelController {
     @Override
     protected void printMenu() {
         System.out.println();
-        System.out.println("Actions with project:");
+        System.out.println("ACTIONS WITH PROJECTS:");
         super.printMenu();
     }
 
     @Override
-    protected Model getNewModel() {
-
+    protected Project getNewModel() {
         System.out.print("Input project name: ");
         String projectName = new Scanner(System.in).nextLine();
         System.out.print("Input project cost: ");
@@ -43,7 +42,7 @@ public class ProjectController extends AbstractModelController {
         long companyId = new Scanner(System.in).nextLong();
         System.out.print("Input customer id: ");
         long customerId = new Scanner(System.in).nextLong();
-        Company company = new Company(companyId, "bla-bla"); //companyDAO.findById(companyId);   -- эаменить когда допшут JdbcCompanyDAO
+        Company company = companyDAO.findById(companyId);
         Customer customer = customerDAO.findById(customerId);
         Project project = new Project(-100, projectName, projectCost, company, customer);
         return project;
