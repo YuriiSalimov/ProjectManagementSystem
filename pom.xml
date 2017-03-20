@@ -37,13 +37,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <!--<dependency>-->
-            <!--<groupId>org.junit.jupiter</groupId>-->
-            <!--<artifactId>junit-jupiter-api</artifactId>-->
-            <!--<version>5.0.0-M3</version>-->
-        <!--</dependency>-->
-
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -87,5 +80,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,7 +1,9 @@
 USE projectManagementDB;
 
 -- add field cost to projects tab
-ALTER TABLE projects ADD cost INT NOT NULL AFTER name;
+ALTER TABLE projects
+  ADD cost INT NOT NULL
+  AFTER name;
 
 /**
 - update all fields cost in tab projects
@@ -9,7 +11,11 @@ ALTER TABLE projects ADD cost INT NOT NULL AFTER name;
 - SET SQL_SAFE_UPDATES = 0;
 - after working fine
  */
-UPDATE projects p SET p.cost = (SELECT sum(d.salary)
-FROM developers d WHERE d.project_id = p.id);
+UPDATE projects p
+SET p.cost = (
+  SELECT sum(d.salary)
+  FROM developers d
+  WHERE d.project_id = p.id
+);
 
 
