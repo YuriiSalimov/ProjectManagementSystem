@@ -58,4 +58,3 @@ CREATE TABLE IF NOT EXISTS developers_skills(
   FOREIGN KEY (skill_id) REFERENCES skills (id)
 )
   ENGINE = InnoDB;
-
