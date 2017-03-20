@@ -52,11 +52,11 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         }
     }
 
-    private void showAll() {
+    protected void showAll() {
         dao.findAll().forEach(System.out::println);
     }
 
-    private void deleteById() {
+    protected void deleteById() {
         System.out.print("Delete by id. Input id: ");
         long id = new Scanner(System.in).nextLong();
         T model = dao.findById(id);
@@ -73,7 +73,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.println("Id of new model: " + dao.save(model));
     }
 
-    private void update() {
+    protected void update() {
         System.out.print("Update. Input id: ");
         long id = new Scanner(System.in).nextLong();
         T oldModel = dao.findById(id);
