@@ -102,12 +102,11 @@ public class JdbcSkillDAO implements SkillDAO {
         try (Connection connection = connectionDB.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
                 preparedStatement.setLong(1, aLong);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ResultSet resultSet = preparedStatement.executeQuery();
                     if (!resultSet.next()) {
                         return null;
                     }
                     return createSkill(resultSet);
-                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -179,12 +178,11 @@ public class JdbcSkillDAO implements SkillDAO {
         try (Connection connection = connectionDB.getConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
                 preparedStatement.setString(1, name);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ResultSet resultSet = preparedStatement.executeQuery();
                     if (!resultSet.next()) {
                         return null;
                     }
                     return createSkill(resultSet);
-                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

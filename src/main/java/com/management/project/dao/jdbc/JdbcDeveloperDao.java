@@ -109,12 +109,11 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             Developer developer;
             try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
                 preparedStatement.setString(1, name);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ResultSet resultSet = preparedStatement.executeQuery();
                     if (!resultSet.next()) {
                         return null;
                     }
                     developer = createDeveloper(resultSet);
-                }
             }
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
@@ -123,7 +122,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     /**
@@ -162,27 +160,14 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             connection.commit();
             return id;
 
-        } catch (Exception e) {
-            try {
-                if (connection!=null) {
-                    connection.rollback();
-                }
-            } catch (SQLException e1) {
-                throw new RuntimeException(e1);
-            }
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            rollbackTransaction(connection);
+            throw new RuntimeException(ex);
         } finally {
-            if (connection!=null){
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
+            closeConnection(connection);
         }
     }
+
 
     /**
      * Method finds a developer in database by id
@@ -197,12 +182,11 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             Developer developer;
             try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
                 preparedStatement.setLong(1, aLong);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ResultSet resultSet = preparedStatement.executeQuery();
                     if (!resultSet.next()) {
                         return null;
                     }
                     developer = createDeveloper(resultSet);
-                }
             }
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
@@ -247,27 +231,15 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             }
             connection.commit();
 
-        } catch (Exception e) {
-            try {
-                if (connection!=null) {
-                    connection.rollback();
-                }
-            } catch (SQLException e1) {
-                throw new RuntimeException(e1);
-            }
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            rollbackTransaction(connection);
+            throw new RuntimeException(ex);
         } finally {
-            if (connection!=null){
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
+            closeConnection(connection);
         }
     }
+
+
 
     /**
      * Method removes a developer from database
@@ -289,28 +261,13 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.setLong(1,obj.getId());
                 statement.executeUpdate();
             }
-
             connection.commit();
 
-        } catch (Exception e) {
-            try {
-                if (connection!=null) {
-                    connection.rollback();
-                }
-            } catch (SQLException e1) {
-                throw new RuntimeException(e1);
-            }
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            rollbackTransaction(connection);
+            throw new RuntimeException(ex);
         } finally {
-            if (connection!=null){
-                try {
-                    connection.setAutoCommit(true);
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
+            closeConnection(connection);
         }
     }
 
@@ -349,7 +306,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         HashSet<Skill> skills;
         try (PreparedStatement preparedStatement = connection.prepareStatement(GET_SKILLS)){
             preparedStatement.setLong(1, developer.getId());
-            try (ResultSet resultSet = preparedStatement.executeQuery()){
+            ResultSet resultSet = preparedStatement.executeQuery();
                 skills = new HashSet<>();
                 while (resultSet.next()){
                     Skill skill = new Skill();
@@ -357,7 +314,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                     skill.setName(resultSet.getString("name"));
                     skills.add(skill);
                 }
-            }
         }
         return skills;
     }
@@ -378,6 +334,35 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         developer.setCompany(companyDAO.findById(resultSet.getLong("company_id")));
         developer.setProject(projectDAO.findById(resultSet.getLong("project_id")));
         return developer;
+    }
+
+    /**
+     * This Method rollback transaction for current connection
+     * @param connection a current connection to DB
+     */
+    private void rollbackTransaction(Connection connection) {
+        try {
+            if (connection!=null) {
+                connection.rollback();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This Method close a current connection and set auto commit for connection
+     * @param connection a current connection to DB
+     */
+    private void closeConnection(Connection connection) {
+        if (connection!=null){
+            try {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
