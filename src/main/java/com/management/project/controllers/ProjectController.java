@@ -18,11 +18,13 @@ import java.util.Scanner;
  */
 public class ProjectController extends AbstractModelController<Project> {
 
-    protected CompanyDAO companyDAO = FactoryDao.getCompanyDAO();
-    protected CustomerDAO customerDAO = FactoryDao.getCustomerDAO();
+    protected CompanyDAO companyDAO;
+    protected CustomerDAO customerDAO;
 
-    public ProjectController(ProjectDAO dao) throws SQLException {
+    public ProjectController(GenericDAO<Project, Long> dao, CompanyDAO companyDAO, CustomerDAO customerDAO) {
         super(dao);
+        this.companyDAO = companyDAO;
+        this.customerDAO = customerDAO;
     }
 
     @Override

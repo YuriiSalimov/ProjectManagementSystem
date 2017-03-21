@@ -9,13 +9,20 @@ import java.sql.SQLException;
  */
 public class MainController extends AbstractController {
 
-    private final CompanyController companyController = FactoryController.getCompanyController();
-    private final CustomerController customerController = FactoryController.getCustomerController();
-    private final DeveloperController developerController = FactoryController.getDeveloperController();
-    private final ProjectController projectController = FactoryController.getProjectController();
-    private final SkillController skillController = FactoryController.getSkillController();
+    private CompanyController companyController;
+    private CustomerController customerController;
+    private DeveloperController developerController;
+    private ProjectController projectController;
+    private SkillController skillController;
 
-    public MainController() throws SQLException {
+    public MainController(CompanyController companyController, CustomerController customerController,
+                          DeveloperController developerController, ProjectController projectController,
+                          SkillController skillController) {
+        this.companyController = companyController;
+        this.customerController = customerController;
+        this.developerController = developerController;
+        this.projectController = projectController;
+        this.skillController = skillController;
     }
 
     @Override

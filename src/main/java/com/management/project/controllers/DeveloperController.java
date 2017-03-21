@@ -19,12 +19,16 @@ import java.util.Scanner;
  */
 public class DeveloperController extends AbstractModelController<Developer> {
 
-    protected SkillDAO skillDAO = FactoryDao.getSkillDAO();
-    protected CompanyDAO companyDAO = FactoryDao.getCompanyDAO();
-    protected ProjectDAO projectDAO = FactoryDao.getProjectDAO();
+    protected SkillDAO skillDAO;
+    protected CompanyDAO companyDAO;
+    protected ProjectDAO projectDAO;
 
-    public DeveloperController(GenericDAO<Developer, Long> dao) throws SQLException {
+    public DeveloperController(GenericDAO<Developer, Long> dao, SkillDAO skillDAO,
+                               CompanyDAO companyDAO, ProjectDAO projectDAO) {
         super(dao);
+        this.skillDAO = skillDAO;
+        this.companyDAO = companyDAO;
+        this.projectDAO = projectDAO;
     }
 
     @Override
