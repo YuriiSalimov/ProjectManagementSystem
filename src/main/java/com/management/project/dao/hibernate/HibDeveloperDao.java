@@ -84,16 +84,22 @@ public class HibDeveloperDao implements DeveloperDAO {
         Session session = sessionFactory.openSession();
         try{
             transaction = session.beginTransaction();
-            developerNew = session.get(Developer.class,developer.getId());
-            developerNew.setName(developer.getName());
-            developerNew.setSalary(developer.getSalary());
-            developerNew.setCompany(developer.getCompany());
-            developerNew.setProject(developer.getProject());
-            developerNew.setSkills((HashSet<Skill>) developer.getSkills());
-            session.clear();
-            session.update(developerNew);
+            developerNew = session.get(Developer.class, developer.getId());
+            if (developerNew != null) {
+                developerNew.setName(developer.getName());
+                developerNew.setSalary(developer.getSalary());
+                developerNew.setCompany(developer.getCompany());
+                developerNew.setProject(developer.getProject());
+                developerNew.setSkills(new HashSet<>());
+                for (Skill skill: developer.getSkills()) {
+                    developerNew.addSkill(skill);
+                }
+                session.clear();
+                session.update(developerNew);
+            }
             transaction.commit();
         }catch (Exception e){
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -115,7 +121,9 @@ public class HibDeveloperDao implements DeveloperDAO {
         try{
             transaction = session.beginTransaction();
             Developer developer = session.get(Developer.class,obj.getId());
-            session.delete(developer);
+            if (developer != null) {
+                session.delete(developer);
+            }
             transaction.commit();
         }catch (Exception e){
             if (transaction != null) {
