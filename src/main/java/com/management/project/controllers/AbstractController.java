@@ -1,5 +1,6 @@
 package com.management.project.controllers;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ import java.util.Scanner;
  */
 public abstract class AbstractController {
 
-    public void start () {
+    public void start () throws SQLException {
         int choice;
         while (true){
             printMenu();
@@ -31,7 +32,7 @@ public abstract class AbstractController {
         return choice;
     }
 
-    protected abstract void action(int choice);
+    protected abstract void action(int choice) throws SQLException;
 
     protected abstract void printMenu();
 

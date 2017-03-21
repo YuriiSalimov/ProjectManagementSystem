@@ -26,7 +26,7 @@ public class MainController extends AbstractController {
     }
 
     @Override
-    protected void action(int choice) {
+    protected void action(int choice) throws SQLException {
         switch (choice) {
             case 1:
                 companyController.start();
