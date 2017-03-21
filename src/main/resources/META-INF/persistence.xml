@@ -13,8 +13,12 @@
             com.mysql.jdbc.Driver
         </property>
 
+        <!--<property name="hibernate.connection.url"  >-->
+            <!--jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true-->
+        <!--</property>-->
+
         <property name="hibernate.connection.url"  >
-            jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true
+            jdbc:mysql://localhost:3306/projectManagementDB?useSSL=false
         </property>
 
         <property name="hibernate.connection.username">
@@ -24,7 +28,7 @@
         <property name="hibernate.connection.password">
             root
         </property>
-        <property name="hibernate.show_sql">true</property>
+        <!--<property name="hibernate.show_sql">true</property>-->
 
 
         <mapping class="com.management.project.models.Developer"></mapping>

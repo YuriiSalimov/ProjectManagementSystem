@@ -48,7 +48,8 @@ public class MainController extends AbstractController {
 
     @Override
     protected void printMenu() {
-        System.out.println("MAIN MENU");
+        System.out.println();
+        System.out.println("MENU");
         System.out.println("1- actions with companies");
         System.out.println("2- actions with customers");
         System.out.println("3- actions with developers");
