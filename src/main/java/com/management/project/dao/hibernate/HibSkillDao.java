@@ -75,8 +75,10 @@ public class HibSkillDao implements SkillDAO{
         try(Session session = sessionFactory.openSession()){
             session.beginTransaction();
             Skill skillToUpdate = session.get(Skill.class,obj.getId());
-            skillToUpdate.setName(obj.getName());
-            session.update(skillToUpdate);
+            if (skillToUpdate != null) {
+                skillToUpdate.setName(obj.getName());
+                session.update(skillToUpdate);
+            }
             session.getTransaction().commit();
         }catch (Exception e) {
             throw new RuntimeException(e);
@@ -94,7 +96,9 @@ public class HibSkillDao implements SkillDAO{
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
             Skill skillToDelete = session.get(Skill.class,obj.getId());
-            session.delete(skillToDelete);
+            if (skillToDelete != null) {
+                session.delete(skillToDelete);
+            }
             session.getTransaction().commit();
         } catch (Exception e){
             throw new RuntimeException(e);
