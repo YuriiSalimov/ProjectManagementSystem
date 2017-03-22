@@ -4,16 +4,17 @@ import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.GenericDAO;
 import com.management.project.dao.ProjectDAO;
 import com.management.project.dao.SkillDAO;
-import com.management.project.models.Company;
-import com.management.project.models.Customer;
-import com.management.project.models.Developer;
+import com.management.project.models.*;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Вадим on 21.03.2017.
@@ -39,21 +40,44 @@ public class DeveloperControllerTest extends AbstractModelControllerTest {
     @Test
     public void getNewModel() throws Exception {
 
-        System.setIn(new ByteArrayInputStream(("name").getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        scanner.next();
-        System.setIn(new ByteArrayInputStream("0".getBytes()));
-        scanner.nextInt();
-        scanner.next();
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        scanner.next();
-        scanner.nextInt();
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        scanner.next();
-        System.setIn(new ByteArrayInputStream("null".getBytes()));
-        scanner.close();
-        Developer developer = developerController.getNewModel();
-        assertEquals(developer, new Developer("name", companyDAO.findById(1L), projectDAO.findById(1L),0,null));
+        Skill skill = new Skill(1, "test skill");
+        Company company = new Company(1, "test company");
+        Project project = new Project(1, "test project", 11111, company, null);
+        Developer ourDeveloper = new Developer(1, "1", company, project, 1);
+
+        when(skillDAO.findById(1l)).thenReturn(skill).thenReturn(null);
+        when(companyDAO.findById(1l)).thenReturn(company);
+        when(projectDAO.findById(1l)).thenReturn(project);
+
+        setInput();
+
+        Developer developerFromGetNewModel = developerController.getNewModel();
+        assertEquals(developerFromGetNewModel, ourDeveloper);
+        Set<Skill> skills = developerFromGetNewModel.getSkills();
+        assertTrue((skills.size() == 1) && skills.contains(skill));
+
+        Developer anotherDeveloper = developerController.getNewModel();
+        assertTrue(anotherDeveloper.getSkills().size() == 0);
+
+    }
+
+    private void setInput() {
+        InputStream inputStream = new InputStream() {
+
+            int count = 0;
+            @Override
+            public int read() throws IOException {
+
+                if (count%3 == 0) {
+                    count++;
+                    return 49;
+                }
+                count++;
+                return -1;
+            }
+        };
+
+        System.setIn(inputStream);
     }
 
 }
