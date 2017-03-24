@@ -8,8 +8,6 @@ import com.management.project.models.*;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -49,7 +47,7 @@ public class DeveloperControllerTest extends AbstractModelControllerTest {
         when(companyDAO.findById(1l)).thenReturn(company);
         when(projectDAO.findById(1l)).thenReturn(project);
 
-        setInput();
+        System.setIn(new Always1InputStream());
 
         Developer developerFromGetNewModel = developerController.getNewModel();
         assertEquals(developerFromGetNewModel, ourDeveloper);
@@ -58,26 +56,5 @@ public class DeveloperControllerTest extends AbstractModelControllerTest {
 
         Developer anotherDeveloper = developerController.getNewModel();
         assertTrue(anotherDeveloper.getSkills().size() == 0);
-
     }
-
-    private void setInput() {
-        InputStream inputStream = new InputStream() {
-
-            int count = 0;
-            @Override
-            public int read() throws IOException {
-
-                if (count%3 == 0) {
-                    count++;
-                    return 49;
-                }
-                count++;
-                return -1;
-            }
-        };
-
-        System.setIn(inputStream);
-    }
-
 }
