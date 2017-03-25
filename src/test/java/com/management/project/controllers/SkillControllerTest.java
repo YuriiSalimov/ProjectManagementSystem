@@ -1,24 +1,14 @@
 package com.management.project.controllers;
 
-import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.GenericDAO;
-import com.management.project.dao.ProjectDAO;
 import com.management.project.dao.SkillDAO;
-import com.management.project.models.Company;
-import com.management.project.models.Developer;
-import com.management.project.models.Project;
 import com.management.project.models.Skill;
 import org.junit.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,7 +16,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Катя on 19.03.2017.
  */
-public class SkillControllerTest extends AbstarctSkillControllerTest {
+public class SkillControllerTest extends AbstractModelControllerTest {
     GenericDAO dao = mock(GenericDAO.class);
     SkillDAO skillDAO = mock(SkillDAO.class);
 
@@ -45,7 +35,7 @@ public class SkillControllerTest extends AbstarctSkillControllerTest {
     @Test
     public void getNewModel() throws Exception {
 
-        Skill skill = new Skill(-100, "test skill");
+        Skill skill = new Skill(-100, "1");
         when(skillDAO.findById(1l)).thenReturn(skill).thenReturn(null);
         System.setIn(new Always1InputStream());
 
