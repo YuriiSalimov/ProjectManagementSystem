@@ -13,6 +13,7 @@ import java.util.*;
 
 /**
  * The class implements a set of methods for working with database, with Developer entity.
+ *
  * @author Вадим
  */
 public class JdbcDeveloperDao implements DeveloperDAO {
@@ -105,15 +106,15 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public Developer findByName(String name) {
-        try (Connection connection = connectionDB.getConnection()){
+        try (Connection connection = connectionDB.getConnection()) {
             Developer developer;
-            try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
                 preparedStatement.setString(1, name);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                    if (!resultSet.next()) {
-                        return null;
-                    }
-                    developer = createDeveloper(resultSet);
+                if (!resultSet.next()) {
+                    return null;
+                }
+                developer = createDeveloper(resultSet);
             }
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
@@ -133,26 +134,27 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     @Override
     public Long save(Developer obj) {
         Connection connection = null;
-        try { connection = connectionDB.getConnection();
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
 
-            try (PreparedStatement statement = connection.prepareStatement(SAVE)){
-                statement.setString(1,obj.getName());
-                statement.setLong(2,obj.getCompany().getId());
-                statement.setLong(3,obj.getProject().getId());
-                statement.setInt(4,obj.getSalary());
+            try (PreparedStatement statement = connection.prepareStatement(SAVE)) {
+                statement.setString(1, obj.getName());
+                statement.setLong(2, obj.getCompany().getId());
+                statement.setLong(3, obj.getProject().getId());
+                statement.setInt(4, obj.getSalary());
                 statement.executeUpdate();
             }
             long id = 0;
-            try (Statement statement = connection.createStatement()){
+            try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
                 resultSet.next();
                 id = resultSet.getLong(1);
             }
-            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)){
-                for(Skill skill: obj.getSkills()){
-                    statement.setLong(1,id);
-                    statement.setLong(2,skill.getId());
+            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)) {
+                for (Skill skill : obj.getSkills()) {
+                    statement.setLong(1, id);
+                    statement.setLong(2, skill.getId());
                     statement.addBatch();
                 }
                 statement.executeBatch();
@@ -168,7 +170,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         }
     }
 
-
     /**
      * Method finds a developer in database by id
      *
@@ -178,15 +179,15 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public Developer findById(Long aLong) {
-        try (Connection connection = connectionDB.getConnection()){
+        try (Connection connection = connectionDB.getConnection()) {
             Developer developer;
-            try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
                 preparedStatement.setLong(1, aLong);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                    if (!resultSet.next()) {
-                        return null;
-                    }
-                    developer = createDeveloper(resultSet);
+                if (!resultSet.next()) {
+                    return null;
+                }
+                developer = createDeveloper(resultSet);
             }
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
@@ -205,26 +206,27 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     @Override
     public void update(Developer obj) {
         Connection connection = null;
-        try { connection = connectionDB.getConnection();
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
 
-            try (PreparedStatement statement = connection.prepareStatement(UPDATE)){
-                statement.setString(1,obj.getName());
-                statement.setLong(2,obj.getCompany().getId());
-                statement.setLong(3,obj.getProject().getId());
-                statement.setLong(5,obj.getId());
-                statement.setInt(4,obj.getSalary());
+            try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
+                statement.setString(1, obj.getName());
+                statement.setLong(2, obj.getCompany().getId());
+                statement.setLong(3, obj.getProject().getId());
+                statement.setLong(5, obj.getId());
+                statement.setInt(4, obj.getSalary());
                 statement.executeUpdate();
             }
 
-            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)){
-                statement.setLong(1,obj.getId());
+            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
+                statement.setLong(1, obj.getId());
                 statement.executeUpdate();
             }
-            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)){
-                for(Skill skill: obj.getSkills()){
-                    statement.setLong(1,obj.getId());
-                    statement.setLong(2,skill.getId());
+            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)) {
+                for (Skill skill : obj.getSkills()) {
+                    statement.setLong(1, obj.getId());
+                    statement.setLong(2, skill.getId());
                     statement.addBatch();
                 }
                 statement.executeBatch();
@@ -239,8 +241,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         }
     }
 
-
-
     /**
      * Method removes a developer from database
      *
@@ -249,16 +249,17 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     @Override
     public void delete(Developer obj) {
         Connection connection = null;
-        try { connection = connectionDB.getConnection();
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
 
-            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)){
-                statement.setLong(1,obj.getId());
+            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
+                statement.setLong(1, obj.getId());
                 statement.executeUpdate();
             }
 
-            try (PreparedStatement statement = connection.prepareStatement(DELETE)){
-                statement.setLong(1,obj.getId());
+            try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
+                statement.setLong(1, obj.getId());
                 statement.executeUpdate();
             }
             connection.commit();
@@ -279,12 +280,12 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     @Override
     public List<Developer> findAll() {
         List<Developer> developers = new ArrayList<>();
-        try(Connection connection = connectionDB.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(FIND_ALL)){
-            while (resultSet.next()){
+        try (Connection connection = connectionDB.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
+            while (resultSet.next()) {
                 Developer developer = createDeveloper(resultSet);
-                HashSet<Skill> skills = createSkills(connection,developer);
+                HashSet<Skill> skills = createSkills(connection, developer);
                 developer.setSkills(skills);
                 developers.add(developer);
             }
@@ -298,22 +299,22 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * Method creates new Set of skills for developer
      *
      * @param connection a current connection
-     * @param developer a developer, which skills must de created
+     * @param developer  a developer, which skills must de created
      * @return a set of skills, which was created
      * @throws SQLException
      */
     private HashSet<Skill> createSkills(Connection connection, Developer developer) throws SQLException {
         HashSet<Skill> skills;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_SKILLS)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_SKILLS)) {
             preparedStatement.setLong(1, developer.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-                skills = new HashSet<>();
-                while (resultSet.next()){
-                    Skill skill = new Skill();
-                    skill.setId(resultSet.getLong("id"));
-                    skill.setName(resultSet.getString("name"));
-                    skills.add(skill);
-                }
+            skills = new HashSet<>();
+            while (resultSet.next()) {
+                Skill skill = new Skill();
+                skill.setId(resultSet.getLong("id"));
+                skill.setName(resultSet.getString("name"));
+                skills.add(skill);
+            }
         }
         return skills;
     }
@@ -338,11 +339,12 @@ public class JdbcDeveloperDao implements DeveloperDAO {
 
     /**
      * This Method rollback transaction for current connection
+     *
      * @param connection a current connection to DB
      */
     private void rollbackTransaction(Connection connection) {
         try {
-            if (connection!=null) {
+            if (connection != null) {
                 connection.rollback();
             }
         } catch (SQLException e) {
@@ -352,10 +354,11 @@ public class JdbcDeveloperDao implements DeveloperDAO {
 
     /**
      * This Method close a current connection and set auto commit for connection
+     *
      * @param connection a current connection to DB
      */
     private void closeConnection(Connection connection) {
-        if (connection!=null){
+        if (connection != null) {
             try {
                 connection.setAutoCommit(true);
                 connection.close();

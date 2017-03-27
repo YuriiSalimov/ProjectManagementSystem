@@ -39,7 +39,7 @@ public class HibProjectDao implements ProjectDAO {
     public Long save(Project project) {
         Long id = null;
         try (Session session = sessionFactory.openSession()) {
-            id = (Long)session.save(project);
+            id = (Long) session.save(project);
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to save project " + project);
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class HibProjectDao implements ProjectDAO {
     /**
      * The method updates a project in a database (finds project in a database by id and overwrites other fields)
      *
-     * @param project  is a project with new parameters
+     * @param project is a project with new parameters
      */
     @Override
     public void update(Project project) {
@@ -106,7 +106,7 @@ public class HibProjectDao implements ProjectDAO {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Project projectFromDb = session.get(Project.class, project.getId());
-            if (projectFromDb == null){
+            if (projectFromDb == null) {
                 return;
             }
             session.delete(projectFromDb);

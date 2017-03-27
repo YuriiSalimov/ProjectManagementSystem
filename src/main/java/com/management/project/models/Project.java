@@ -9,15 +9,15 @@ import javax.persistence.*;
  * @author Aleksey
  */
 @Entity
-@Table (name = "projects", schema = "projectManagementDB")
+@Table(name = "projects", schema = "projectManagementDB")
 public class Project implements Model {
 
     /**
      * The unique identifier for each project.
      */
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     /**
@@ -29,7 +29,7 @@ public class Project implements Model {
     /**
      * The cost of this project.
      */
-    @Column (name = "cost")
+    @Column(name = "cost")
     private int cost;
 
     /**

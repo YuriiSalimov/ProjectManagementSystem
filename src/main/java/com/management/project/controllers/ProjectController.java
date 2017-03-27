@@ -3,14 +3,10 @@ package com.management.project.controllers;
 import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.CustomerDAO;
 import com.management.project.dao.GenericDAO;
-import com.management.project.dao.ProjectDAO;
-import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
-import com.management.project.models.Model;
 import com.management.project.models.Project;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -21,7 +17,11 @@ public class ProjectController extends AbstractModelController<Project> {
     protected CompanyDAO companyDAO;
     protected CustomerDAO customerDAO;
 
-    public ProjectController(GenericDAO<Project, Long> dao, CompanyDAO companyDAO, CustomerDAO customerDAO) {
+    public ProjectController(
+            GenericDAO<Project, Long> dao,
+            CompanyDAO companyDAO,
+            CustomerDAO customerDAO
+    ) {
         super(dao);
         this.companyDAO = companyDAO;
         this.customerDAO = customerDAO;

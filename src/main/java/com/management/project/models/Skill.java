@@ -10,7 +10,7 @@ import java.util.Set;
  * @author Вадим
  */
 @Entity
-@Table (name = "skills")
+@Table(name = "skills")
 public class Skill implements Model {
 
     /**
@@ -18,13 +18,13 @@ public class Skill implements Model {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column(name = "id")
     private long id;
 
     /**
      * a name of skill.
      */
-    @Column (name = "name")
+    @Column(name = "name")
     private String name;
 
     /**

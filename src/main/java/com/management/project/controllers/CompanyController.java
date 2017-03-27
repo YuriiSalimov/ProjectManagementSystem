@@ -18,8 +18,7 @@ public class CompanyController extends AbstractModelController<Company> {
     protected Company getNewModel() {
         System.out.print("Input company name: ");
         String companyName = new Scanner(System.in).nextLine();
-        Company company = new Company(-100, companyName);
-        return company;
+        return new Company(-100, companyName);
     }
 
     @Override

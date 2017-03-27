@@ -10,7 +10,8 @@ import java.util.List;
 
 /**
  * The class implements a set of methods for working with database, with Company entity.
- * @author  Slava
+ *
+ * @author Slava
  */
 public class JdbcCompanyDAO implements CompanyDAO {
 
@@ -73,15 +74,13 @@ public class JdbcCompanyDAO implements CompanyDAO {
     @Override
     public Company findByName(String companyName) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                Company foundedCompany=
-                        new Company(resultSet.getLong("id"), resultSet.getString("name"));
-                return foundedCompany;
+            if (resultSet.next()) {
+                return new Company(resultSet.getLong("id"), resultSet.getString("name"));
             }
-                return null;
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -97,8 +96,8 @@ public class JdbcCompanyDAO implements CompanyDAO {
     public Long save(Company obj) {
         Long id;
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
-             Statement statement = connection.createStatement()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+                Statement statement = connection.createStatement()) {
             preparedStatement.setString(1, obj.getName());
             preparedStatement.executeUpdate();
             ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
@@ -120,14 +119,13 @@ public class JdbcCompanyDAO implements CompanyDAO {
     @Override
     public Company findById(Long aLong) {
         Company foundedCompany;
-        foundedCompany= null;
+        foundedCompany = null;
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
-            preparedStatement.setLong(1,aLong);
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+            preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                foundedCompany = new Company(
-                        resultSet.getLong("id"), resultSet.getString("name"));
+            if (resultSet.next()) {
+                foundedCompany = new Company(resultSet.getLong("id"), resultSet.getString("name"));
             }
             return foundedCompany;
         } catch (SQLException e) {
@@ -143,9 +141,9 @@ public class JdbcCompanyDAO implements CompanyDAO {
     @Override
     public void update(Company company) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-            preparedStatement.setString(1,company.getName());
-            preparedStatement.setLong(2,company.getId());
+                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
+            preparedStatement.setString(1, company.getName());
+            preparedStatement.setLong(2, company.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -160,8 +158,8 @@ public class JdbcCompanyDAO implements CompanyDAO {
     @Override
     public void delete(Company obj) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
-            preparedStatement.setLong(1,obj.getId());
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+            preparedStatement.setLong(1, obj.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -177,11 +175,10 @@ public class JdbcCompanyDAO implements CompanyDAO {
     public List<Company> findAll() {
         List<Company> allCompanies = new ArrayList<>();
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                allCompanies.add(new Company(resultSet.getLong("id"),
-                        resultSet.getString("name")));
+            while (resultSet.next()) {
+                allCompanies.add(new Company(resultSet.getLong("id"), resultSet.getString("name")));
             }
             return allCompanies;
         } catch (SQLException e) {

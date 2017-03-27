@@ -24,23 +24,22 @@ public class Main extends AbstractController {
     @Override
     protected void action(int choice) throws SQLException {
         switch (choice) {
-            case 1:
-                new MainController(FactoryController.getCompanyController(),
-                        FactoryController.getCustomerController(),
-                        FactoryController.getDeveloperController(),
-                        FactoryController.getProjectController(),
-                        FactoryController.getSkillController())
-                        .start();
-                break;
-
-            case 2:
-                new MainController(HibFactoryController.getCompanyController(),
-                        HibFactoryController.getCustomerController(),
-                        HibFactoryController.getDeveloperController(),
-                        HibFactoryController.getProjectController(),
-                        HibFactoryController.getSkillController())
-                        .start();
-                break;
+        case 1:
+            new MainController(FactoryController.getCompanyController(),
+                    FactoryController.getCustomerController(),
+                    FactoryController.getDeveloperController(),
+                    FactoryController.getProjectController(),
+                    FactoryController.getSkillController())
+                    .start();
+            break;
+        case 2:
+            new MainController(HibFactoryController.getCompanyController(),
+                    HibFactoryController.getCustomerController(),
+                    HibFactoryController.getDeveloperController(),
+                    HibFactoryController.getProjectController(),
+                    HibFactoryController.getSkillController())
+                    .start();
+            break;
         }
     }
 

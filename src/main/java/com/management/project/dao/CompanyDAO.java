@@ -9,4 +9,3 @@ import com.management.project.models.Company;
 public interface CompanyDAO extends GenericDAO<Company, Long> {
 
 }
-

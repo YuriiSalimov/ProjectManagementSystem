@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table (name = "customers")
 public class Customer implements Model {
+
     /**
      * The unique identifier for each customer.
      */

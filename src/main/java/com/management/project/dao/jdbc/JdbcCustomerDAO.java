@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  * The class implements a set of methods for working with database, with Customer entity.
+ * * The class implements a set of methods for working with database, with Customer entity.
  *
  * @author Pavel Perevoznyk
  */
@@ -69,7 +69,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
     public Long save(Customer obj) {
         Long id = null;
         try (PreparedStatement preparedStatement1 = connection.prepareStatement(SAVE);
-             PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
+                PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
             preparedStatement1.setString(1, obj.getName());
             preparedStatement1.execute();
             ResultSet rs = preparedStatement2.executeQuery();
@@ -144,7 +144,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
      */
     @Override
     public List<Customer> findAll() {
-        List<Customer> customers = new ArrayList();
+        List<Customer> customers;
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(FIND_ALL);
             customers = buildCustomersFromResultSet(resultSet);

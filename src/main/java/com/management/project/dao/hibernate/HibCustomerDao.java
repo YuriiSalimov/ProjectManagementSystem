@@ -69,7 +69,7 @@ public class HibCustomerDao implements CustomerDAO {
     /**
      * The method updates a customer in a database (finds customer in a database by id and overwrites other fields)
      *
-     * @param customer  is a company with new parameters
+     * @param customer is a company with new parameters
      */
     @Override
     public void update(Customer customer) {
@@ -103,7 +103,7 @@ public class HibCustomerDao implements CustomerDAO {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Customer companyFromDb = session.get(Customer.class, customer.getId());
-            if (companyFromDb == null){
+            if (companyFromDb == null) {
                 return;
             }
             session.delete(companyFromDb);

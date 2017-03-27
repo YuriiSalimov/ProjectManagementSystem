@@ -3,7 +3,6 @@ package com.management.project.controllers;
 import com.management.project.dao.GenericDAO;
 import com.management.project.models.Model;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -31,24 +30,24 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     @Override
     protected void action(int choice) {
         switch (choice) {
-            case 1:
-                addNew();
-                break;
-            case 2:
-                update();
-                break;
-            case 3:
-                findByIdAndOutput();
-                break;
-            case 4:
-                findByNameAndOutput();
-                break;
-            case 5:
-                deleteById();
-                break;
-            case 6:
-                showAll();
-                break;
+        case 1:
+            addNew();
+            break;
+        case 2:
+            update();
+            break;
+        case 3:
+            findByIdAndOutput();
+            break;
+        case 4:
+            findByNameAndOutput();
+            break;
+        case 5:
+            deleteById();
+            break;
+        case 6:
+            showAll();
+            break;
         }
     }
 
@@ -77,7 +76,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.print("Update. Input id: ");
         long id = new Scanner(System.in).nextLong();
         T oldModel = dao.findById(id);
-        if (oldModel == null){
+        if (oldModel == null) {
             System.out.println("Model with this id is not found");
             return;
         }

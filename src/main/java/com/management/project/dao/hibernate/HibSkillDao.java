@@ -4,16 +4,15 @@ import com.management.project.dao.SkillDAO;
 import com.management.project.models.Skill;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
 /**
- *  * The class implements a set of methods for working with database including Hibernate framework, with Skill entity
-
+ * * The class implements a set of methods for working with database including Hibernate framework, with Skill entity
+ *
  * @author Вадим
  */
-public class HibSkillDao implements SkillDAO{
+public class HibSkillDao implements SkillDAO {
 
     /**
      * An instance of SessionFactory
@@ -38,7 +37,7 @@ public class HibSkillDao implements SkillDAO{
     @Override
     public Long save(Skill obj) {
         Long id;
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             id = (Long) session.save(obj);
             session.getTransaction().commit();
@@ -47,6 +46,7 @@ public class HibSkillDao implements SkillDAO{
         }
         return id;
     }
+
     /**
      * The method finds a skill in database by id of skill
      *
@@ -57,9 +57,9 @@ public class HibSkillDao implements SkillDAO{
     @Override
     public Skill findById(Long aLong) {
         Skill skill;
-        try(Session session = sessionFactory.openSession()){
-            skill = session.get(Skill.class,aLong);
-        }catch (Exception e){
+        try (Session session = sessionFactory.openSession()) {
+            skill = session.get(Skill.class, aLong);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return skill;
@@ -68,23 +68,22 @@ public class HibSkillDao implements SkillDAO{
     /**
      * The method updates a skill in a database (finds skill in a database by id and overwrites other fields)
      *
-     * @param obj  is a skill with new parameters
+     * @param obj is a skill with new parameters
      */
     @Override
     public void update(Skill obj) {
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Skill skillToUpdate = session.get(Skill.class,obj.getId());
+            Skill skillToUpdate = session.get(Skill.class, obj.getId());
             if (skillToUpdate != null) {
                 skillToUpdate.setName(obj.getName());
                 session.update(skillToUpdate);
             }
             session.getTransaction().commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * The method removes a skill from a database
@@ -93,14 +92,14 @@ public class HibSkillDao implements SkillDAO{
      */
     @Override
     public void delete(Skill obj) {
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Skill skillToDelete = session.get(Skill.class,obj.getId());
+            Skill skillToDelete = session.get(Skill.class, obj.getId());
             if (skillToDelete != null) {
                 session.delete(skillToDelete);
             }
             session.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -112,9 +111,9 @@ public class HibSkillDao implements SkillDAO{
      */
     @Override
     public List<Skill> findAll() {
-        try (Session session = sessionFactory.openSession()){
-            return   session.createQuery("from Skill").list();
-        }catch (Exception e){
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from Skill").list();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -128,10 +127,10 @@ public class HibSkillDao implements SkillDAO{
      */
     @Override
     public Skill findByName(String name) {
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             return (Skill) session.createQuery("from Skill s where s.name like :name")
-                    .setParameter("name",name).uniqueResult();
-        }catch (Exception e){
+                    .setParameter("name", name).uniqueResult();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
