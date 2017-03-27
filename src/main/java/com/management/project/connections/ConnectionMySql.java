@@ -26,7 +26,6 @@ public class ConnectionMySql implements ConnectionDB {
     private ConnectionMySql() {
     }
 
-
     /**
      * This method create instance of this class or return instance if it already exist
      * @return instance of ConnectionMySql
@@ -45,7 +44,6 @@ public class ConnectionMySql implements ConnectionDB {
      */
     @Override
     public Connection getConnection() throws SQLException {
-
         return DriverManager.getConnection(DB_URL, USER, PASSWORD);
     }
 }

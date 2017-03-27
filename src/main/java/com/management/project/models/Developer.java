@@ -1,7 +1,6 @@
 package com.management.project.models;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import java.util.Set;
  * @author Вадим
  */
 @Entity
-@Table (name = "developers", schema = "projectManagementDB")
+@Table(name = "developers", schema = "projectManagementDB")
 public class Developer implements Model {
 
     /**
@@ -26,13 +25,13 @@ public class Developer implements Model {
     /**
      * The name of this developer.
      */
-    @Column (name = "name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The company, which employs this developer.
      */
-    @ManyToOne (cascade = {
+    @ManyToOne(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -44,7 +43,7 @@ public class Developer implements Model {
     /**
      * The project, that works the developer
      */
-    @ManyToOne (cascade = {
+    @ManyToOne(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -62,15 +61,15 @@ public class Developer implements Model {
     /**
      * Skills which have developer
      */
-    @ManyToMany (cascade = {
+    @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.DETACH
     }, fetch = FetchType.EAGER)
     @JoinTable(name = "developers_skills",
-            joinColumns = {@JoinColumn(name = "developer_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+            joinColumns = { @JoinColumn(name = "developer_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
     )
     private Set<Skill> skills = new HashSet<Skill>();
 
@@ -89,7 +88,6 @@ public class Developer implements Model {
     public Developer(String name) {
         this.name = name;
     }
-
 
     /**
      * Constructor.

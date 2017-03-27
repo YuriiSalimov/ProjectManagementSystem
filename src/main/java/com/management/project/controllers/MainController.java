@@ -12,9 +12,14 @@ public class MainController extends AbstractController {
     private DeveloperController developerController;
     private ProjectController projectController;
     private SkillController skillController;
-    public MainController(CompanyController companyController, CustomerController customerController,
-                          DeveloperController developerController, ProjectController projectController,
-                          SkillController skillController) {
+
+    public MainController(
+            CompanyController companyController,
+            CustomerController customerController,
+            DeveloperController developerController,
+            ProjectController projectController,
+            SkillController skillController
+    ) {
         this.companyController = companyController;
         this.customerController = customerController;
         this.developerController = developerController;
@@ -25,21 +30,21 @@ public class MainController extends AbstractController {
     @Override
     protected void action(int choice) throws SQLException {
         switch (choice) {
-            case 1:
-                companyController.start();
-                break;
-            case 2:
-                customerController.start();
-                break;
-            case 3:
-                developerController.start();
-                break;
-            case 4:
-                projectController.start();
-                break;
-            case 5:
-                skillController.start();
-                break;
+        case 1:
+            companyController.start();
+            break;
+        case 2:
+            customerController.start();
+            break;
+        case 3:
+            developerController.start();
+            break;
+        case 4:
+            projectController.start();
+            break;
+        case 5:
+            skillController.start();
+            break;
         }
     }
 

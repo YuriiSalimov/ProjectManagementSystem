@@ -17,7 +17,11 @@ public class ProjectController extends AbstractModelController<Project> {
     protected CompanyDAO companyDAO;
     protected CustomerDAO customerDAO;
 
-    public ProjectController(GenericDAO<Project, Long> dao, CompanyDAO companyDAO, CustomerDAO customerDAO) {
+    public ProjectController(
+            GenericDAO<Project, Long> dao,
+            CompanyDAO companyDAO,
+            CustomerDAO customerDAO
+    ) {
         super(dao);
         this.companyDAO = companyDAO;
         this.customerDAO = customerDAO;

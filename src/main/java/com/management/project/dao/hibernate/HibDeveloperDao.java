@@ -1,15 +1,18 @@
 package com.management.project.dao.hibernate;
+
 import com.management.project.dao.DeveloperDAO;
 import com.management.project.models.Developer;
 import com.management.project.models.Skill;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import java.util.HashSet;
 import java.util.List;
 
 /**
  * The class implements a set of methods for working with database including Hibernate framework, with Developer entity
+ *
  * @author Вадим
  */
 public class HibDeveloperDao implements DeveloperDAO {
@@ -39,11 +42,11 @@ public class HibDeveloperDao implements DeveloperDAO {
         Long id = null;
         Transaction transaction = null;
         Session session = sessionFactory.openSession();
-        try{
+        try {
             transaction = session.beginTransaction();
             id = (Long) session.save(developer);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -64,9 +67,9 @@ public class HibDeveloperDao implements DeveloperDAO {
     @Override
     public Developer findById(Long id) {
         Developer developer;
-        try (Session session = sessionFactory.openSession()){
-            developer = session.get(Developer.class,id);
-        }catch (Exception e){
+        try (Session session = sessionFactory.openSession()) {
+            developer = session.get(Developer.class, id);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return developer;
@@ -75,14 +78,14 @@ public class HibDeveloperDao implements DeveloperDAO {
     /**
      * The method updates a developer in a database (finds developer in a database by id and overwrites other fields)
      *
-     * @param developer  is a developer with new parameters
+     * @param developer is a developer with new parameters
      */
     @Override
     public void update(Developer developer) {
         Developer developerNew;
         Transaction transaction = null;
         Session session = sessionFactory.openSession();
-        try{
+        try {
             transaction = session.beginTransaction();
             developerNew = session.get(Developer.class, developer.getId());
             if (developerNew != null) {
@@ -91,14 +94,14 @@ public class HibDeveloperDao implements DeveloperDAO {
                 developerNew.setCompany(developer.getCompany());
                 developerNew.setProject(developer.getProject());
                 developerNew.setSkills(new HashSet<>());
-                for (Skill skill: developer.getSkills()) {
+                for (Skill skill : developer.getSkills()) {
                     developerNew.addSkill(skill);
                 }
                 session.clear();
                 session.update(developerNew);
             }
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
@@ -117,14 +120,14 @@ public class HibDeveloperDao implements DeveloperDAO {
     public void delete(Developer obj) {
         Transaction transaction = null;
         Session session = sessionFactory.openSession();
-        try{
+        try {
             transaction = session.beginTransaction();
-            Developer developer = session.get(Developer.class,obj.getId());
+            Developer developer = session.get(Developer.class, obj.getId());
             if (developer != null) {
                 session.delete(developer);
             }
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -142,7 +145,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     @Override
     public List<Developer> findAll() {
         List<Developer> developers;
-        try(Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             developers = session.createQuery("from Developer").list();
         }
         return developers;
@@ -158,7 +161,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     @Override
     public Developer findByName(String name) {
         Developer developer;
-        try (Session session = sessionFactory.openSession()){
+        try (Session session = sessionFactory.openSession()) {
             developer = (Developer) session.createQuery("from Developer d where d.name like :name")
                     .setParameter("name", name).uniqueResult();
         }

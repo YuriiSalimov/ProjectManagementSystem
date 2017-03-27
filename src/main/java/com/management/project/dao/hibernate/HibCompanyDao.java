@@ -5,6 +5,7 @@ import com.management.project.models.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class HibCompanyDao implements CompanyDAO {
     public Long save(Company company) {
         Long id = null;
         try (Session session = sessionFactory.openSession()) {
-            id = (Long)session.save(company);
+            id = (Long) session.save(company);
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to save company " + company);
             e.printStackTrace();
@@ -68,7 +69,7 @@ public class HibCompanyDao implements CompanyDAO {
     /**
      * The method updates a company in a database (finds company in a database by id and overwrites other fields)
      *
-     * @param company  is a company with new parameters
+     * @param company is a company with new parameters
      */
     @Override
     public void update(Company company) {
@@ -102,7 +103,7 @@ public class HibCompanyDao implements CompanyDAO {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Company companyFromDb = session.get(Company.class, company.getId());
-            if (companyFromDb == null){
+            if (companyFromDb == null) {
                 return;
             }
             session.delete(companyFromDb);

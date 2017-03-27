@@ -86,7 +86,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     @Override
     public Project findByName(String name) {
         Project project = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Project> projects = buildProjectsFromResultSet(resultSet);
@@ -111,7 +111,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     public Long save(Project project) {
         Long id = null;
         try (PreparedStatement preparedStatementSave = connection.prepareStatement(SAVE);
-        PreparedStatement preparedStatementGetLastId = connection.prepareStatement(GET_LAST_ID)){
+                PreparedStatement preparedStatementGetLastId = connection.prepareStatement(GET_LAST_ID)) {
             preparedStatementSave.setString(1, project.getName());
             preparedStatementSave.setInt(2, project.getCost());
             preparedStatementSave.setLong(3, project.getCompany().getId());
@@ -137,7 +137,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     @Override
     public Project findById(Long id) {
         Project project = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Project> projects = buildProjectsFromResultSet(resultSet);
@@ -159,7 +159,7 @@ public class JdbcProjectDAO implements ProjectDAO {
      */
     @Override
     public void update(Project project) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
             preparedStatement.setString(1, project.getName());
             preparedStatement.setInt(2, project.getCost());
             preparedStatement.setLong(3, project.getCompany().getId());
@@ -167,7 +167,10 @@ public class JdbcProjectDAO implements ProjectDAO {
             preparedStatement.setLong(5, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred while trying to update Project with ID: " + project.getId() + "\n" + e);
+            System.out.println(
+                    "SQL exception occurred while trying to update Project with ID: "
+                            + project.getId() + "\n" + e
+            );
         }
 
     }
@@ -179,11 +182,14 @@ public class JdbcProjectDAO implements ProjectDAO {
      */
     @Override
     public void delete(Project project) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setLong(1, project.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred while trying to delete Project with ID: " + project.getId());
+            System.out.println(
+                    "SQL exception occurred while trying to delete Project with ID: "
+                            + project.getId()
+            );
             e.printStackTrace();
         }
     }
@@ -196,7 +202,7 @@ public class JdbcProjectDAO implements ProjectDAO {
     @Override
     public List<Project> findAll() {
         List<Project> projects = new ArrayList<>();
-        try (Statement statement = connection.createStatement()){
+        try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(FIND_ALL);
             projects = buildProjectsFromResultSet(resultSet);
             resultSet.close();
@@ -213,14 +219,14 @@ public class JdbcProjectDAO implements ProjectDAO {
      * @param resultSet set that we get after execution SQL query
      * @return a list of all projects from a database
      */
-    private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException{
+    private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException {
         List<Project> projects = new ArrayList<>();
         Company company;
         Customer customer;
         long id;
         String name;
         int cost;
-        while (resultSet.next()){
+        while (resultSet.next()) {
             id = resultSet.getLong("id");
             name = resultSet.getString("name");
             cost = resultSet.getInt("cost");

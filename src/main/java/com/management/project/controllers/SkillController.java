@@ -9,6 +9,7 @@ import java.util.Scanner;
  * @author Вадим
  */
 public class SkillController extends AbstractModelController<Skill> {
+
     public SkillController(GenericDAO<Skill, Long> dao) {
         super(dao);
     }
@@ -17,8 +18,7 @@ public class SkillController extends AbstractModelController<Skill> {
     protected Skill getNewModel() {
         System.out.print("Input skill name: ");
         String skillName = new Scanner(System.in).nextLine();
-        Skill skill = new Skill(-100, skillName);
-        return skill;
+        return new Skill(-100, skillName);
     }
 
     @Override

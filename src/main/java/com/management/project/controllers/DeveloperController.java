@@ -21,8 +21,11 @@ public class DeveloperController extends AbstractModelController<Developer> {
     protected CompanyDAO companyDAO;
     protected ProjectDAO projectDAO;
 
-    public DeveloperController(GenericDAO<Developer, Long> dao, SkillDAO skillDAO,
-                               CompanyDAO companyDAO, ProjectDAO projectDAO) {
+    public DeveloperController(
+            GenericDAO<Developer, Long> dao,
+            SkillDAO skillDAO,
+            CompanyDAO companyDAO, ProjectDAO projectDAO
+    ) {
         super(dao);
         this.skillDAO = skillDAO;
         this.companyDAO = companyDAO;
@@ -47,9 +50,9 @@ public class DeveloperController extends AbstractModelController<Developer> {
         System.out.println("Input project id: ");
         long projectId = new Scanner(System.in).nextLong();
         System.out.print("Input skill ids (example: 1,2,3... ): ");
-        String skillIdLine = new Scanner(System.in).nextLine().replaceAll(" ","");
+        String skillIdLine = new Scanner(System.in).nextLine().replaceAll(" ", "");
         HashSet<Skill> skillsSet = new HashSet<>();
-        for (String skillId: skillIdLine.split(",")){
+        for (String skillId : skillIdLine.split(",")) {
             Skill skill = skillDAO.findById(Long.parseLong(skillId));
             if (skill != null) {
                 skillsSet.add(skill);
@@ -57,7 +60,6 @@ public class DeveloperController extends AbstractModelController<Developer> {
         }
         Company company = companyDAO.findById(companyId);
         Project project = projectDAO.findById(projectId);
-        Developer developer = new Developer(-100, developerName, company, project, salary, skillsSet);
-        return developer;
+        return new Developer(-100, developerName, company, project, salary, skillsSet);
     }
 }

@@ -18,8 +18,7 @@ public class CustomerController extends AbstractModelController<Customer> {
     protected Customer getNewModel() {
         System.out.print("Input customer name: ");
         String customerName = new Scanner(System.in).nextLine();
-        Customer customer = new Customer(-100, customerName);
-        return customer;
+        return new Customer(-100, customerName);
     }
 
     @Override

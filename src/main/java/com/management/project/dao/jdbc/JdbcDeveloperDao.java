@@ -13,6 +13,7 @@ import java.util.*;
 
 /**
  * The class implements a set of methods for working with database, with Developer entity.
+ *
  * @author Вадим
  */
 public class JdbcDeveloperDao implements DeveloperDAO {
@@ -105,18 +106,20 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public Developer findByName(String name) {
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)){
+        try (Connection connection = connectionDB.getConnection()) {
             Developer developer;
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                return null;
+            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+                preparedStatement.setString(1, name);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (!resultSet.next()) {
+                    return null;
+                }
+                developer = createDeveloper(resultSet);
             }
-            developer = createDeveloper(resultSet);
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
             return developer;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -130,30 +133,40 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public Long save(Developer obj) {
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement statementSaveDeveloper = connection.prepareStatement(SAVE);
-             Statement statementLastInsert = connection.createStatement();
-             PreparedStatement statementSaveSkills = connection.prepareStatement(SAVE_SKILLS)) {
-            long id;
+        Connection connection = null;
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
-            statementSaveDeveloper.setString(1,obj.getName());
-            statementSaveDeveloper.setLong(2,obj.getCompany().getId());
-            statementSaveDeveloper.setLong(3,obj.getProject().getId());
-            statementSaveDeveloper.setInt(4,obj.getSalary());
-            statementSaveDeveloper.executeUpdate();
-            ResultSet resultSet = statementLastInsert.executeQuery(GET_LAST_INSERTED);
-            resultSet.next();
-            id = resultSet.getLong(1);
-            for(Skill skill: obj.getSkills()){
-                statementSaveSkills.setLong(1,id);
-                statementSaveSkills.setLong(2,skill.getId());
-                statementSaveSkills.addBatch();
+
+            try (PreparedStatement statement = connection.prepareStatement(SAVE)) {
+                statement.setString(1, obj.getName());
+                statement.setLong(2, obj.getCompany().getId());
+                statement.setLong(3, obj.getProject().getId());
+                statement.setInt(4, obj.getSalary());
+                statement.executeUpdate();
             }
-            statementSaveSkills.executeBatch();
+            long id = 0;
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
+                resultSet.next();
+                id = resultSet.getLong(1);
+            }
+            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)) {
+                for (Skill skill : obj.getSkills()) {
+                    statement.setLong(1, id);
+                    statement.setLong(2, skill.getId());
+                    statement.addBatch();
+                }
+                statement.executeBatch();
+            }
             connection.commit();
             return id;
+
         } catch (Exception ex) {
+            rollbackTransaction(connection);
             throw new RuntimeException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -166,18 +179,20 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public Developer findById(Long aLong) {
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)){
+        try (Connection connection = connectionDB.getConnection()) {
             Developer developer;
-            preparedStatement.setLong(1, aLong);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next()) {
-                return null;
+            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+                preparedStatement.setLong(1, aLong);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (!resultSet.next()) {
+                    return null;
+                }
+                developer = createDeveloper(resultSet);
             }
-            developer = createDeveloper(resultSet);
             HashSet<Skill> skills = createSkills(connection, developer);
             developer.setSkills(skills);
             return developer;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -190,28 +205,39 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public void update(Developer obj) {
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement statementUpdate = connection.prepareStatement(UPDATE);
-             PreparedStatement DellSkills = connection.prepareStatement(DELETE_SKILLS);
-             PreparedStatement statementSavaSkills = connection.prepareStatement(SAVE_SKILLS)){
+        Connection connection = null;
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
-            statementUpdate.setString(1,obj.getName());
-            statementUpdate.setLong(2,obj.getCompany().getId());
-            statementUpdate.setLong(3,obj.getProject().getId());
-            statementUpdate.setLong(5,obj.getId());
-            statementUpdate.setInt(4,obj.getSalary());
-            statementUpdate.executeUpdate();
-            DellSkills.setLong(1,obj.getId());
-            DellSkills.executeUpdate();
-            for(Skill skill: obj.getSkills()){
-                statementSavaSkills.setLong(1,obj.getId());
-                statementSavaSkills.setLong(2,skill.getId());
-                statementSavaSkills.addBatch();
+
+            try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
+                statement.setString(1, obj.getName());
+                statement.setLong(2, obj.getCompany().getId());
+                statement.setLong(3, obj.getProject().getId());
+                statement.setLong(5, obj.getId());
+                statement.setInt(4, obj.getSalary());
+                statement.executeUpdate();
             }
-            statementSavaSkills.executeBatch();
+
+            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
+                statement.setLong(1, obj.getId());
+                statement.executeUpdate();
+            }
+            try (PreparedStatement statement = connection.prepareStatement(SAVE_SKILLS)) {
+                for (Skill skill : obj.getSkills()) {
+                    statement.setLong(1, obj.getId());
+                    statement.setLong(2, skill.getId());
+                    statement.addBatch();
+                }
+                statement.executeBatch();
+            }
             connection.commit();
+
         } catch (Exception ex) {
+            rollbackTransaction(connection);
             throw new RuntimeException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -222,17 +248,27 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      */
     @Override
     public void delete(Developer obj) {
-        try (Connection connection = connectionDB.getConnection();
-             PreparedStatement statementDellSkills = connection.prepareStatement(DELETE_SKILLS);
-             PreparedStatement statementDellDeveloper = connection.prepareStatement(DELETE)){
+        Connection connection = null;
+        try {
+            connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
-            statementDellSkills.setLong(1,obj.getId());
-            statementDellSkills.executeUpdate();
-            statementDellDeveloper.setLong(1,obj.getId());
-            statementDellDeveloper.executeUpdate();
+
+            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
+                statement.setLong(1, obj.getId());
+                statement.executeUpdate();
+            }
+
+            try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
+                statement.setLong(1, obj.getId());
+                statement.executeUpdate();
+            }
             connection.commit();
+
         } catch (Exception ex) {
+            rollbackTransaction(connection);
             throw new RuntimeException(ex);
+        } finally {
+            closeConnection(connection);
         }
     }
 
@@ -244,12 +280,12 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     @Override
     public List<Developer> findAll() {
         List<Developer> developers = new ArrayList<>();
-        try(Connection connection = connectionDB.getConnection();
-            Statement statement = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(FIND_ALL);
-            while (resultSet.next()){
+        try (Connection connection = connectionDB.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
+            while (resultSet.next()) {
                 Developer developer = createDeveloper(resultSet);
-                HashSet<Skill> skills = createSkills(connection,developer);
+                HashSet<Skill> skills = createSkills(connection, developer);
                 developer.setSkills(skills);
                 developers.add(developer);
             }
@@ -263,22 +299,22 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * Method creates new Set of skills for developer
      *
      * @param connection a current connection
-     * @param developer a developer, which skills must de created
+     * @param developer  a developer, which skills must de created
      * @return a set of skills, which was created
      * @throws SQLException
      */
     private HashSet<Skill> createSkills(Connection connection, Developer developer) throws SQLException {
         HashSet<Skill> skills;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_SKILLS)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(GET_SKILLS)) {
             preparedStatement.setLong(1, developer.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-                skills = new HashSet<>();
-                while (resultSet.next()){
-                    Skill skill = new Skill();
-                    skill.setId(resultSet.getLong("id"));
-                    skill.setName(resultSet.getString("name"));
-                    skills.add(skill);
-                }
+            skills = new HashSet<>();
+            while (resultSet.next()) {
+                Skill skill = new Skill();
+                skill.setId(resultSet.getLong("id"));
+                skill.setName(resultSet.getString("name"));
+                skills.add(skill);
+            }
         }
         return skills;
     }
@@ -299,6 +335,37 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         developer.setCompany(companyDAO.findById(resultSet.getLong("company_id")));
         developer.setProject(projectDAO.findById(resultSet.getLong("project_id")));
         return developer;
+    }
+
+    /**
+     * This Method rollback transaction for current connection
+     *
+     * @param connection a current connection to DB
+     */
+    private void rollbackTransaction(Connection connection) {
+        try {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This Method close a current connection and set auto commit for connection
+     *
+     * @param connection a current connection to DB
+     */
+    private void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

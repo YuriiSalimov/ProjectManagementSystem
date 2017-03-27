@@ -9,9 +9,9 @@ import java.util.Scanner;
  */
 public abstract class AbstractController {
 
-    public void start () throws SQLException {
+    public void start() throws SQLException {
         int choice;
-        while (true){
+        while (true) {
             printMenu();
             choice = readChoice();
             if (choice == 0) {
@@ -35,5 +35,4 @@ public abstract class AbstractController {
     protected abstract void action(int choice) throws SQLException;
 
     protected abstract void printMenu();
-
 }
