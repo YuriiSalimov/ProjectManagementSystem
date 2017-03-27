@@ -85,7 +85,10 @@ public class JdbcCompanyDAO implements CompanyDAO {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Company(resultSet.getLong("id"), resultSet.getString("name"));
+                return new Company(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name")
+                );
             }
             return null;
         } catch (SQLException e) {
@@ -132,7 +135,10 @@ public class JdbcCompanyDAO implements CompanyDAO {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                foundedCompany = new Company(resultSet.getLong("id"), resultSet.getString("name"));
+                foundedCompany = new Company(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name")
+                );
             }
             return foundedCompany;
         } catch (SQLException e) {
@@ -185,7 +191,12 @@ public class JdbcCompanyDAO implements CompanyDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allCompanies.add(new Company(resultSet.getLong("id"), resultSet.getString("name")));
+                allCompanies.add(
+                        new Company(
+                                resultSet.getLong("id"),
+                                resultSet.getString("name")
+                        )
+                );
             }
             return allCompanies;
         } catch (SQLException e) {

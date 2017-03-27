@@ -28,20 +28,29 @@ public class Company implements Model {
     private String name;
 
     /**
+     * Constructor without parameters
+     */
+    public Company() {
+    }
+
+    /**
+     * Constructor
+     *
+     * @param name a name to the new company.
+     */
+    public Company(String name) {
+        this.name = name;
+    }
+
+    /**
      * Constructor
      *
      * @param id   a unique identifier for the new company.
      * @param name a name to the new company.
      */
     public Company(long id, String name) {
+        this(name);
         this.id = id;
-        this.name = name;
-    }
-
-    /**
-     * Constructor without parameters
-     */
-    public Company() {
     }
 
     /**
