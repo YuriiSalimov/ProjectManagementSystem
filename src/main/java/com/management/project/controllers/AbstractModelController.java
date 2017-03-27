@@ -24,6 +24,9 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         this.dao = dao;
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println("1 - add new");
@@ -35,6 +38,10 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.println("0 - go to main menu");
     }
 
+    /**
+     *
+     * @param choice
+     */
     @Override
     protected void action(int choice) {
         switch (choice) {
@@ -59,10 +66,16 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         }
     }
 
+    /**
+     *
+     */
     protected void showAll() {
         dao.findAll().forEach(System.out::println);
     }
 
+    /**
+     *
+     */
     protected void deleteById() {
         System.out.print("Delete by id. Input id: ");
         long id = new Scanner(System.in).nextLong();
@@ -75,11 +88,17 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         dao.delete(model);
     }
 
+    /**
+     *
+     */
     protected void addNew() {
         T model = getNewModel();
         System.out.println("Id of new model: " + dao.save(model));
     }
 
+    /**
+     *
+     */
     protected void update() {
         System.out.print("Update. Input id: ");
         long id = new Scanner(System.in).nextLong();
@@ -96,6 +115,9 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         dao.update(model);
     }
 
+    /**
+     *
+     */
     protected void findByIdAndOutput() {
         System.out.print("Find by id. Input id: ");
         long id = new Scanner(System.in).nextLong();
@@ -103,6 +125,9 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.println(model);
     }
 
+    /**
+     *
+     */
     protected void findByNameAndOutput() {
         System.out.print("Find by name. Input name: ");
         String name = new Scanner(System.in).nextLine();
@@ -110,5 +135,9 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
         System.out.println(model);
     }
 
+    /**
+     *
+     * @return
+     */
     protected abstract T getNewModel();
 }
