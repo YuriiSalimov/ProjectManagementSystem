@@ -42,7 +42,6 @@ public class HibCompanyDaoTest {
         assertNull(hibCompanyDao.findByName("TestUpdate"));
         assertEquals(newCompany, hibCompanyDao.findByName("NewTestUpdate"));
         hibCompanyDao.delete(hibCompanyDao.findByName("NewTestUpdate"));
-
         Company anotherCompany = new Company(id + 100, "anotherCompany");
         hibCompanyDao.update(anotherCompany);
         assertNull(hibCompanyDao.findByName("anotherCompany"));
@@ -68,7 +67,6 @@ public class HibCompanyDaoTest {
         List<Company> listAfter = hibCompanyDao.findAll();
         assertTrue((listAfter.size() - listSizeBefore) == 2);
         assertTrue(listAfter.contains(company1) && listAfter.contains(company2));
-
         hibCompanyDao.delete(hibCompanyDao.findByName("company1 for test findAll"));
         hibCompanyDao.delete(hibCompanyDao.findByName("company2 for test findAll"));
     }

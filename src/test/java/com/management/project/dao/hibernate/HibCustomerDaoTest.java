@@ -39,7 +39,6 @@ public class HibCustomerDaoTest {
         assertNull(hibCustomerDao.findByName("customerTest"));
         assertEquals(customerUpdate, hibCustomerDao.findByName("customerUpdate"));
         hibCustomerDao.delete(hibCustomerDao.findByName("customerUpdate"));
-
     }
 
     @Test
@@ -55,21 +54,16 @@ public class HibCustomerDaoTest {
     public void findAll() throws Exception {
         Customer customerTest1 = new Customer();
         customerTest1.setName("Test1");
-
         Customer customerTest2 = new Customer();
         customerTest2.setName("Test2");
-
         Long id1 = hibCustomerDao.save(customerTest1);
         Long id2 = hibCustomerDao.save(customerTest2);
         List<Customer> customerList1 = hibCustomerDao.findAll();
-
         assertFalse(customerList1.isEmpty());
         assertNotNull(customerList1);
         assertTrue(customerList1.contains(customerTest1)&&customerList1.contains(customerTest2));
-
         hibCustomerDao.delete(hibCustomerDao.findById(id1));
         List<Customer> customerList2 = hibCustomerDao.findAll();
-
         hibCustomerDao.delete(hibCustomerDao.findById(id2));
         assertNotEquals(customerList1,customerList2);
     }

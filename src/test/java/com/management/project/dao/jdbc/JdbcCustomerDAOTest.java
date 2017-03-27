@@ -35,7 +35,7 @@ public class JdbcCustomerDAOTest {
         Customer testCustomer = new Customer();
         testCustomer.setId(2);
         testCustomer.setName("Abbott Laboratories");
-       assertEquals(jdbcCustomerDAO.findById((long)2), testCustomer);
+        assertEquals(jdbcCustomerDAO.findById((long)2), testCustomer);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class JdbcCustomerDAOTest {
         Long testID2 = jdbcCustomerDAO.save(testCustomer2);
         testCustomer.setId(testID);
         testCustomer2.setId(testID2);
-        List<Customer> testList = new ArrayList<>();
+        List<Customer> testList;
         testList = jdbcCustomerDAO.findAll();
         assertTrue(testList.contains(testCustomer) && testList.contains(testCustomer2));
         jdbcCustomerDAO.delete(jdbcCustomerDAO.findById(testID));

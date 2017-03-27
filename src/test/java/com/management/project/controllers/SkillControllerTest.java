@@ -23,25 +23,19 @@ public class SkillControllerTest extends AbstractModelControllerTest {
     SkillController skillController = new SkillController(skillDAO);
     @Test
     public void printMenu() throws Exception {
-
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(byteArrayOutputStream));
         skillController.printMenu();
         assertTrue(byteArrayOutputStream.toString().contains("ACTIONS WITH SKILLS:"));
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-
     }
 
     @Test
     public void getNewModel() throws Exception {
-
         Skill skill = new Skill(-100, "1");
         when(skillDAO.findById(1l)).thenReturn(skill).thenReturn(null);
         System.setIn(new Always1InputStream());
-
         Skill skillFromGetNewModel = skillController.getNewModel();
         assertEquals(skillFromGetNewModel, skill);
-
-
     }
 }

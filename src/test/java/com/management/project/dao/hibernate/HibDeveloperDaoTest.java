@@ -6,10 +6,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -85,7 +83,6 @@ public class HibDeveloperDaoTest {
         hibDeveloperDao.update(developerFromDB);
         assertEquals(developerFromDB, hibDeveloperDao.findByName("after update"));
         hibDeveloperDao.delete(hibDeveloperDao.findByName("after update"));
-
         Developer developer1 = new Developer(1111100, "not exist in base", company, project, 1000);
         hibDeveloperDao.update(developer1);
         assertNull(hibDeveloperDao.findByName("not exist in base"));

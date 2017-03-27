@@ -1,6 +1,5 @@
 package com.management.project.models;
 
-import com.management.project.models.Skill;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -40,7 +39,6 @@ public class SkillTest {
         Skill skill_test = new Skill(1912, "Java");
         assertEquals(skill_test, skill);
         assertEquals(skill,skill);
-
         Skill skill1 = new Skill();
         Skill skill2 = null;
         assertNotEquals(skill1,skill2);
@@ -53,7 +51,6 @@ public class SkillTest {
         Skill skill_test_1 = new Skill(2017, "Java Android");
         assertTrue(skill_test.hashCode() == skill.hashCode());
         assertFalse(skill.hashCode() == skill_test_1.hashCode());
-
     }
 
     @Test

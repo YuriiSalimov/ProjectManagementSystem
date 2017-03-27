@@ -1,7 +1,6 @@
 package com.management.project.factory;
 
 import com.management.project.controllers.*;
-import com.management.project.dao.SkillDAO;
 
 import java.sql.SQLException;
 

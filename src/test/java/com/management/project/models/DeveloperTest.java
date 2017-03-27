@@ -1,6 +1,5 @@
 package com.management.project.models;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -41,7 +40,6 @@ public class DeveloperTest {
         assertEquals("new developer", developer.getName());
         developer.setName(null);
         assertEquals("", developer.getName());
-
     }
 
     @Test
@@ -49,7 +47,6 @@ public class DeveloperTest {
         company = new Company(10001, "Apple");
         developer = new Developer(123, "Slava", company, null, 3000);
         assertTrue(company == developer.getCompany());
-
     }
 
     @Test
@@ -95,7 +92,6 @@ public class DeveloperTest {
         HashSet<Skill> skills = new HashSet<>();
         developer = new Developer(1L, "Den", null, null, 1, skills);
         assertTrue(skills == developer.getSkills());
-
     }
 
     @Test
@@ -148,53 +144,37 @@ public class DeveloperTest {
         developer = new Developer(100, "Pavel", company, project, 2000);
         Developer developer1 = new Developer(50, "Pavel", company, project, 2000);
         Developer developer2 = new Developer(150, "Pavel", company, project, 2000);
-
         //reflexive
         assertTrue(developer.equals(developer));
-
         //symmetric
         assertTrue(developer1.equals(developer));
         assertTrue(developer.equals(developer1));
-
         //transitive
         assertTrue(developer.equals(developer2));
         assertTrue(developer1.equals(developer2));
-
         //consistent
         assertTrue(developer1.equals(developer));
         assertTrue(developer1.equals(developer));
-
         developer1.setName("Petr");
         assertFalse(developer1.equals(developer));
-
         developer1.setName("Pavel");
         assertEquals(developer1,developer);
-
         developer.setCompany(null);
         assertNotEquals(developer1, developer);
         assertNotEquals(developer, developer1);
-
         developer1.setCompany(null);
         assertEquals(developer1, developer);
-
         developer1.setSalary(1000);
         assertNotEquals(developer1, developer);
         developer.setSalary(1000);
-
-
         assertFalse(developer.equals(null));
-
         assertFalse(developer.equals(new String("developer")));
-
         developer1.setProject(new Project(1, "Some Project", 159, null, null));
         assertFalse(developer1.equals(developer));
-
         developer1.setProject(null);
         assertFalse(developer1.equals(developer));
-
         developer.setProject(null);
         assertTrue(developer1.equals(developer));
-
     }
 
     @Test
@@ -205,13 +185,10 @@ public class DeveloperTest {
         Developer developer1 = new Developer(500, "Pavel", company, project, 2000);
         assertTrue(developer.hashCode() == developer.hashCode());
         assertTrue(developer.hashCode() == developer1.hashCode());
-
         developer1.setCompany(null);
         assertFalse(developer1.hashCode() == developer.hashCode());
-
         developer.setCompany(null);
         assertTrue(developer1.hashCode() == developer.hashCode());
-
         developer1.setProject(null);
         assertFalse(developer1.hashCode() == developer.hashCode());
     }

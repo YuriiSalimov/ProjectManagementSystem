@@ -5,7 +5,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ProjectTest {
-    private Project project = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
+    private Project project = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"),
+            new Customer(1, "Bayer"));
 
     @Test
     public void getId() throws Exception {
@@ -74,18 +75,16 @@ public class ProjectTest {
 
     @Test
     public void equals() throws Exception {
-        Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
+        Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"),
+                new Customer(1, "Bayer"));
         assertEquals(project2, project);
         assertEquals(project, project2);
-
         assertFalse(project.equals(null));
         assertFalse(project.equals(new Integer(1)));
-
         project2.setName("Go");
         assertFalse(project.equals(project2));
-
-        Project project1 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
-
+        Project project1 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"),
+                new Customer(1, "Bayer"));
         project1.setCompany(new Company(1,"Test"));
         assertNotEquals(project,project1);
         assertNotEquals(project1,project);
@@ -94,7 +93,6 @@ public class ProjectTest {
         assertNotEquals(project1,project);
         project.setCompany(null);
         assertTrue(project.equals(project1));
-
         project1.setCustomer(new Customer(1,"Test"));
         assertNotEquals(project,project1);
         assertNotEquals(project1,project);
@@ -103,16 +101,12 @@ public class ProjectTest {
         assertNotEquals(project1,project);
         project.setCustomer(null);
         assertTrue(project.equals(project1));
-
-
-
-
-
     }
 
     @Test
     public void testHashCode() throws Exception {
-        Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"), new Customer(1, "Bayer"));
+        Project project2 = new Project(1, "Android app", 3000, new Company(1, "Luxsoft"),
+                new Customer(1, "Bayer"));
         assertTrue(project2.hashCode() == project.hashCode());
         project2.setName("New app");
         assertFalse(project2.hashCode() == project.hashCode());
@@ -125,6 +119,5 @@ public class ProjectTest {
         assertTrue(project.toString().contains("Luxsoft"));
         assertTrue(project.toString().contains("Bayer"));
     }
-
 
 }

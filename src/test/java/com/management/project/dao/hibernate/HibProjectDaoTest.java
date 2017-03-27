@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +24,6 @@ public class HibProjectDaoTest {
     private static Customer customer;
     private static Long customerId;
     private static Long companyId;
-
 
     @BeforeClass
     public static void createData () {

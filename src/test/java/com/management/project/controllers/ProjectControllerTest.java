@@ -3,8 +3,6 @@ package com.management.project.controllers;
 import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.CustomerDAO;
 import com.management.project.dao.GenericDAO;
-import com.management.project.dao.ProjectDAO;
-import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Customer;
 import com.management.project.models.Project;
@@ -14,14 +12,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.lang.String;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -51,14 +45,10 @@ public class ProjectControllerTest extends AbstractModelControllerTest {
         Company company = new Company(1, "test company");
         Customer customer = new Customer(1, "test customer");
         Project ourProject = new Project(1, "1", 1, company, customer);
-
         when(companyDAO.findById(1l)).thenReturn(company);
         when(customerDAO.findById(1l)).thenReturn(customer);
-
         System.setIn(new Always1InputStream());
-
         Project projectFromGetNewProject = projectController.getNewModel();
         assertEquals(projectFromGetNewProject, ourProject);
-
     }
 }

@@ -3,7 +3,6 @@ package com.management.project.dao.jdbc;
 import com.management.project.dao.SkillDAO;
 import com.management.project.factory.FactoryDao;
 import com.management.project.models.Skill;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -29,7 +28,6 @@ public class JdbcSkillDAOTest {
         skill.setName("Test1");
         Long testid = jdbcSkillDAO.save(skill);
         assertNotNull(testid);
-
         Skill skill1 = jdbcSkillDAO.findById(testid);
         assertEquals(skill,skill1);
     }
@@ -40,7 +38,6 @@ public class JdbcSkillDAOTest {
         skillTest.setName("Test2");
         Long id = jdbcSkillDAO.save(skillTest);
         assertEquals(skillTest,jdbcSkillDAO.findById(id));
-
         assertNull(jdbcSkillDAO.findById(-1L));
     }
 
@@ -60,7 +57,6 @@ public class JdbcSkillDAOTest {
         skillTest.setName("Test4");
         Long id  = jdbcSkillDAO.save(skillTest);
         assertNotNull(jdbcSkillDAO.findById(id));
-
         jdbcSkillDAO.delete(jdbcSkillDAO.findById(id));
         assertNull(jdbcSkillDAO.findById(id));
     }
@@ -78,11 +74,9 @@ public class JdbcSkillDAOTest {
         skillTest.add(jdbcSkillDAO.findById(id2));
         List<Skill> skillList1 = jdbcSkillDAO.findAll();
         assertTrue(skillList1.containsAll(skillTest));
-
         jdbcSkillDAO.delete(jdbcSkillDAO.findById(id1));
         List<Skill> skillList2 = jdbcSkillDAO.findAll();
         assertNotEquals(skillList1,skillList2);
-
     }
 
     @Test
@@ -93,7 +87,6 @@ public class JdbcSkillDAOTest {
         Skill skill2 = jdbcSkillDAO.findByName("Test7");
         Skill skill3 = jdbcSkillDAO.findByName("EDR");
         assertNull(skill3);
-
         assertEquals(jdbcSkillDAO.findById(id1),skill2);
     }
 

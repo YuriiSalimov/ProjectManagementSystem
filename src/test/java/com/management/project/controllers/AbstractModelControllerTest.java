@@ -34,14 +34,11 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
     public void printMenu() throws Exception {
         AbstractModelController abstractModelController =
                 mock(AbstractModelController.class, Mockito.CALLS_REAL_METHODS);
-
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(byteArrayOutputStream));
-
         abstractModelController.printMenu();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
         String outputString = byteArrayOutputStream.toString();
-
         assertTrue(outputString.contains("1 - add new"));
         assertTrue(outputString.contains("2 - update"));
         assertTrue(outputString.contains("3 - find by id"));
@@ -55,14 +52,12 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
     public void action() throws Exception {
         AbstractModelController abstractModelController =
                 mock(AbstractModelController.class, Mockito.CALLS_REAL_METHODS);
-
         doNothing().when(abstractModelController).addNew();
         doNothing().when(abstractModelController).update();
         doNothing().when(abstractModelController).findByIdAndOutput();
         doNothing().when(abstractModelController).findByNameAndOutput();
         doNothing().when(abstractModelController).deleteById();
         doNothing().when(abstractModelController).showAll();
-
         abstractModelController.action(0);
         abstractModelController.action(7);
         abstractModelController.action(-1);
@@ -72,32 +67,24 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
         verify(abstractModelController, never()).findByNameAndOutput();
         verify(abstractModelController, never()).deleteById();
         verify(abstractModelController, never()).showAll();
-
         abstractModelController.action(1);
         verify(abstractModelController).addNew();
-
         abstractModelController.action(2);
         verify(abstractModelController).update();
-
         abstractModelController.action(3);
         verify(abstractModelController).findByIdAndOutput();
-
         abstractModelController.action(4);
         verify(abstractModelController).findByNameAndOutput();
-
         abstractModelController.action(5);
         verify(abstractModelController).deleteById();
-
         abstractModelController.action(6);
         verify(abstractModelController).showAll();
     }
 
     @Test
     public void addNew() throws Exception {
-
         GenericDAO dao = mock(GenericDAO.class);
         Model model = mock(Model.class);
-
         AbstractModelController abstractModelController = new AbstractModelController(dao) {
             @Override
             protected Model getNewModel() {
@@ -105,7 +92,6 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
             }
         };
         AbstractModelController spyAbstractModelController = spy(abstractModelController);
-
         spyAbstractModelController.addNew();
         verify(spyAbstractModelController).getNewModel();
         verify(dao).save(model);
@@ -165,7 +151,6 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
         System.setIn(new ByteArrayInputStream("1".getBytes()));
         abstractModelController.deleteById();
         verify(dao).delete(model);
-
         System.setIn(new ByteArrayInputStream("1".getBytes()));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(byteArrayOutputStream));
@@ -191,7 +176,6 @@ public class AbstractModelControllerTest extends AbstractControllerTest {
         abstractModelController.update();
         verify(newModel).setId(1l);
         verify(dao).update(newModel);
-
         System.setIn(new ByteArrayInputStream("1".getBytes()));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(byteArrayOutputStream));
