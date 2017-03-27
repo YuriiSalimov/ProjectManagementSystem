@@ -9,10 +9,7 @@ import com.management.project.models.Customer;
 import com.management.project.models.Project;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -39,13 +36,10 @@ public class JdbcProjectDAOTest {
 
     @Test
     public void findByName() throws Exception {
-
         project = new Project(-1, "newProjectForTestFindByName", 3333, company, customer);
         projectDAO.save(project);
-
         Project project1 = projectDAO.findByName("newProjectForTestFindByName");
         assertEquals(project1, project);
-
         projectDAO.delete(project1);
         assertNull(projectDAO.findByName("newProjectForTestFindByName"));
     }
@@ -95,10 +89,8 @@ public class JdbcProjectDAOTest {
         Project project1 = new Project(-100, "secondProjectForTestFindAll", 555, company, customer);
         long id1 = projectDAO.save(project1);
         long id = projectDAO.save(project);
-
         List<Project> projectList = projectDAO.findAll();
         assertTrue(projectList.contains(project1) && projectList.contains(project));
-
         projectDAO.delete(projectDAO.findById(id));
         projectDAO.delete(projectDAO.findById(id1));
     }

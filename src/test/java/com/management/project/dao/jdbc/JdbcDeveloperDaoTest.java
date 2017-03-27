@@ -5,11 +5,8 @@ import com.management.project.dao.DeveloperDAO;
 import com.management.project.dao.ProjectDAO;
 import com.management.project.dao.SkillDAO;
 import com.management.project.factory.FactoryDao;
-import com.management.project.models.Company;
 import com.management.project.models.Developer;
-import com.management.project.models.Project;
 import com.management.project.models.Skill;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -38,14 +35,10 @@ public class JdbcDeveloperDaoTest {
         developerTest.setName("Test");
         developerTest.setCompany(companyDAO.findById(1L));
         developerTest.setProject(projectDAO.findById(1L));
-
         Long id = developerDao.save(developerTest);
-
         assertEquals(developerDao.findById(id), developerDao.findByName("Test"));
         assertNull(developerDao.findByName(""));
-
         developerDao.delete(developerDao.findByName("Test"));
-
     }
 
     @Test
@@ -58,15 +51,10 @@ public class JdbcDeveloperDaoTest {
         skills.add(skillDAO.findById(1L));
         skills.add(skillDAO.findById(2L));
         developerTest.setSkills((HashSet<Skill>) skills);
-
         Long id = developerDao.save(developerTest);
-
         assertNotNull(id);
         assertEquals(developerTest,developerDao.findById(id));
-
         developerDao.delete(developerDao.findById(id));
-
-
     }
 
     @Test
@@ -75,13 +63,10 @@ public class JdbcDeveloperDaoTest {
         developerTest.setName("Test");
         developerTest.setCompany(companyDAO.findById(1L));
         developerTest.setProject(projectDAO.findById(1L));
-
         Long id = developerDao.save(developerTest);
-
         assertNotNull(developerDao.findById(id));
         assertNull(developerDao.findById(-10L));
         assertEquals(developerTest,developerDao.findById(id));
-
         developerDao.delete(developerDao.findById(id));
     }
 
@@ -91,19 +76,15 @@ public class JdbcDeveloperDaoTest {
         developerTest.setName("Test");
         developerTest.setCompany(companyDAO.findById(1L));
         developerTest.setProject(projectDAO.findById(1L));
-
         Long id = developerDao.save(developerTest);
         Set<Skill> skills = new HashSet<>();
         skills.add(skillDAO.findById(1L));
         skills.add(skillDAO.findById(2L));
         Developer developerNew = new Developer(id,"Updated",companyDAO.findById(2L),projectDAO.findById(2L),1000,skills);
-
         assertEquals(developerTest,developerDao.findById(id));
         developerDao.update(developerNew);
-
         assertEquals(developerNew,developerDao.findByName("Updated"));
         assertNotEquals(developerTest,developerDao.findById(id));
-
         developerDao.delete(developerDao.findById(id));
     }
 
@@ -113,13 +94,10 @@ public class JdbcDeveloperDaoTest {
         developerTest.setName("Test");
         developerTest.setCompany(companyDAO.findById(1L));
         developerTest.setProject(projectDAO.findById(1L));
-
         Long id = developerDao.save(developerTest);
-
         assertNotNull(developerDao.findById(id));
         developerDao.delete(developerDao.findById(id));
         assertNull(developerDao.findById(id));
-
     }
 
     @Test
@@ -128,27 +106,20 @@ public class JdbcDeveloperDaoTest {
         developerTest1.setName("Test1");
         developerTest1.setCompany(companyDAO.findById(1L));
         developerTest1.setProject(projectDAO.findById(1L));
-
         Developer developerTest2 = new Developer();
         developerTest2.setName("Test2");
         developerTest2.setCompany(companyDAO.findById(2L));
         developerTest2.setProject(projectDAO.findById(2L));
-
         Long id1 = developerDao.save(developerTest1);
         Long id2 = developerDao.save(developerTest2);
         List<Developer> developers1 = developerDao.findAll();
-
         assertFalse(developers1.isEmpty());
         assertNotNull(developers1);
         assertTrue(developers1.contains(developerTest1)&&developers1.contains(developerTest2));
-
         developerDao.delete(developerDao.findById(id1));
         List<Developer> developers2 = developerDao.findAll();
-
-
         developerDao.delete(developerDao.findById(id2));
         assertNotEquals(developers1,developers2);
-
     }
 
 }

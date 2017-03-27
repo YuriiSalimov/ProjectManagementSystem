@@ -74,16 +74,14 @@ public class JdbcSkillDAO implements SkillDAO {
     @Override
     public Long save(Skill obj) {
         Long id;
-        try (Connection connection = connectionDB.getConnection()) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(SAVE)) {
-                preparedStatement.setString(1, obj.getName());
-                preparedStatement.executeUpdate();
-            }
-            try (Statement statement = connection.createStatement()) {
-                ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
-                resultSet.next();
-                id = resultSet.getLong(1);
-            }
+        try (Connection connection = connectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+             Statement statement = connection.createStatement()) {
+            preparedStatement.setString(1, obj.getName());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
+            resultSet.next();
+            id = resultSet.getLong(1);
             return id;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -99,15 +97,14 @@ public class JdbcSkillDAO implements SkillDAO {
      */
     @Override
     public Skill findById(Long aLong) {
-        try (Connection connection = connectionDB.getConnection()) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
-                preparedStatement.setLong(1, aLong);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                    if (!resultSet.next()) {
-                        return null;
-                    }
-                    return createSkill(resultSet);
+        try (Connection connection = connectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+            preparedStatement.setLong(1, aLong);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                return null;
             }
+            return createSkill(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -175,16 +172,15 @@ public class JdbcSkillDAO implements SkillDAO {
      * or null if skill with this name does not exist
      */
     public Skill findByName(String name) {
-        try (Connection connection = connectionDB.getConnection()) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
-                preparedStatement.setString(1, name);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                    if (!resultSet.next()) {
-                        return null;
-                    }
-                    return createSkill(resultSet);
+        try (Connection connection = connectionDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                return null;
             }
-        } catch (SQLException e) {
+            return createSkill(resultSet);
+         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
