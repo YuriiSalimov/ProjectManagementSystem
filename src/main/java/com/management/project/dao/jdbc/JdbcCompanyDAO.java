@@ -78,37 +78,25 @@ public class JdbcCompanyDAO implements CompanyDAO {
      * @return a company with entered name
      * or null if company with this name does not exist
      */
-//    @Override
-//    public Company findByName(String companyName) {
-//        try (Connection connection = connectionDB.getConnection();
-//                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
-//            preparedStatement.setString(1, companyName);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()) {
-//                return new Company(resultSet.getLong("id"), resultSet.getString("name"));
-//            }
-//            return null;
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
+    @Override
     public Company findByName(String companyName) {
-        Company company = null;
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                company = new Company(resultSet.getLong("id"), resultSet.getString("name"));
+                return new Company(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name")
+                );
             }
-            return company;
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-        /**
+    /**
      * Method saves a new company in the database
      *
      * @param obj a company, which must be save in the database
@@ -147,7 +135,10 @@ public class JdbcCompanyDAO implements CompanyDAO {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                foundedCompany = new Company(resultSet.getLong("id"), resultSet.getString("name"));
+                foundedCompany = new Company(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name")
+                );
             }
             return foundedCompany;
         } catch (SQLException e) {
@@ -200,7 +191,12 @@ public class JdbcCompanyDAO implements CompanyDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allCompanies.add(new Company(resultSet.getLong("id"), resultSet.getString("name")));
+                allCompanies.add(
+                        new Company(
+                                resultSet.getLong("id"),
+                                resultSet.getString("name")
+                        )
+                );
             }
             return allCompanies;
         } catch (SQLException e) {
