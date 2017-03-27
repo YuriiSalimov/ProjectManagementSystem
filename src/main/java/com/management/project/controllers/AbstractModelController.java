@@ -6,7 +6,7 @@ import com.management.project.models.Model;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 07.03.2017.
+ * @author Slava Makhinich
  */
 public abstract class AbstractModelController<T extends Model> extends AbstractController {
 
