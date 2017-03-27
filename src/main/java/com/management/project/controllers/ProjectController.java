@@ -10,13 +10,28 @@ import com.management.project.models.Project;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public class ProjectController extends AbstractModelController<Project> {
 
+    /**
+     *
+     */
     protected CompanyDAO companyDAO;
+
+    /**
+     *
+     */
     protected CustomerDAO customerDAO;
 
+    /**
+     *
+     * @param dao
+     * @param companyDAO
+     * @param customerDAO
+     */
     public ProjectController(
             GenericDAO<Project, Long> dao,
             CompanyDAO companyDAO,
@@ -27,6 +42,9 @@ public class ProjectController extends AbstractModelController<Project> {
         this.customerDAO = customerDAO;
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();
@@ -34,6 +52,10 @@ public class ProjectController extends AbstractModelController<Project> {
         super.printMenu();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected Project getNewModel() {
         System.out.print("Input project name: ");

@@ -5,10 +5,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public abstract class AbstractController {
 
+    /**
+     * @throws SQLException
+     */
     public void start() throws SQLException {
         int choice;
         while (true) {
@@ -21,6 +26,9 @@ public abstract class AbstractController {
         }
     }
 
+    /**
+     * @return
+     */
     protected int readChoice() {
         int choice;
         System.out.println("Input your choice: ");
@@ -32,7 +40,14 @@ public abstract class AbstractController {
         return choice;
     }
 
+    /**
+     * @param choice
+     * @throws SQLException
+     */
     protected abstract void action(int choice) throws SQLException;
 
+    /**
+     *
+     */
     protected abstract void printMenu();
 }

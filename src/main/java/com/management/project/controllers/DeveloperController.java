@@ -13,14 +13,33 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public class DeveloperController extends AbstractModelController<Developer> {
 
+    /**
+     *
+     */
     protected SkillDAO skillDAO;
+
+    /**
+     *
+     */
     protected CompanyDAO companyDAO;
+
+    /**
+     *
+     */
     protected ProjectDAO projectDAO;
 
+    /**
+     * @param dao
+     * @param skillDAO
+     * @param companyDAO
+     * @param projectDAO
+     */
     public DeveloperController(
             GenericDAO<Developer, Long> dao,
             SkillDAO skillDAO,
@@ -32,6 +51,9 @@ public class DeveloperController extends AbstractModelController<Developer> {
         this.projectDAO = projectDAO;
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();
@@ -39,6 +61,9 @@ public class DeveloperController extends AbstractModelController<Developer> {
         super.printMenu();
     }
 
+    /**
+     * @return
+     */
     @Override
     protected Developer getNewModel() {
         System.out.print("Input developer name: ");

@@ -6,12 +6,20 @@ import com.management.project.models.Model;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public abstract class AbstractModelController<T extends Model> extends AbstractController {
 
+    /**
+     *
+     */
     protected final GenericDAO<T, Long> dao;
 
+    /**
+     * @param dao
+     */
     public AbstractModelController(GenericDAO<T, Long> dao) {
         this.dao = dao;
     }

@@ -8,7 +8,8 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 /**
- * * The class implements a set of methods for working with database including Hibernate framework, with Skill entity
+ * * The class implements a set of methods for working
+ * with database including Hibernate framework, with Skill entity
  *
  * @author Вадим
  */
@@ -66,7 +67,8 @@ public class HibSkillDao implements SkillDAO {
     }
 
     /**
-     * The method updates a skill in a database (finds skill in a database by id and overwrites other fields)
+     * The method updates a skill in a database
+     * (finds skill in a database by id and overwrites other fields)
      *
      * @param obj is a skill with new parameters
      */

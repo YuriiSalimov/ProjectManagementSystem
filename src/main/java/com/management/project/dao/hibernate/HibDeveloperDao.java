@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database including Hibernate framework, with Developer entity
+ * The class implements a set of methods for working
+ * with database including Hibernate framework, with Developer entity
  *
  * @author Вадим
  */
@@ -41,8 +42,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     public Long save(Developer developer) {
         Long id = null;
         Transaction transaction = null;
-        Session session = sessionFactory.openSession();
-        try {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             id = (Long) session.save(developer);
             transaction.commit();
@@ -51,8 +51,6 @@ public class HibDeveloperDao implements DeveloperDAO {
                 transaction.rollback();
             }
             throw new RuntimeException(e);
-        } finally {
-            session.close();
         }
         return id;
     }
@@ -76,7 +74,8 @@ public class HibDeveloperDao implements DeveloperDAO {
     }
 
     /**
-     * The method updates a developer in a database (finds developer in a database by id and overwrites other fields)
+     * The method updates a developer in a database
+     * (finds developer in a database by id and overwrites other fields)
      *
      * @param developer is a developer with new parameters
      */
@@ -84,8 +83,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     public void update(Developer developer) {
         Developer developerNew;
         Transaction transaction = null;
-        Session session = sessionFactory.openSession();
-        try {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             developerNew = session.get(Developer.class, developer.getId());
             if (developerNew != null) {
@@ -106,8 +104,6 @@ public class HibDeveloperDao implements DeveloperDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-        } finally {
-            session.close();
         }
     }
 
@@ -119,8 +115,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     @Override
     public void delete(Developer obj) {
         Transaction transaction = null;
-        Session session = sessionFactory.openSession();
-        try {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
             Developer developer = session.get(Developer.class, obj.getId());
             if (developer != null) {
@@ -132,8 +127,6 @@ public class HibDeveloperDao implements DeveloperDAO {
                 transaction.rollback();
             }
             throw new RuntimeException(e);
-        } finally {
-            session.close();
         }
     }
 

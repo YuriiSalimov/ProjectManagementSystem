@@ -9,29 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * * The class implements a set of methods for working with database, with Customer entity.
+ * * The class implements a set of methods
+ * for working with database, with Customer entity.
  *
  * @author Pavel Perevoznyk
  */
 public class JdbcCustomerDAO implements CustomerDAO {
 
     /**
-     * A pattern of an SQL command (without particular value) for saving a customer in a database
+     * A pattern of an SQL command (without particular value)
+     * for saving a customer in a database
      */
     private static final String SAVE = "INSERT INTO customers (NAME) VALUES(?)";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a customer in a database by id
+     * A pattern of an SQL command (without particular value)
+     * for finding a customer in a database by id
      */
     private static final String FIND_BY_ID = "SELECT * FROM customers WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for update a customer in a database
+     * A pattern of an SQL command (without particular value)
+     * for update a customer in a database
      */
     private static final String UPDATE = "UPDATE customers SET NAME = ? WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a customer from a database
+     * A pattern of an SQL command (without particular value)
+     * for removing a customer from a database
      */
     private static final String DELETE = "DELETE FROM customers WHERE ID = ?";
 
@@ -41,7 +46,8 @@ public class JdbcCustomerDAO implements CustomerDAO {
     private static final String FIND_ALL = "SELECT * FROM customers";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a customer in a database by name
+     * A pattern of an SQL command (without particular value)
+     * for finding a customer in a database by name
      */
     private static final String FIND_BY_NAME = "SELECT * FROM customers WHERE NAME = ?";
 
@@ -107,7 +113,8 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     /**
-     * The method updates a customer in a database (finds customer in a database by id and overwrites other fields)
+     * The method updates a customer in a database
+     * (finds customer in a database by id and overwrites other fields)
      *
      * @param obj customer with new name
      */
@@ -179,10 +186,12 @@ public class JdbcCustomerDAO implements CustomerDAO {
     }
 
     /**
-     * The method builds a list of customers from resultSet (set that we get after execution SQL query)
+     * The method builds a list of customers from resultSet
+     * (set that we get after execution SQL query)
      *
      * @param rs set that we get after execution SQL query
      * @return a list of all customers from a database
+     * @throws SQLException
      */
     private static List<Customer> buildCustomersFromResultSet(ResultSet rs) throws SQLException {
         List<Customer> customers = new ArrayList<>();

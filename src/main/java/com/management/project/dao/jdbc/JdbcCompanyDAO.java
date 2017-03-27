@@ -9,29 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database, with Company entity.
+ * The class implements a set of methods for working
+ * with database, with Company entity.
  *
  * @author Slava
  */
 public class JdbcCompanyDAO implements CompanyDAO {
 
     /**
-     * A pattern of an SQL command (without particular values) for saving a company in a database
+     * A pattern of an SQL command (without particular values)
+     * for saving a company in a database
      */
     private final static String SAVE = "INSERT INTO companies (name) VALUES(?)";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a company in a database by id
+     * A pattern of an SQL command (without particular value)
+     * for finding a company in a database by id
      */
     private final static String FIND_BY_ID = "SELECT * FROM companies WHERE id = ?";
 
     /**
-     * A pattern of an SQL command (without particular values) for update a company in a database
+     * A pattern of an SQL command (without particular values)
+     * for update a company in a database
      */
     private final static String UPDATE = "UPDATE companies SET name = ? WHERE id = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a company from a database by id
+     * A pattern of an SQL command (without particular value)
+     * for removing a company from a database by id
      */
     private final static String DELETE = "DELETE FROM companies WHERE id = ?";
 
@@ -41,12 +46,14 @@ public class JdbcCompanyDAO implements CompanyDAO {
     private final static String FIND_ALL = "SELECT * FROM companies";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a company in a database by name
+     * A pattern of an SQL command (without particular value)
+     * for finding a company in a database by name
      */
     private final static String FIND_BY_NAME = "SELECT * FROM companies WHERE name = ? ";
 
     /**
-     * A pattern of an SQL command  for finding a id from the last inserted company in a database
+     * A pattern of an SQL command  for finding a id from the last
+     * inserted company in a database
      */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 

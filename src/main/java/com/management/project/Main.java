@@ -8,10 +8,16 @@ import com.management.project.factory.HibFactoryController;
 import java.sql.SQLException;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public class Main extends AbstractController {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             new Main().start();
@@ -21,6 +27,11 @@ public class Main extends AbstractController {
         System.out.println("Goodbye!");
     }
 
+    /**
+     *
+     * @param choice
+     * @throws SQLException
+     */
     @Override
     protected void action(int choice) throws SQLException {
         switch (choice) {
@@ -43,6 +54,9 @@ public class Main extends AbstractController {
         }
     }
 
+    /**
+     * 
+     */
     @Override
     protected void printMenu() {
         System.out.println("What DAO do you want to use?");

@@ -9,7 +9,8 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database including Hibernate framework, with Customer entity
+ * The class implements a set of methods for working
+ * with database including Hibernate framework, with Customer entity
  *
  * @author Slava Makhinich
  */
@@ -67,7 +68,8 @@ public class HibCustomerDao implements CustomerDAO {
     }
 
     /**
-     * The method updates a customer in a database (finds customer in a database by id and overwrites other fields)
+     * The method updates a customer in a database
+     * (finds customer in a database by id and overwrites other fields)
      *
      * @param customer is a company with new parameters
      */

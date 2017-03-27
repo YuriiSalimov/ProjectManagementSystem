@@ -6,14 +6,24 @@ import com.management.project.models.Company;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Вадим
  */
 public class CompanyController extends AbstractModelController<Company> {
 
+    /**
+     *
+     * @param dao
+     */
     public CompanyController(GenericDAO<Company, Long> dao) {
         super(dao);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected Company getNewModel() {
         System.out.print("Input company name: ");
@@ -21,6 +31,9 @@ public class CompanyController extends AbstractModelController<Company> {
         return new Company(-100, companyName);
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();

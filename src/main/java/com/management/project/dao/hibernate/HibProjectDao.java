@@ -9,7 +9,8 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database including Hibernate framework, with Project entity
+ * The class implements a set of methods for working
+ * with database including Hibernate framework, with Project entity
  *
  * @author Slava Makhinich
  */
@@ -67,7 +68,8 @@ public class HibProjectDao implements ProjectDAO {
     }
 
     /**
-     * The method updates a project in a database (finds project in a database by id and overwrites other fields)
+     * The method updates a project in a database
+     * (finds project in a database by id and overwrites other fields)
      *
      * @param project is a project with new parameters
      */

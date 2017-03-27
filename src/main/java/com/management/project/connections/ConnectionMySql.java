@@ -28,6 +28,7 @@ public class ConnectionMySql implements ConnectionDB {
 
     /**
      * This method create instance of this class or return instance if it already exist
+     *
      * @return instance of ConnectionMySql
      */
     public static ConnectionMySql getInstance() {
@@ -39,6 +40,7 @@ public class ConnectionMySql implements ConnectionDB {
 
     /**
      * This method create connection to DB
+     *
      * @return connection to DB
      * @throws SQLException
      */

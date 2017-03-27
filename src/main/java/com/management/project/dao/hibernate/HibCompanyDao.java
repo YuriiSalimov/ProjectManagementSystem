@@ -9,7 +9,8 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database including Hibernate framework, with Company entity
+ * The class implements a set of methods for working with
+ * database including Hibernate framework, with Company entity
  *
  * @author Slava Makhinich
  */
@@ -67,7 +68,8 @@ public class HibCompanyDao implements CompanyDAO {
     }
 
     /**
-     * The method updates a company in a database (finds company in a database by id and overwrites other fields)
+     * The method updates a company in a database
+     * (finds company in a database by id and overwrites other fields)
      *
      * @param company is a company with new parameters
      */

@@ -9,28 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The class implements a set of methods for working with database, with Skill entity.
+ * The class implements a set of methods for working
+ * with database, with Skill entity.
+ *
  * @author Вадим
  */
 public class JdbcSkillDAO implements SkillDAO {
 
     /**
-     * A pattern of an SQL command (without particular values) for saving a skill in a database
+     * A pattern of an SQL command (without particular values)
+     * for saving a skill in a database
      */
     private final static String SAVE = "INSERT INTO skills (name) VALUES(?)";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a skill in a database by id
+     * A pattern of an SQL command (without particular value)
+     * for finding a skill in a database by id
      */
     private final static String FIND_BY_ID = "SELECT * FROM skills WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular values) for update a skill in a database
+     * A pattern of an SQL command (without particular values)
+     * for update a skill in a database
      */
     private final static String UPDATE = "UPDATE skills SET name = ? WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a skill from a database by id
+     * A pattern of an SQL command (without particular value)
+     * for removing a skill from a database by id
      */
     private final static String DELETE = "DELETE FROM skills WHERE ID = ?";
 
@@ -40,16 +46,16 @@ public class JdbcSkillDAO implements SkillDAO {
     private final static String FIND_ALL = "SELECT * FROM skills";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a skill in a database by name
+     * A pattern of an SQL command (without particular value)
+     * for finding a skill in a database by name
      */
     private final static String FIND_BY_NAME = "SELECT * FROM skills WHERE NAME = ? ";
 
-
     /**
-     * A pattern of an SQL command  for finding a id from the last inserted skill in a database
+     * A pattern of an SQL command  for finding a id
+     * from the last inserted skill in a database
      */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
-
 
     /**
      * a connection to database
@@ -75,8 +81,8 @@ public class JdbcSkillDAO implements SkillDAO {
     public Long save(Skill obj) {
         Long id;
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
-             Statement statement = connection.createStatement()) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+                Statement statement = connection.createStatement()) {
             preparedStatement.setString(1, obj.getName());
             preparedStatement.executeUpdate();
             ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
@@ -98,7 +104,7 @@ public class JdbcSkillDAO implements SkillDAO {
     @Override
     public Skill findById(Long aLong) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
@@ -118,7 +124,7 @@ public class JdbcSkillDAO implements SkillDAO {
     @Override
     public void update(Skill obj) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
             preparedStatement.setString(1, obj.getName());
             preparedStatement.setLong(2, obj.getId());
             preparedStatement.executeUpdate();
@@ -135,7 +141,7 @@ public class JdbcSkillDAO implements SkillDAO {
     @Override
     public void delete(Skill obj) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             preparedStatement.setLong(1, obj.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -152,8 +158,8 @@ public class JdbcSkillDAO implements SkillDAO {
     public List<Skill> findAll() {
         List<Skill> skillList = new ArrayList<>();
         try (Connection connection = connectionDB.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
             while (resultSet.next()) {
                 Skill skill = createSkill(resultSet);
                 skillList.add(skill);
@@ -173,14 +179,14 @@ public class JdbcSkillDAO implements SkillDAO {
      */
     public Skill findByName(String name) {
         try (Connection connection = connectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
                 return null;
             }
             return createSkill(resultSet);
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

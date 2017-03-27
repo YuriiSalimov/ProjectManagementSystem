@@ -14,29 +14,34 @@ import java.util.List;
 import static com.management.project.utils.Constants.*;
 
 /**
- * The class implements a set of methods for working with database, with Project entity.
+ * The class implements a set of methods for working
+ * with database, with Project entity.
  *
  * @author Slava Makhinich
  */
 public class JdbcProjectDAO implements ProjectDAO {
 
     /**
-     * A pattern of an SQL command (without particular values) for saving a project in a database
+     * A pattern of an SQL command (without particular values)
+     * for saving a project in a database
      */
     private static final String SAVE = "INSERT INTO projects (name, cost, company_id, customer_id) VALUES(?, ?, ?, ?)";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a project in a database by id
+     * A pattern of an SQL command (without particular value)
+     * for finding a project in a database by id
      */
     private static final String FIND_BY_ID = "SELECT * FROM projects WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular values) for update a project in a database
+     * A pattern of an SQL command (without particular values)
+     * for update a project in a database
      */
     private static final String UPDATE = "UPDATE projects SET name  = ?, cost = ?, company_id = ?, customer_id = ? WHERE id = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a project from a database by id
+     * A pattern of an SQL command (without particular value)
+     * for removing a project from a database by id
      */
     private static final String DELETE = "DELETE FROM projects WHERE ID = ?";
 
@@ -46,7 +51,8 @@ public class JdbcProjectDAO implements ProjectDAO {
     private static final String FIND_ALL = "SELECT * FROM projects";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a project in a database by name
+     * A pattern of an SQL command (without particular value)
+     * for finding a project in a database by name
      */
     private static final String FIND_BY_NAME = "SELECT * FROM projects WHERE NAME LIKE ?";
 
@@ -66,9 +72,10 @@ public class JdbcProjectDAO implements ProjectDAO {
     private Connection connection;
 
     /**
-     * * Constructor.
+     * Constructor.
      *
-     * @param connection a connection to a database
+     * @param connection @param connection a connection to a database
+     * @throws SQLException
      */
     public JdbcProjectDAO(Connection connection) throws SQLException {
         this.connection = connection;
@@ -95,7 +102,10 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + name);
+            System.out.println(
+                    "SQL exception occurred while trying to retrieve " +
+                            "Project with Name: " + name
+            );
             e.printStackTrace();
         }
         return project;
@@ -122,7 +132,10 @@ public class JdbcProjectDAO implements ProjectDAO {
             id = resultSet.getLong(1);
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred while trying to save Customer: " + project.getName() + "\n" + e);
+            System.out.println(
+                    "SQL exception occurred while trying to save Customer: " +
+                            project.getName() + "\n" + e
+            );
         }
         return id;
     }
@@ -146,14 +159,18 @@ public class JdbcProjectDAO implements ProjectDAO {
             }
             resultSet.close();
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred while trying to retrieve Project with Name: " + id);
+            System.out.println(
+                    "SQL exception occurred while trying to retrieve " +
+                            "Project with Name: " + id
+            );
             e.printStackTrace();
         }
         return project;
     }
 
     /**
-     * The method updates a project in a database (finds project in a database by id and overwrites other fields)
+     * The method updates a project in a database
+     * (finds project in a database by id and overwrites other fields)
      *
      * @param project project with new parameters
      */
@@ -214,10 +231,12 @@ public class JdbcProjectDAO implements ProjectDAO {
     }
 
     /**
-     * The method builds a list of projects from resultSet (set that we get after execution SQL query)
+     * The method builds a list of projects from resultSet
+     * (set that we get after execution SQL query)
      *
      * @param resultSet set that we get after execution SQL query
      * @return a list of all projects from a database
+     * @throws SQLException
      */
     private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException {
         List<Project> projects = new ArrayList<>();

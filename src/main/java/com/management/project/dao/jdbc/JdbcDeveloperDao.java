@@ -12,39 +12,46 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * The class implements a set of methods for working with database, with Developer entity.
+ * The class implements a set of methods for working
+ * with database, with Developer entity.
  *
  * @author Вадим
  */
 public class JdbcDeveloperDao implements DeveloperDAO {
 
     /**
-     * A pattern of an SQL command (without particular values) for saving a developer in a database
+     * A pattern of an SQL command (without particular values)
+     * for saving a developer in a database
      */
     private final static String SAVE = "INSERT INTO developers(name, company_id, project_id,salary) VALUES(?,?,?,?)";
 
     /**
-     * A pattern of an SQL command (without particular values) for saving a set skills of developer in a database
+     * A pattern of an SQL command (without particular values)
+     * for saving a set skills of developer in a database
      */
     private static final String SAVE_SKILLS = "INSERT developers_skills VALUES (?,?)";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a developer in a database by id
+     * A pattern of an SQL command (without particular value)
+     * for finding a developer in a database by id
      */
     private final static String FIND_BY_ID = "SELECT * FROM developers WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular values) for update a developer in a database
+     * A pattern of an SQL command (without particular values)
+     * for update a developer in a database
      */
     private final static String UPDATE = "UPDATE developers SET name = ?, company_id = ?,project_id = ?,salary =? WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a developer from a database by id
+     * A pattern of an SQL command (without particular value)
+     * for removing a developer from a database by id
      */
     private final static String DELETE = "DELETE FROM developers WHERE ID = ?";
 
     /**
-     * A pattern of an SQL command (without particular value) for removing a set skills of developer from a database by developer`sid
+     * A pattern of an SQL command (without particular value)
+     * for removing a set skills of developer from a database by developer`sid
      */
     private final static String DELETE_SKILLS = "DELETE FROM developers_skills WHERE developer_id = ?";
 
@@ -54,17 +61,20 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     private final static String FIND_ALL = "SELECT * FROM developers";
 
     /**
-     * A pattern of an SQL command (without particular value) for finding a developer in a database by name
+     * A pattern of an SQL command (without particular value)
+     * for finding a developer in a database by name
      */
     private final static String FIND_BY_NAME = "SELECT * FROM developers WHERE NAME = ?";
 
     /**
-     * A pattern of an SQL command  for finding a id from the last inserted developer in a database
+     * A pattern of an SQL command  for finding a id from
+     * the last inserted developer in a database
      */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
     /**
-     * An SQL command for getting set of developer`s skills from a database by developer`s id
+     * An SQL command for getting set of developer`s skills
+     * from a database by developer`s id
      */
     private final static String GET_SKILLS = "SELECT * FROM skills " +
             "JOIN developers_skills ON skills.ID = developers_skills.skill_id " +
@@ -87,9 +97,10 @@ public class JdbcDeveloperDao implements DeveloperDAO {
     private ConnectionDB connectionDB;
 
     /**
-     * * Constructor.
+     * Constructor.
      *
      * @param connectionDB a connection to database
+     * @throws SQLException
      */
     public JdbcDeveloperDao(ConnectionDB connectionDB) throws SQLException {
         this.connectionDB = connectionDB;
@@ -145,7 +156,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.setInt(4, obj.getSalary());
                 statement.executeUpdate();
             }
-            long id = 0;
+            long id;
             try (Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(GET_LAST_INSERTED);
                 resultSet.next();
@@ -209,7 +220,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         try {
             connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
-
             try (PreparedStatement statement = connection.prepareStatement(UPDATE)) {
                 statement.setString(1, obj.getName());
                 statement.setLong(2, obj.getCompany().getId());
@@ -218,7 +228,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.setInt(4, obj.getSalary());
                 statement.executeUpdate();
             }
-
             try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
                 statement.setLong(1, obj.getId());
                 statement.executeUpdate();
@@ -232,7 +241,6 @@ public class JdbcDeveloperDao implements DeveloperDAO {
                 statement.executeBatch();
             }
             connection.commit();
-
         } catch (Exception ex) {
             rollbackTransaction(connection);
             throw new RuntimeException(ex);
@@ -252,18 +260,15 @@ public class JdbcDeveloperDao implements DeveloperDAO {
         try {
             connection = connectionDB.getConnection();
             connection.setAutoCommit(false);
-
             try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILLS)) {
                 statement.setLong(1, obj.getId());
                 statement.executeUpdate();
             }
-
             try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
                 statement.setLong(1, obj.getId());
                 statement.executeUpdate();
             }
             connection.commit();
-
         } catch (Exception ex) {
             rollbackTransaction(connection);
             throw new RuntimeException(ex);
@@ -367,5 +372,4 @@ public class JdbcDeveloperDao implements DeveloperDAO {
             }
         }
     }
-
 }

@@ -3,16 +3,44 @@ package com.management.project.controllers;
 import java.sql.SQLException;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public class MainController extends AbstractController {
 
+    /**
+     *
+     */
     private CompanyController companyController;
+
+    /**
+     *
+     */
     private CustomerController customerController;
+
+    /**
+     *
+     */
     private DeveloperController developerController;
+
+    /**
+     *
+     */
     private ProjectController projectController;
+
+    /**
+     *
+     */
     private SkillController skillController;
 
+    /**
+     * @param companyController
+     * @param customerController
+     * @param developerController
+     * @param projectController
+     * @param skillController
+     */
     public MainController(
             CompanyController companyController,
             CustomerController customerController,
@@ -27,6 +55,10 @@ public class MainController extends AbstractController {
         this.skillController = skillController;
     }
 
+    /**
+     * @param choice
+     * @throws SQLException
+     */
     @Override
     protected void action(int choice) throws SQLException {
         switch (choice) {
@@ -48,6 +80,9 @@ public class MainController extends AbstractController {
         }
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();

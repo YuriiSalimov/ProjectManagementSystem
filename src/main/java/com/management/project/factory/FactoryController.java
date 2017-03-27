@@ -5,8 +5,9 @@ import com.management.project.controllers.*;
 import java.sql.SQLException;
 
 /**
- * The class implements the Factory pattern. It creates and supplies model's controllers, and these controllers
- * use JDBC DAOs
+ * The class implements the Factory pattern.
+ * It creates and supplies model's controllers,
+ * and these controllers use JDBC DAOs
  *
  * @author Slava Makhinich
  */
@@ -40,13 +41,15 @@ public final class FactoryController {
     /**
      * Private constructor
      */
-    private FactoryController(){
+    private FactoryController() {
     }
 
     /**
-     * The method returns an instance of CompanyController, and creates it if it is not exist
+     * The method returns an instance of CompanyController,
+     * and creates it if it is not exist
      *
      * @return an instance of CompanyController
+     * @throws SQLException
      */
     public static CompanyController getCompanyController() throws SQLException {
         if (companyController == null) {
@@ -56,9 +59,11 @@ public final class FactoryController {
     }
 
     /**
-     * The method returns an instance of CustomerController, and creates it if it is not exist
+     * The method returns an instance of CustomerController,
+     * and creates it if it is not exist
      *
      * @return an instance of CustomerController
+     * @throws SQLException
      */
     public static CustomerController getCustomerController() throws SQLException {
         if (customerController == null) {
@@ -68,9 +73,11 @@ public final class FactoryController {
     }
 
     /**
-     * The method returns an instance of DeveloperController, and creates it if it is not exist
+     * The method returns an instance of DeveloperController,
+     * and creates it if it is not exist
      *
      * @return an instance of DeveloperController
+     * @throws SQLException
      */
     public static DeveloperController getDeveloperController() throws SQLException {
         if (developerController == null) {
@@ -81,9 +88,11 @@ public final class FactoryController {
     }
 
     /**
-     * The method returns an instance of ProjectController, and creates it if it is not exist
+     * The method returns an instance of ProjectController,
+     * and creates it if it is not exist
      *
      * @return an instance of ProjectController
+     * @throws SQLException
      */
     public static ProjectController getProjectController() throws SQLException {
         if (projectController == null) {
@@ -94,9 +103,11 @@ public final class FactoryController {
     }
 
     /**
-     * The method returns an instance of SkillController, and creates it if it is not exist
+     * The method returns an instance of SkillController,
+     * and creates it if it is not exist
      *
      * @return an instance of SkillController
+     * @throws SQLException
      */
     public static SkillController getSkillController() throws SQLException {
         if (skillController == null) {

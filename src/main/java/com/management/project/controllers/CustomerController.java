@@ -6,14 +6,24 @@ import com.management.project.models.Customer;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Slava Makhinich
  */
 public class CustomerController extends AbstractModelController<Customer> {
 
+    /**
+     *
+     * @param dao
+     */
     public CustomerController(GenericDAO<Customer, Long> dao) {
         super(dao);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected Customer getNewModel() {
         System.out.print("Input customer name: ");
@@ -21,6 +31,9 @@ public class CustomerController extends AbstractModelController<Customer> {
         return new Customer(-100, customerName);
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();

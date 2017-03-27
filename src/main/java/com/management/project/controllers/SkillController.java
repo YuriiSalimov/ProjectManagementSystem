@@ -6,14 +6,24 @@ import com.management.project.models.Skill;
 import java.util.Scanner;
 
 /**
+ * DESCRIPTION - ???
+ *
  * @author Вадим
  */
 public class SkillController extends AbstractModelController<Skill> {
 
+    /**
+     *
+     * @param dao
+     */
     public SkillController(GenericDAO<Skill, Long> dao) {
         super(dao);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected Skill getNewModel() {
         System.out.print("Input skill name: ");
@@ -21,6 +31,9 @@ public class SkillController extends AbstractModelController<Skill> {
         return new Skill(-100, skillName);
     }
 
+    /**
+     *
+     */
     @Override
     protected void printMenu() {
         System.out.println();

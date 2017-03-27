@@ -3,13 +3,13 @@ package com.management.project.factory;
 import com.management.project.controllers.*;
 
 /**
- * The class implements the Factory pattern. It creates and supplies model's controllers, and these controllers
- * use Hibernate DAOs
+ * The class implements the Factory pattern.
+ * It creates and supplies model's controllers,
+ * and these controllers use Hibernate DAOs
  *
  * @author Slava Makhinich
  */
 public final class HibFactoryController {
-
 
     /**
      * An instance of CompanyController
@@ -39,11 +39,12 @@ public final class HibFactoryController {
     /**
      * Private constructor
      */
-    private HibFactoryController(){
+    private HibFactoryController() {
     }
 
     /**
-     * The method returns an instance of CompanyController, and creates it if it is not exist
+     * The method returns an instance of CompanyController,
+     * and creates it if it is not exist
      *
      * @return an instance of CompanyController
      */
@@ -55,7 +56,8 @@ public final class HibFactoryController {
     }
 
     /**
-     * The method returns an instance of CustomerController, and creates it if it is not exist
+     * The method returns an instance of CustomerController,
+     * and creates it if it is not exist
      *
      * @return an instance of CustomerController
      */
@@ -67,33 +69,43 @@ public final class HibFactoryController {
     }
 
     /**
-     * The method returns an instance of DeveloperController, and creates it if it is not exist
+     * The method returns an instance of DeveloperController,
+     * and creates it if it is not exist
      *
      * @return an instance of DeveloperController
      */
     public static DeveloperController getDeveloperController() {
         if (developerController == null) {
-            developerController = new DeveloperController(HibFactoryDao.getDeveloperDAO(), HibFactoryDao.getSkillDAO(),
-                    HibFactoryDao.getCompanyDAO(), HibFactoryDao.getProjectDAO());
+            developerController = new DeveloperController(
+                    HibFactoryDao.getDeveloperDAO(),
+                    HibFactoryDao.getSkillDAO(),
+                    HibFactoryDao.getCompanyDAO(),
+                    HibFactoryDao.getProjectDAO()
+            );
         }
         return developerController;
     }
 
     /**
-     * The method returns an instance of ProjectController, and creates it if it is not exist
+     * The method returns an instance of ProjectController,
+     * and creates it if it is not exist
      *
      * @return an instance of ProjectController
      */
     public static ProjectController getProjectController() {
         if (projectController == null) {
-            projectController = new ProjectController(HibFactoryDao.getProjectDAO(), HibFactoryDao.getCompanyDAO(),
-                    HibFactoryDao.getCustomerDAO());
+            projectController = new ProjectController(
+                    HibFactoryDao.getProjectDAO(),
+                    HibFactoryDao.getCompanyDAO(),
+                    HibFactoryDao.getCustomerDAO()
+            );
         }
         return projectController;
     }
 
     /**
-     * The method returns an instance of SkillController, and creates it if it is not exist
+     * The method returns an instance of SkillController,
+     * and creates it if it is not exist
      *
      * @return an instance of SkillController
      */

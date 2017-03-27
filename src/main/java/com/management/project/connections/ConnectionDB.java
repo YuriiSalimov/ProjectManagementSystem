@@ -4,9 +4,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by Вадим on 28.02.2017.
+ * DESCRIPTION - ???
+ *
+ * @author Вадим
  */
 public interface ConnectionDB {
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     Connection getConnection() throws SQLException;
 }
