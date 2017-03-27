@@ -3,43 +3,45 @@ package com.management.project.controllers;
 import java.sql.SQLException;
 
 /**
- * DESCRIPTION - ???
+ * A class for working with models controllers. An instance of this class will be created in Main class
  *
  * @author Slava Makhinich
  */
 public class MainController extends AbstractController {
 
     /**
-     *
+     * An instance of CompanyController
      */
     private CompanyController companyController;
 
     /**
-     *
+     * An instance of CustomerController
      */
     private CustomerController customerController;
 
     /**
-     *
+     * An instance of DeveloperController
      */
     private DeveloperController developerController;
 
     /**
-     *
+     * An instance of ProjectController
      */
     private ProjectController projectController;
 
     /**
-     *
+     * An instance of SkillController
      */
     private SkillController skillController;
 
     /**
-     * @param companyController
-     * @param customerController
-     * @param developerController
-     * @param projectController
-     * @param skillController
+     *  Constructor
+     *
+     * @param companyController an instance of CompanyController
+     * @param customerController an instance of CustomerController
+     * @param developerController an instance of DeveloperController
+     * @param projectController an instance of ProjectController
+     * @param skillController an instance of SkillController
      */
     public MainController(
             CompanyController companyController,
@@ -56,8 +58,11 @@ public class MainController extends AbstractController {
     }
 
     /**
-     * @param choice
-     * @throws SQLException
+     * The method invokes the start() method of model controller, the choice of model controller depends on users
+     * choice, that we get from method readChoice()
+     *
+     * @param choice a choice of user, that we get from method readChoice()
+     * @throws SQLException in case of connection problems
      */
     @Override
     protected void action(int choice) throws SQLException {
@@ -81,7 +86,7 @@ public class MainController extends AbstractController {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {
