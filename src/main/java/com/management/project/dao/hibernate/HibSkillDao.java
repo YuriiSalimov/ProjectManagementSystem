@@ -4,7 +4,6 @@ import com.management.project.dao.SkillDAO;
 import com.management.project.models.Skill;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.List;
 

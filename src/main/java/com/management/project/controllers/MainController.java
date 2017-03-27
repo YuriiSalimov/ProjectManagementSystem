@@ -1,7 +1,5 @@
 package com.management.project.controllers;
 
-import com.management.project.factory.FactoryController;
-
 import java.sql.SQLException;
 
 /**
@@ -14,7 +12,6 @@ public class MainController extends AbstractController {
     private DeveloperController developerController;
     private ProjectController projectController;
     private SkillController skillController;
-
     public MainController(CompanyController companyController, CustomerController customerController,
                           DeveloperController developerController, ProjectController projectController,
                           SkillController skillController) {

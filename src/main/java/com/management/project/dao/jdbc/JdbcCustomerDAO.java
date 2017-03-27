@@ -67,7 +67,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
      */
     @Override
     public Long save(Customer obj) {
-        Long id = null;
+        Long id;
         try (PreparedStatement preparedStatement1 = connection.prepareStatement(SAVE);
              PreparedStatement preparedStatement2 = connection.prepareStatement(Constants.GET_LAST_ID)) {
             preparedStatement1.setString(1, obj.getName());

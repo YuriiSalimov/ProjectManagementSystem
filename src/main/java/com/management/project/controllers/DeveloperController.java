@@ -4,13 +4,11 @@ import com.management.project.dao.CompanyDAO;
 import com.management.project.dao.GenericDAO;
 import com.management.project.dao.ProjectDAO;
 import com.management.project.dao.SkillDAO;
-import com.management.project.factory.FactoryDao;
 import com.management.project.models.Company;
 import com.management.project.models.Developer;
 import com.management.project.models.Project;
 import com.management.project.models.Skill;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Scanner;
 

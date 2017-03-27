@@ -1,7 +1,6 @@
 package com.management.project.controllers;
 
 import com.management.project.dao.GenericDAO;
-import com.management.project.models.Company;
 import com.management.project.models.Skill;
 
 import java.util.Scanner;

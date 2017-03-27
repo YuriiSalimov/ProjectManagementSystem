@@ -3,11 +3,10 @@ package com.management.project.controllers;
 import com.management.project.dao.GenericDAO;
 import com.management.project.models.Model;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
 /**
- * Created by Slava on 07.03.2017.
+ * @author Slava Makhinich
  */
 public abstract class AbstractModelController<T extends Model> extends AbstractController {
 

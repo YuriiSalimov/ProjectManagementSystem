@@ -106,7 +106,6 @@ public class HibDeveloperDao implements DeveloperDAO {
         } finally {
             session.close();
         }
-
     }
 
     /**
@@ -133,7 +132,6 @@ public class HibDeveloperDao implements DeveloperDAO {
         } finally {
             session.close();
         }
-
     }
 
     /**
