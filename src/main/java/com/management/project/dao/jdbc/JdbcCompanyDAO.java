@@ -78,22 +78,37 @@ public class JdbcCompanyDAO implements CompanyDAO {
      * @return a company with entered name
      * or null if company with this name does not exist
      */
-    @Override
+//    @Override
+//    public Company findByName(String companyName) {
+//        try (Connection connection = connectionDB.getConnection();
+//                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+//            preparedStatement.setString(1, companyName);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            if (resultSet.next()) {
+//                return new Company(resultSet.getLong("id"), resultSet.getString("name"));
+//            }
+//            return null;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
     public Company findByName(String companyName) {
+        Company company = null;
         try (Connection connection = connectionDB.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Company(resultSet.getLong("id"), resultSet.getString("name"));
+                company = new Company(resultSet.getLong("id"), resultSet.getString("name"));
             }
-            return null;
+            return company;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    /**
+        /**
      * Method saves a new company in the database
      *
      * @param obj a company, which must be save in the database
