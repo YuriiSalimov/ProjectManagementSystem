@@ -88,11 +88,12 @@ public class JdbcProjectDAO implements ProjectDAO {
      *
      * @param name is a name of a project
      * @return a project with entered name
-     * or null if project with this name does not exist in the database
+     * or new project with empty parameters if project with this name does not exist in the database
      */
     @Override
     public Project findByName(String name) {
-        Project project = null;
+        Project project =
+                new Project(0, name, 0, new Company(0, ""), new Customer(0, ""));
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -145,11 +146,12 @@ public class JdbcProjectDAO implements ProjectDAO {
      *
      * @param id an id of a project
      * @return a project with entered id
-     * or null if project with this id does not exist
+     * or new project with empty parameters if project with this id does not exist
      */
     @Override
     public Project findById(Long id) {
-        Project project = null;
+        Project project =
+                new Project(id, "", 0, new Company(0, ""), new Customer(0, ""));
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

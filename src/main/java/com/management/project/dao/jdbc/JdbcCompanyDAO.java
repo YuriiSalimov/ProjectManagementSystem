@@ -76,21 +76,22 @@ public class JdbcCompanyDAO implements CompanyDAO {
      *
      * @param companyName a name of a company
      * @return a company with entered name
-     * or null if company with this name does not exist
+     * or new company with empty parameters if company with this name does not exist
      */
     @Override
     public Company findByName(String companyName) {
+        Company company = new Company(0, companyName);
         try (Connection connection = connectionDB.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Company(
+                company = new Company(
                         resultSet.getLong("id"),
                         resultSet.getString("name")
                 );
             }
-            return null;
+            return company;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -124,12 +125,11 @@ public class JdbcCompanyDAO implements CompanyDAO {
      *
      * @param aLong an id of a company
      * @return a company with entered id
-     * or null if company with this id does not exist
+     * or new company with empty parameters if company with this id does not exist
      */
     @Override
     public Company findById(Long aLong) {
-        Company foundedCompany;
-        foundedCompany = null;
+        Company foundedCompany = new Company(aLong, "");
         try (Connection connection = connectionDB.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, aLong);

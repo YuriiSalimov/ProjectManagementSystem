@@ -1,11 +1,14 @@
 package com.management.project.dao.hibernate;
 
 import com.management.project.dao.ProjectDAO;
+import com.management.project.models.Company;
+import com.management.project.models.Customer;
 import com.management.project.models.Project;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,13 +56,17 @@ public class HibProjectDao implements ProjectDAO {
      *
      * @param id an id of a project
      * @return a project with entered id
-     * or null if project with this id does not exist in the database
+     * or project with empty parameters if project with this id does not exist in the database
      */
     @Override
     public Project findById(Long id) {
-        Project project = null;
+        Project project =
+                new Project(id, "", 0, new Company(0, ""), new Customer(0, ""));
         try (Session session = sessionFactory.openSession()) {
-            project = session.get(Project.class, id);
+            Project projectFromDB = session.get(Project.class, id);
+            if (projectFromDB != null) {
+                project = projectFromDB;
+            }
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to find project with id: " + id);
             e.printStackTrace();
@@ -129,7 +136,7 @@ public class HibProjectDao implements ProjectDAO {
      */
     @Override
     public List<Project> findAll() {
-        List<Project> projects = null;
+        List<Project> projects = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             projects = session.createQuery("from Project").list();
         } catch (Exception e) {
@@ -144,11 +151,12 @@ public class HibProjectDao implements ProjectDAO {
      *
      * @param name is a name of a project
      * @return a project with entered name
-     * or null if project with this name does not exist in the database
+     * or project with empty parameters if project with this name does not exist in the database
      */
     @Override
     public Project findByName(String name) {
-        Project project = null;
+        Project project =
+                new Project(0, name, 0, new Company(0, ""), new Customer(0, ""));
         try (Session session = sessionFactory.openSession()) {
             List<Project> projects = session.createQuery("select c from Project c where c.name like :name")
                     .setParameter("name", name).list();

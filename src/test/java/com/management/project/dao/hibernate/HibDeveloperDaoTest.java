@@ -62,7 +62,7 @@ public class HibDeveloperDaoTest {
         hibDeveloperDao.save(developer);
         assertEquals(developer, hibDeveloperDao.findByName("for test save()"));
         hibDeveloperDao.delete(hibDeveloperDao.findByName("for test save()"));
-        assertNull(hibDeveloperDao.findByName("for test save()"));
+        assertTrue(hibDeveloperDao.findByName("for test save()").getId() == 0);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class HibDeveloperDaoTest {
         Long id = hibDeveloperDao.save(developer);
         assertEquals(developer, hibDeveloperDao.findById(id));
         hibDeveloperDao.delete(hibDeveloperDao.findById(id));
-        assertNull(hibDeveloperDao.findById(id));
+        assertTrue(hibDeveloperDao.findById(id).getName() == "");
     }
 
     @Test
@@ -85,7 +85,7 @@ public class HibDeveloperDaoTest {
         hibDeveloperDao.delete(hibDeveloperDao.findByName("after update"));
         Developer developer1 = new Developer(1111100, "not exist in base", company, project, 1000);
         hibDeveloperDao.update(developer1);
-        assertNull(hibDeveloperDao.findByName("not exist in base"));
+        assertTrue(hibDeveloperDao.findByName("not exist in base").getId() == 0);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class HibDeveloperDaoTest {
         Long id = hibDeveloperDao.save(developer);
         assertNotNull(hibDeveloperDao.findByName("for test delete()"));
         hibDeveloperDao.delete(hibDeveloperDao.findByName("for test delete()"));
-        assertNull(hibDeveloperDao.findByName("for test delete()"));
+        assertTrue(hibDeveloperDao.findByName("for test delete()").getId() == 0);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class HibDeveloperDaoTest {
         hibDeveloperDao.save(developer);
         assertEquals(developer, hibDeveloperDao.findByName("for test findByName()"));
         hibDeveloperDao.delete(hibDeveloperDao.findByName("for test findByName()"));
-        assertNull(hibDeveloperDao.findByName("for test findByName()"));
+        assertTrue(hibDeveloperDao.findByName("for test findByName()").getId() == 0);
     }
 
 }

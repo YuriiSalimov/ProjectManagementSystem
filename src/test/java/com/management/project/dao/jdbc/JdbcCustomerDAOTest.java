@@ -40,7 +40,7 @@ public class JdbcCustomerDAOTest {
 
     @Test
     public void findByIdNull() throws Exception{
-        assertNull(jdbcCustomerDAO.findById((long)-500));
+        assertTrue(jdbcCustomerDAO.findById((long)-500).getName() == "");
     }
 
      @Test

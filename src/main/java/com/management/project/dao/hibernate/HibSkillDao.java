@@ -53,13 +53,16 @@ public class HibSkillDao implements SkillDAO {
      *
      * @param aLong an id of a skill
      * @return a skill with entered id
-     * or null if skill with this id does not exist in the database
+     * or new skill with empty parameters if the skill with this id does not exist in the database
      */
     @Override
     public Skill findById(Long aLong) {
-        Skill skill;
+        Skill skill = new Skill(aLong, "");
         try (Session session = sessionFactory.openSession()) {
-            skill = session.get(Skill.class, aLong);
+            Skill skillFromDB = session.get(Skill.class, aLong);
+            if (skillFromDB != null) {
+                skill = skillFromDB;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -125,15 +128,20 @@ public class HibSkillDao implements SkillDAO {
      *
      * @param name is a name of a skill
      * @return a skill with entered name
-     * or null if skill with this name does not exist in the database
+     * or new skill with empty parameters if the skill with this id does not exist in the database
      */
     @Override
     public Skill findByName(String name) {
+        Skill skill = new Skill(0, "");
         try (Session session = sessionFactory.openSession()) {
-            return (Skill) session.createQuery("from Skill s where s.name like :name")
+            Skill skillFromDB = (Skill) session.createQuery("from Skill s where s.name like :name")
                     .setParameter("name", name).uniqueResult();
+            if (skillFromDB != null) {
+                skill = skillFromDB;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return skill;
     }
 }

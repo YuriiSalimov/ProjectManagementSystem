@@ -41,7 +41,7 @@ public class JdbcProjectDAOTest {
         Project project1 = projectDAO.findByName("newProjectForTestFindByName");
         assertEquals(project1, project);
         projectDAO.delete(project1);
-        assertNull(projectDAO.findByName("newProjectForTestFindByName"));
+        assertTrue(projectDAO.findByName("newProjectForTestFindByName").getId() == 0);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class JdbcProjectDAOTest {
         Long id = projectDAO.save(project);
         assertEquals(projectDAO.findById(id), project);
         projectDAO.delete(projectDAO.findById(id));
-        assertNull(projectDAO.findById(id));
+        assertTrue(projectDAO.findById(id).getName() == "");
     }
 
     @Test

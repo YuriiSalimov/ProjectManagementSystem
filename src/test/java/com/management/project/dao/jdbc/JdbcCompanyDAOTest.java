@@ -27,7 +27,7 @@ public class JdbcCompanyDAOTest {
         companyDAO.save(company);
         assertEquals(company, companyDAO.findByName("CompanyForTestFindByName"));
         companyDAO.delete(companyDAO.findByName("CompanyForTestFindByName"));
-        assertNull(companyDAO.findByName("CompanyForTestFindByName"));
+        assertTrue(companyDAO.findByName("CompanyForTestFindByName").getId() == 0);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class JdbcCompanyDAOTest {
         long id = companyDAO.save(company);
         assertEquals(company, companyDAO.findById(id));
         companyDAO.delete(companyDAO.findById(id));
-        assertNull(companyDAO.findById(id));
+        assertTrue(companyDAO.findById(id).getName() == "");
     }
 
     @Test
@@ -64,7 +64,7 @@ public class JdbcCompanyDAOTest {
         long id = companyDAO.save(company);
         assertNotNull(companyDAO.findById(id));
         companyDAO.delete(companyDAO.findById(id));
-        assertNull(companyDAO.findById(id));
+        assertTrue(companyDAO.findById(id).getName() == "");
     }
 
     @Test

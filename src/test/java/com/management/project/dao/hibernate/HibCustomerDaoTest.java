@@ -27,7 +27,7 @@ public class HibCustomerDaoTest {
         Long id = hibCustomerDao.save(customer);
         assertEquals(hibCustomerDao.findById(id), customer);
         hibCustomerDao.delete(hibCustomerDao.findById(id));
-        assertNull(hibCustomerDao.findById(id));
+        assertEquals(new Customer(id, ""), hibCustomerDao.findById(id));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class HibCustomerDaoTest {
         Long id = hibCustomerDao.save(customer);
         Customer customerUpdate = new Customer(id, "customerUpdate");
         hibCustomerDao.update(customerUpdate);
-        assertNull(hibCustomerDao.findByName("customerTest"));
+        assertEquals(new Customer(0, "customerTest"), hibCustomerDao.findByName("customerTest"));
         assertEquals(customerUpdate, hibCustomerDao.findByName("customerUpdate"));
         hibCustomerDao.delete(hibCustomerDao.findByName("customerUpdate"));
     }
@@ -47,7 +47,7 @@ public class HibCustomerDaoTest {
         Long id = hibCustomerDao.save(customer);
         assertEquals(customer, hibCustomerDao.findById(id));
         hibCustomerDao.delete(hibCustomerDao.findById(id));
-        assertNull(hibCustomerDao.findByName("customerTest"));
+        assertEquals(new Customer(0, ""), hibCustomerDao.findById(id));
     }
 
     @Test
@@ -74,6 +74,6 @@ public class HibCustomerDaoTest {
         hibCustomerDao.save(customer);
         assertEquals(customer, hibCustomerDao.findByName("customerTest"));
         hibCustomerDao.delete(hibCustomerDao.findByName("customerTest"));
-        assertNull(hibCustomerDao.findByName("customerTest"));
+        assertEquals(new Customer("customerTest"), hibCustomerDao.findByName("customerTest"));
     }
 }

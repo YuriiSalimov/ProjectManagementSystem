@@ -21,7 +21,7 @@ public class HibSkillDaoTest {
         hibSkillDao.save(skill);
         assertEquals(skill, hibSkillDao.findByName("for test save()"));
         hibSkillDao.delete(hibSkillDao.findByName("for test save()"));
-        assertNull(hibSkillDao.findByName("for test save()"));
+        assertTrue(hibSkillDao.findByName("for test save()").getId() == 0);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class HibSkillDaoTest {
         long id = hibSkillDao.save(skill);
         assertEquals(skill, hibSkillDao.findById(id));
         hibSkillDao.delete(hibSkillDao.findById(id));
-        assertNull(hibSkillDao.findById(id));
+        assertTrue(hibSkillDao.findById(id).getName() == "");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class HibSkillDaoTest {
         long id = hibSkillDao.save(skill);
         assertEquals(hibSkillDao.findById(id), skill);
         hibSkillDao.delete(hibSkillDao.findById(id));
-        assertNull(hibSkillDao.findById(id));
+        assertTrue(hibSkillDao.findById(id).getName() == "");
         Skill skillNotExist = new Skill(id, "skillNotExist");
         hibSkillDao.delete(skillNotExist);
     }
@@ -72,7 +72,7 @@ public class HibSkillDaoTest {
         hibSkillDao.save(skill);
         assertEquals(skill, hibSkillDao.findByName("for test findByName()"));
         hibSkillDao.delete(hibSkillDao.findByName("for test findByName()"));
-        assertNull(hibSkillDao.findByName("for test findByName()"));
+        assertTrue(hibSkillDao.findByName("for test findByName()").getId() == 0);
     }
 
 }

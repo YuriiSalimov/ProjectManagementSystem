@@ -37,7 +37,7 @@ public class JdbcDeveloperDaoTest {
         developerTest.setProject(projectDAO.findById(1L));
         Long id = developerDao.save(developerTest);
         assertEquals(developerDao.findById(id), developerDao.findByName("Test"));
-        assertNull(developerDao.findByName(""));
+        assertTrue(developerDao.findByName("not exist").getId() == 0);
         developerDao.delete(developerDao.findByName("Test"));
     }
 
@@ -65,7 +65,7 @@ public class JdbcDeveloperDaoTest {
         developerTest.setProject(projectDAO.findById(1L));
         Long id = developerDao.save(developerTest);
         assertNotNull(developerDao.findById(id));
-        assertNull(developerDao.findById(-10L));
+        assertTrue(developerDao.findById(-10L).getName() == "");
         assertEquals(developerTest,developerDao.findById(id));
         developerDao.delete(developerDao.findById(id));
     }
@@ -97,7 +97,7 @@ public class JdbcDeveloperDaoTest {
         Long id = developerDao.save(developerTest);
         assertNotNull(developerDao.findById(id));
         developerDao.delete(developerDao.findById(id));
-        assertNull(developerDao.findById(id));
+        assertTrue(developerDao.findById(id).getName() == "");
     }
 
     @Test

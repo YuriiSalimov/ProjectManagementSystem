@@ -93,11 +93,11 @@ public class JdbcCustomerDAO implements CustomerDAO {
      *
      * @param id an id of a customer
      * @return a customer with entered id
-     * or null if customer with this id does not exist
+     * or new customer with empty parameters if customer with this id does not exist
      */
     @Override
     public Customer findById(Long id) {
-        Customer customer = null;
+        Customer customer = new Customer(id, "");
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -167,11 +167,11 @@ public class JdbcCustomerDAO implements CustomerDAO {
      *
      * @param name a name of a customer
      * @return a customer with entered name
-     * or null if customer with this name does not exist
+     * or new customer with empty parameters if customer with this name does not exist
      */
     @Override
     public Customer findByName(String name) {
-        Customer customer = null;
+        Customer customer = new Customer(0, name);
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();

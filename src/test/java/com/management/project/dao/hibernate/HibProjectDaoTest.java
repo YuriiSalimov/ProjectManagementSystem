@@ -47,7 +47,7 @@ public class HibProjectDaoTest {
         hibProjectDao.save(project);
         assertEquals(project, hibProjectDao.findByName("for test save()"));
         hibProjectDao.delete(hibProjectDao.findByName("for test save()"));
-        assertNull(hibProjectDao.findByName("for test save()"));
+        assertTrue(hibProjectDao.findByName("for test save()").getId() == 0);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class HibProjectDaoTest {
         long id = hibProjectDao.save(project);
         assertEquals(project, hibProjectDao.findById(id));
         hibProjectDao.delete(hibProjectDao.findById(id));
-        assertNull(hibProjectDao.findById(id));
+        assertTrue(hibProjectDao.findById(id).getName() == "");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class HibProjectDaoTest {
         assertEquals(project1, hibProjectDao.findById(id));
         hibProjectDao.delete(hibProjectDao.findById(id));
         hibProjectDao.update(project1);
-        assertNull(hibProjectDao.findByName("new name for test update()"));
+        assertTrue(hibProjectDao.findByName("new name for test update()").getId() == 0);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class HibProjectDaoTest {
         long id = hibProjectDao.save(project);
         assertNotNull(hibProjectDao.findById(id));
         hibProjectDao.delete(hibProjectDao.findById(id));
-        assertNull(hibProjectDao.findById(id));
+        assertTrue(hibProjectDao.findById(id).getName() == "");
     }
 
     @Test
@@ -98,7 +98,7 @@ public class HibProjectDaoTest {
         hibProjectDao.save(project);
         assertEquals(project, hibProjectDao.findByName("for test findByName()"));
         hibProjectDao.delete(hibProjectDao.findByName("for test findByName()"));
-        assertNull(hibProjectDao.findByName("for test findByName()"));
+        assertTrue(hibProjectDao.findByName("for test findByName()").getId() == 0);
     }
 
 }

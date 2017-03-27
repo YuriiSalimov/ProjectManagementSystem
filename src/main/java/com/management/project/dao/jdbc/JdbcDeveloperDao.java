@@ -113,17 +113,18 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      *
      * @param name a name of a developer
      * @return a developer with entered name
-     * or null if developer with this name does not exist
+     * or new developer with empty parameters if developer with this name does not exist
      */
     @Override
     public Developer findByName(String name) {
         try (Connection connection = connectionDB.getConnection()) {
-            Developer developer;
+            Developer developer = createNewEmptyDeveloper();
+            developer.setName(name);
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)) {
                 preparedStatement.setString(1, name);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
-                    return null;
+                    return developer;
                 }
                 developer = createDeveloper(resultSet);
             }
@@ -186,17 +187,18 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      *
      * @param aLong an id of a developer
      * @return a developer with entered id
-     * or null if developer with this id does not exist
+     * or new developer with empty parameters if developer with this id does not exist
      */
     @Override
     public Developer findById(Long aLong) {
         try (Connection connection = connectionDB.getConnection()) {
-            Developer developer;
+            Developer developer = createNewEmptyDeveloper();
+            developer.setId(aLong);
             try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
                 preparedStatement.setLong(1, aLong);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
-                    return null;
+                    return developer;
                 }
                 developer = createDeveloper(resultSet);
             }

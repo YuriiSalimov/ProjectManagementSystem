@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,13 +54,16 @@ public class HibCompanyDao implements CompanyDAO {
      *
      * @param id an id of a company
      * @return a company with entered id
-     * or null if company with this id does not exist in the database
+     * or new company with empty parameters if company with this id does not exist in the database
      */
     @Override
     public Company findById(Long id) {
-        Company company = null;
+        Company company = new Company(id, "");
         try (Session session = sessionFactory.openSession()) {
-            company = session.get(Company.class, id);
+            Company companyFromDB = session.get(Company.class, id);
+            if (companyFromDB != null) {
+                company = companyFromDB;
+            }
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to find company with id: " + id);
             e.printStackTrace();
@@ -126,7 +130,7 @@ public class HibCompanyDao implements CompanyDAO {
      */
     @Override
     public List<Company> findAll() {
-        List<Company> companies = null;
+        List<Company> companies = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             companies = session.createQuery("from Company").list();
         } catch (Exception e) {
@@ -141,11 +145,11 @@ public class HibCompanyDao implements CompanyDAO {
      *
      * @param name is a name of a company
      * @return a company with entered name
-     * or null if company with this name does not exist in the database
+     * or new company with empty parameters if company with this name does not exist in the database
      */
     @Override
     public Company findByName(String name) {
-        Company company = null;
+        Company company = new Company(0, name);
         try (Session session = sessionFactory.openSession()) {
             List<Company> companies = session.createQuery("select c from Company c where c.name like :name")
                     .setParameter("name", name).list();

@@ -30,7 +30,7 @@ public class HibCompanyDaoTest {
         assertEquals(hibCompanyDao.findById(id), company);
         company.setId(id);
         hibCompanyDao.delete(company);
-        assertNull(hibCompanyDao.findById(id));
+        assertEquals(new Company(id, ""), hibCompanyDao.findById(id));
     }
 
     @Test
@@ -39,12 +39,12 @@ public class HibCompanyDaoTest {
         Long id = hibCompanyDao.save(company);
         Company newCompany = new Company(id, "NewTestUpdate");
         hibCompanyDao.update(newCompany);
-        assertNull(hibCompanyDao.findByName("TestUpdate"));
+        assertEquals(new Company(0, "TestUpdate"), hibCompanyDao.findByName("TestUpdate"));
         assertEquals(newCompany, hibCompanyDao.findByName("NewTestUpdate"));
         hibCompanyDao.delete(hibCompanyDao.findByName("NewTestUpdate"));
         Company anotherCompany = new Company(id + 100, "anotherCompany");
         hibCompanyDao.update(anotherCompany);
-        assertNull(hibCompanyDao.findByName("anotherCompany"));
+        assertEquals(new Company(0, "anotherCompany"), hibCompanyDao.findByName("anotherCompany"));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class HibCompanyDaoTest {
         hibCompanyDao.save(company);
         assertEquals(company, hibCompanyDao.findByName("for test delete"));
         hibCompanyDao.delete(hibCompanyDao.findByName("for test delete"));
-        assertNull(hibCompanyDao.findByName("for test delete"));
+        assertEquals(new Company(0, "for test delete"), hibCompanyDao.findByName("for test delete"));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class HibCompanyDaoTest {
         hibCompanyDao.save(company);
         assertEquals(company, hibCompanyDao.findByName("findByNameTest"));
         hibCompanyDao.delete(hibCompanyDao.findByName("findByNameTest"));
-        assertNull(hibCompanyDao.findByName("findByNameTest"));
+        assertEquals(new Company(0, "findByNameTest") , hibCompanyDao.findByName("findByNameTest"));
     }
 
 }

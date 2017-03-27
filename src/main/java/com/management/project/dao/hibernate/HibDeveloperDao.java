@@ -1,8 +1,7 @@
 package com.management.project.dao.hibernate;
 
 import com.management.project.dao.DeveloperDAO;
-import com.management.project.models.Developer;
-import com.management.project.models.Skill;
+import com.management.project.models.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -60,13 +59,17 @@ public class HibDeveloperDao implements DeveloperDAO {
      *
      * @param id an id of a developer
      * @return a developer with entered id
-     * or null if developer with this id does not exist in the database
+     * or developer with empty parameters if developer with this id does not exist in the database
      */
     @Override
     public Developer findById(Long id) {
-        Developer developer;
+        Developer developer = createNewEmptyDeveloper();
+        developer.setId(id);
         try (Session session = sessionFactory.openSession()) {
-            developer = session.get(Developer.class, id);
+            Developer developerFromDB = session.get(Developer.class, id);
+            if (developerFromDB != null) {
+                developer = developerFromDB;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -149,15 +152,20 @@ public class HibDeveloperDao implements DeveloperDAO {
      *
      * @param name is a name of a developer
      * @return a developer with entered name
-     * or null if developer with this name does not exist in the database
+     * or developer with empty parameters if developer with this name does not exist in the database
      */
     @Override
     public Developer findByName(String name) {
-        Developer developer;
+        Developer developer = createNewEmptyDeveloper();
+        developer.setName(name);
         try (Session session = sessionFactory.openSession()) {
-            developer = (Developer) session.createQuery("from Developer d where d.name like :name")
+             Developer developerFromDB = (Developer) session.createQuery("from Developer d where d.name like :name")
                     .setParameter("name", name).uniqueResult();
+             if (developerFromDB != null) {
+                 developer = developerFromDB;
+             }
         }
         return developer;
     }
+
 }

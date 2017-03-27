@@ -38,7 +38,7 @@ public class JdbcSkillDAOTest {
         skillTest.setName("Test2");
         Long id = jdbcSkillDAO.save(skillTest);
         assertEquals(skillTest,jdbcSkillDAO.findById(id));
-        assertNull(jdbcSkillDAO.findById(-1L));
+        assertTrue(jdbcSkillDAO.findById(-1L).getName() == "");
     }
 
     @Test
@@ -58,7 +58,7 @@ public class JdbcSkillDAOTest {
         Long id  = jdbcSkillDAO.save(skillTest);
         assertNotNull(jdbcSkillDAO.findById(id));
         jdbcSkillDAO.delete(jdbcSkillDAO.findById(id));
-        assertNull(jdbcSkillDAO.findById(id));
+        assertTrue(jdbcSkillDAO.findById(id).getName() == "");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class JdbcSkillDAOTest {
         Long id1 = jdbcSkillDAO.save(skill1);
         Skill skill2 = jdbcSkillDAO.findByName("Test7");
         Skill skill3 = jdbcSkillDAO.findByName("EDR");
-        assertNull(skill3);
+        assertTrue(skill3.getId() == 0);
         assertEquals(jdbcSkillDAO.findById(id1),skill2);
     }
 

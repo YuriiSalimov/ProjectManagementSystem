@@ -99,7 +99,7 @@ public class JdbcSkillDAO implements SkillDAO {
      *
      * @param aLong id of skill
      * @return a skill with entered id
-     * or null if skill with this id does not exist
+     * or new skill with empty parameters if skill with this id does not exist
      */
     @Override
     public Skill findById(Long aLong) {
@@ -108,7 +108,7 @@ public class JdbcSkillDAO implements SkillDAO {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
-                return null;
+                return new Skill(aLong, "");
             }
             return createSkill(resultSet);
         } catch (SQLException e) {
@@ -175,7 +175,7 @@ public class JdbcSkillDAO implements SkillDAO {
      *
      * @param name a name of skill
      * @return a skill with entered name
-     * or null if skill with this name does not exist
+     * or new skill with empty parameters if skill with this name does not exist
      */
     public Skill findByName(String name) {
         try (Connection connection = connectionDB.getConnection();
@@ -183,7 +183,7 @@ public class JdbcSkillDAO implements SkillDAO {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
-                return null;
+                return new Skill(0, name);
             }
             return createSkill(resultSet);
         } catch (SQLException e) {

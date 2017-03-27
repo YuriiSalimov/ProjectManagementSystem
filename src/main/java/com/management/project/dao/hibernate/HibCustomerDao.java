@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,13 +54,16 @@ public class HibCustomerDao implements CustomerDAO {
      *
      * @param id an id of a customer
      * @return a customer with entered id
-     * or null if customer with this id does not exist in the database
+     * or customer with empty parameters if customer with this id does not exist in the database
      */
     @Override
     public Customer findById(Long id) {
-        Customer customer = null;
+        Customer customer = new Customer(id, "");
         try (Session session = sessionFactory.openSession()) {
-            customer = session.get(Customer.class, id);
+            Customer customerFromDB = session.get(Customer.class, id);
+            if (customerFromDB != null) {
+                customer = customerFromDB;
+            }
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to find customer with id: " + id);
             e.printStackTrace();
@@ -126,7 +130,7 @@ public class HibCustomerDao implements CustomerDAO {
      */
     @Override
     public List<Customer> findAll() {
-        List<Customer> customers = null;
+        List<Customer> customers = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             customers = session.createQuery("from Customer").list();
         } catch (Exception e) {
@@ -141,11 +145,11 @@ public class HibCustomerDao implements CustomerDAO {
      *
      * @param name is a name of a customer
      * @return a customer with entered name
-     * or null if customer with this name does not exist in the database
+     * or customer with empty parameters if customer with this name does not exist in the database
      */
     @Override
     public Customer findByName(String name) {
-        Customer customer = null;
+        Customer customer = new Customer(0, name);
         try (Session session = sessionFactory.openSession()) {
             List<Customer> companies = session.createQuery("select c from Customer c where c.name like :name")
                     .setParameter("name", name).list();
