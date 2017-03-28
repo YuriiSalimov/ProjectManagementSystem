@@ -6,7 +6,8 @@ import com.management.project.models.Developer;
 import com.management.project.models.Project;
 
 /**
- * DESCRIPTION - ???
+ * The interface extends methods from GenericDAO for working with data base and entity
+ * The interface will be implemented by DAO classes that will work with Developer entity
  *
  * @author Perevoznyk Pavel
  */
