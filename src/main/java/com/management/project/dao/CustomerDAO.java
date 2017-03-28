@@ -3,7 +3,8 @@ package com.management.project.dao;
 import com.management.project.models.Customer;
 
 /**
- * DESCRIPTION - ???
+ * The interface extends methods for working with data base and entity from GenericDAO
+ * The interface will be implemented by DAO classes that will work with Customer entity
  *
  * @author Perevoznyk Pavel
  */
