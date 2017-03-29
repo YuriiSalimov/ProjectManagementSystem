@@ -191,7 +191,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
      *
      * @param rs set that we get after execution SQL query
      * @return a list of all customers from a database
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static List<Customer> buildCustomersFromResultSet(ResultSet rs) throws SQLException {
         List<Customer> customers = new ArrayList<>();

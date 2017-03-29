@@ -75,7 +75,7 @@ public class JdbcProjectDAO implements ProjectDAO {
      * Constructor.
      *
      * @param connection @param connection a connection to a database
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public JdbcProjectDAO(Connection connection) throws SQLException {
         this.connection = connection;
@@ -238,7 +238,7 @@ public class JdbcProjectDAO implements ProjectDAO {
      *
      * @param resultSet set that we get after execution SQL query
      * @return a list of all projects from a database
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private List<Project> buildProjectsFromResultSet(ResultSet resultSet) throws SQLException {
         List<Project> projects = new ArrayList<>();

@@ -196,7 +196,7 @@ public class JdbcSkillDAO implements SkillDAO {
      *
      * @param resultSet a set of result from statement query
      * @return a skill, which was created on the basis of resultSet
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static Skill createSkill(ResultSet resultSet) throws SQLException {
         Skill skill = new Skill();

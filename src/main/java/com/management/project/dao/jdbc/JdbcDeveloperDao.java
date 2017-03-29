@@ -100,7 +100,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * Constructor.
      *
      * @param connectionDB a connection to database
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public JdbcDeveloperDao(ConnectionDB connectionDB) throws SQLException {
         this.connectionDB = connectionDB;
@@ -308,7 +308,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      * @param connection a current connection
      * @param developer  a developer, which skills must de created
      * @return a set of skills, which was created
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private HashSet<Skill> createSkills(Connection connection, Developer developer) throws SQLException {
         HashSet<Skill> skills;
@@ -331,7 +331,7 @@ public class JdbcDeveloperDao implements DeveloperDAO {
      *
      * @param resultSet resultSet a set of result from statement query
      * @return a developer, which was created on the basics of resultSet
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private Developer createDeveloper(ResultSet resultSet) throws SQLException {
         Developer developer;

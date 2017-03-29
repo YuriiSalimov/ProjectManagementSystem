@@ -51,7 +51,7 @@ public final class FactoryDao {
      * is not exist
      *
      * @return an instance of CompanyDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static CompanyDAO getCompanyDAO() throws SQLException {
         if (companyDAO == null) {
@@ -64,7 +64,7 @@ public final class FactoryDao {
      * The method creates and returns an instance of CompanyDAO
      *
      * @return an instance of CompanyDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static CompanyDAO createCompanyDao() throws SQLException {
         return new JdbcCompanyDAO(ConnectionMySql.getInstance());
@@ -76,7 +76,7 @@ public final class FactoryDao {
      * CustomerDAO is not exist
      *
      * @return an instance of CustomerDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static CustomerDAO getCustomerDAO() throws SQLException {
         if (customerDAO == null) {
@@ -89,7 +89,7 @@ public final class FactoryDao {
      * The method creates and returns an instance of CustomerDAO
      *
      * @return an instance of CustomerDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static CustomerDAO createCustomerDao() throws SQLException {
         return new JdbcCustomerDAO(ConnectionMySql.getInstance().getConnection());
@@ -101,7 +101,7 @@ public final class FactoryDao {
      * if the instance of DeveloperDAO is not exist
      *
      * @return an instance of DeveloperDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static DeveloperDAO getDeveloperDAO() throws SQLException {
         if (developerDAO == null) {
@@ -114,7 +114,7 @@ public final class FactoryDao {
      * The method creates and returns an instance of DeveloperDAO
      *
      * @return an instance of DeveloperDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static DeveloperDAO createDeveloperDao() throws SQLException {
         return new JdbcDeveloperDao(ConnectionMySql.getInstance());
@@ -126,7 +126,7 @@ public final class FactoryDao {
      * ProjectDAO is not exist
      *
      * @return an instance of ProjectDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static ProjectDAO getProjectDAO() throws SQLException {
         if (projectDAO == null) {
@@ -139,7 +139,7 @@ public final class FactoryDao {
      * The method creates and returns an instance of ProjectDAO
      *
      * @return an instance of ProjectDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static ProjectDAO createProjectDao() throws SQLException {
         return new JdbcProjectDAO(ConnectionMySql.getInstance().getConnection());
@@ -151,7 +151,7 @@ public final class FactoryDao {
      * SkillDAO is not exist
      *
      * @return an instance of SkillDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static SkillDAO getSkillDAO() throws SQLException {
         if (skillDAO == null) {
@@ -164,7 +164,7 @@ public final class FactoryDao {
      * The method creates and returns an instance of SkillDAO
      *
      * @return an instance of SkillDAO
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     private static SkillDAO createSkillDao() throws SQLException {
         return new JdbcSkillDAO(ConnectionMySql.getInstance());
