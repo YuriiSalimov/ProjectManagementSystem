@@ -25,7 +25,7 @@ public class HibDeveloperDao implements DeveloperDAO {
     /**
      * Constructor
      *
-     * @param sessionFactory
+     * @param sessionFactory an instance of SessionFactory
      */
     public HibDeveloperDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

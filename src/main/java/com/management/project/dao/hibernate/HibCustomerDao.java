@@ -25,7 +25,7 @@ public class HibCustomerDao implements CustomerDAO {
     /**
      * Constructor
      *
-     * @param sessionFactory
+     * @param sessionFactory an instance of SessionFactory
      */
     public HibCustomerDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

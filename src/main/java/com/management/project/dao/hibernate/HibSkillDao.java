@@ -23,7 +23,7 @@ public class HibSkillDao implements SkillDAO {
     /**
      * Constructor
      *
-     * @param sessionFactory
+     * @param sessionFactory an instance of SessionFactory
      */
     public HibSkillDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

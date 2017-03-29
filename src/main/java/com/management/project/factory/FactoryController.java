@@ -49,7 +49,7 @@ public final class FactoryController {
      * and creates it if it is not exist
      *
      * @return an instance of CompanyController
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static CompanyController getCompanyController() throws SQLException {
         if (companyController == null) {
@@ -77,7 +77,7 @@ public final class FactoryController {
      * and creates it if it is not exist
      *
      * @return an instance of DeveloperController
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static DeveloperController getDeveloperController() throws SQLException {
         if (developerController == null) {
@@ -92,7 +92,7 @@ public final class FactoryController {
      * and creates it if it is not exist
      *
      * @return an instance of ProjectController
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static ProjectController getProjectController() throws SQLException {
         if (projectController == null) {
@@ -107,7 +107,7 @@ public final class FactoryController {
      * and creates it if it is not exist
      *
      * @return an instance of SkillController
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     public static SkillController getSkillController() throws SQLException {
         if (skillController == null) {

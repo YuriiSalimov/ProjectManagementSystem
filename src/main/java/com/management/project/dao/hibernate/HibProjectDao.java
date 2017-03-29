@@ -27,7 +27,7 @@ public class HibProjectDao implements ProjectDAO {
     /**
      * Constructor
      *
-     * @param sessionFactory
+     * @param sessionFactory an instance of SessionFactory
      */
     public HibProjectDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
