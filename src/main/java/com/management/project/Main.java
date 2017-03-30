@@ -8,15 +8,16 @@ import com.management.project.factory.HibFactoryController;
 import java.sql.SQLException;
 
 /**
- * DESCRIPTION - ???
+ * Class to run the program. The class extends AbstractController class and implements its abstract methods
  *
  * @author Slava Makhinich
  */
 public class Main extends AbstractController {
 
     /**
+     * The main method, method to run the program
      *
-     * @param args
+     * @param args an array of strings, arguments of the program
      */
     public static void main(String[] args) {
         try {
@@ -28,9 +29,14 @@ public class Main extends AbstractController {
     }
 
     /**
+     * The method create an instance of MainController and runs its method start(). There could be two types of
+     * MainController's instance, one of them uses JDBC DAO, and another uses Hibernate DAO.
+     * The type of MainController's instance depends on user's choice, that we get from readChoice() method.
      *
-     * @param choice
-     * @throws SQLException
+     * @param choice an integer, the users choice, that we get from readChoice() method.
+     *               If choice == 1 then program uses JDBC DAO, if choice == 2 then program uses Hibernate DAO.
+     *
+     * @throws SQLException in case of problem with connection to the database
      */
     @Override
     protected void action(int choice) throws SQLException {
@@ -55,7 +61,7 @@ public class Main extends AbstractController {
     }
 
     /**
-     * 
+     * The method prints menu of this class
      */
     @Override
     protected void printMenu() {
