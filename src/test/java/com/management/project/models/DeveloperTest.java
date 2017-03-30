@@ -7,7 +7,7 @@ import java.util.HashSet;
 import static org.junit.Assert.*;
 
 /**
- * Created by Slava on 03.03.2017.
+ * @author Slava Makhinich
  */
 public class DeveloperTest {
     private Developer developer;

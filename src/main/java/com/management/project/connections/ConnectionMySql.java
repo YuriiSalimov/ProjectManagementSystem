@@ -11,8 +11,19 @@ import java.sql.SQLException;
  */
 public class ConnectionMySql implements ConnectionDB {
 
+    /**
+     * User's name in MySQL server
+     */
     private final static String USER = "root";
+
+    /**
+     * User's password in MySQL server
+     */
     private final static String PASSWORD = "root";
+
+    /**
+     * Database's URL
+     */
     private final static String DB_URL = "jdbc:mysql://localhost:3306/projectManagementDB?autoReconnect=true&useSSL=false";
 
     /**
@@ -42,7 +53,7 @@ public class ConnectionMySql implements ConnectionDB {
      * This method create connection to DB
      *
      * @return connection to DB
-     * @throws SQLException
+     * @throws SQLException in case of connection problems
      */
     @Override
     public Connection getConnection() throws SQLException {
