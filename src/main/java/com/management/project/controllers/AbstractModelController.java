@@ -6,26 +6,28 @@ import com.management.project.models.Model;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * Abstract class, parent for all model's controllers
  *
  * @author Slava Makhinich
  */
 public abstract class AbstractModelController<T extends Model> extends AbstractController {
 
     /**
-     *
+     * An instance of DAO for working with model and with database
      */
     protected final GenericDAO<T, Long> dao;
 
     /**
-     * @param dao
+     * Constructor
+     *
+     * @param dao an instance of DAO for working with model and with database
      */
     public AbstractModelController(GenericDAO<T, Long> dao) {
         this.dao = dao;
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {
@@ -39,8 +41,10 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
+     * The method invokes one of the others methods of this class.
+     * The method that will be invoked depends on users choice, that we get from method readChoice()
      *
-     * @param choice
+     * @param choice a choice of user, that we get from method readChoice()
      */
     @Override
     protected void action(int choice) {
@@ -67,14 +71,16 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
-     *
+     * The method finds all models with particular type in database (uses DAO for this), and output them
      */
     protected void showAll() {
         dao.findAll().forEach(System.out::println);
     }
 
     /**
-     *
+     * Method for removing models from database.
+     * The method finds model in database by id (uses DAO for this),
+     * and removes it (uses DAO for this), if it was founded
      */
     protected void deleteById() {
         System.out.print("Delete by id. Input id: ");
@@ -89,7 +95,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
-     *
+     * The method gets a new model from method getNewModel(), and saves the model in database (uses DAO for this)
      */
     protected void addNew() {
         T model = getNewModel();
@@ -97,7 +103,10 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
-     *
+     * Method for updating models.
+     * The method asks user for id of model, finds model with this id in database (uses DAO for this),
+     * gets a new model from method getNewModel(), sets old id for this model,
+     * and saves the model in database (uses DAO for this)
      */
     protected void update() {
         System.out.print("Update. Input id: ");
@@ -116,7 +125,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
-     *
+     * The method finds a model in database by id (uses DAO for this), and outputs founded model
      */
     protected void findByIdAndOutput() {
         System.out.print("Find by id. Input id: ");
@@ -126,7 +135,7 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
-     *
+     * The method finds a model in database by name (uses DAO for this), and outputs founded model
      */
     protected void findByNameAndOutput() {
         System.out.print("Find by name. Input name: ");
@@ -136,8 +145,9 @@ public abstract class AbstractModelController<T extends Model> extends AbstractC
     }
 
     /**
+     * Method for creating new developers. Needs to be implemented.
      *
-     * @return
+     * @return a new model
      */
     protected abstract T getNewModel();
 }

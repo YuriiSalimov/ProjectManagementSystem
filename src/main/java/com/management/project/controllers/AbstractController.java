@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Abstract class, parent  for all controllers
+ * Abstract class, parent for all controllers
  *
  * @author Slava Makhinich
  */
