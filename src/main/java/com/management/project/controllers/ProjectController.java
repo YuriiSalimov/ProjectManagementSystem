@@ -10,27 +10,28 @@ import com.management.project.models.Project;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * An controller for working with Project entity
  *
  * @author Slava Makhinich
  */
 public class ProjectController extends AbstractModelController<Project> {
 
     /**
-     *
+     * An instance of CompanyDAO for working with database with Company entity
      */
     protected CompanyDAO companyDAO;
 
     /**
-     *
+     * An instance of CustomerDAO for working with database with Customer entity
      */
     protected CustomerDAO customerDAO;
 
     /**
+     * Constructor
      *
-     * @param dao
-     * @param companyDAO
-     * @param customerDAO
+     * @param dao  An instance of GenericDAO<Project, Long> for working with database with Project entity
+     * @param companyDAO  An instance of CompanyDAO for working with database with Company entity
+     * @param customerDAO An instance of CustomerDAO for working with database with Customer entity
      */
     public ProjectController(
             GenericDAO<Project, Long> dao,
@@ -43,7 +44,7 @@ public class ProjectController extends AbstractModelController<Project> {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {
@@ -53,8 +54,10 @@ public class ProjectController extends AbstractModelController<Project> {
     }
 
     /**
+     * Method for creating new projects. The method asks user for project's parameters,
+     * and return a new project with these parameters
      *
-     * @return
+     * @return a new project with parameters that the user inputted
      */
     @Override
     protected Project getNewModel() {

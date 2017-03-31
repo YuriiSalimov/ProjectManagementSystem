@@ -6,23 +6,26 @@ import com.management.project.models.Customer;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * An controller for working with Project entity
  *
  * @author Slava Makhinich
  */
 public class CustomerController extends AbstractModelController<Customer> {
 
     /**
+     * Constructor
      *
-     * @param dao
+     * @param dao An instance of GenericDAO<Customer, Long> for working with database with Project entity
      */
     public CustomerController(GenericDAO<Customer, Long> dao) {
         super(dao);
     }
 
     /**
+     * Method for creating new customers. The method asks user for customer's name,
+     * and return a new customer with this name
      *
-     * @return
+     * @return a new customer with name that the user inputted
      */
     @Override
     protected Customer getNewModel() {
@@ -32,7 +35,7 @@ public class CustomerController extends AbstractModelController<Customer> {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {

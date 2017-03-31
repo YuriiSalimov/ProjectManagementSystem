@@ -13,32 +13,34 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * An controller for working with Developer entity
  *
  * @author Slava Makhinich
  */
 public class DeveloperController extends AbstractModelController<Developer> {
 
     /**
-     *
+     * An instance of SkillDAO for working with database with database with Skill entity
      */
     protected SkillDAO skillDAO;
 
     /**
-     *
+     * An instance of CompanyDAO for working with database with Company entity
      */
     protected CompanyDAO companyDAO;
 
     /**
-     *
+     * An instance of ProjectDAO for working with database with Project entity
      */
     protected ProjectDAO projectDAO;
 
     /**
-     * @param dao
-     * @param skillDAO
-     * @param companyDAO
-     * @param projectDAO
+     * Constructor
+     *
+     * @param dao An instance of GenericDAO<Developer, Long> for working with database with Project entity
+     * @param skillDAO An instance of CompanyDAO for working with database with Skill entity
+     * @param companyDAO An instance of CompanyDAO for working with database with Company entity
+     * @param projectDAO An instance of CompanyDAO for working with database with Project entity
      */
     public DeveloperController(
             GenericDAO<Developer, Long> dao,
@@ -52,7 +54,7 @@ public class DeveloperController extends AbstractModelController<Developer> {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {
@@ -62,7 +64,10 @@ public class DeveloperController extends AbstractModelController<Developer> {
     }
 
     /**
-     * @return
+     * Method for creating new developers. The method asks user for developer's parameters,
+     * and return a new developer with these parameters
+     *
+     * @return a new developer with parameters that the user inputted
      */
     @Override
     protected Developer getNewModel() {

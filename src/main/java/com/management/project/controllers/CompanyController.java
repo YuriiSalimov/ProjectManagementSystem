@@ -6,23 +6,26 @@ import com.management.project.models.Company;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * An controller for working with Company entity
  *
  * @author Вадим
  */
 public class CompanyController extends AbstractModelController<Company> {
 
     /**
+     * Constructor
      *
-     * @param dao
+     * @param dao An instance of GenericDAO<Company, Long> for working with database with Project entity
      */
     public CompanyController(GenericDAO<Company, Long> dao) {
         super(dao);
     }
 
     /**
+     * Method for creating new companies. The method asks user for company's name,
+     * and return a new company with this name
      *
-     * @return
+     * @return a new company with name that the user inputted
      */
     @Override
     protected Company getNewModel() {
@@ -32,7 +35,7 @@ public class CompanyController extends AbstractModelController<Company> {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {

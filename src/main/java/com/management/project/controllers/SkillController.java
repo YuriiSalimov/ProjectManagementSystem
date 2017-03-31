@@ -6,23 +6,25 @@ import com.management.project.models.Skill;
 import java.util.Scanner;
 
 /**
- * DESCRIPTION - ???
+ * An controller for working with Skill entity
  *
  * @author Вадим
  */
 public class SkillController extends AbstractModelController<Skill> {
 
     /**
+     * Constructor
      *
-     * @param dao
+     * @param dao An instance of GenericDAO<Skill, Long> for working with database with Project entity
      */
     public SkillController(GenericDAO<Skill, Long> dao) {
         super(dao);
     }
 
     /**
+     * Method for creating new skills. The method asks user for skill's name, and return a new skill with this name
      *
-     * @return
+     * @return a new skill with name that the user inputted
      */
     @Override
     protected Skill getNewModel() {
@@ -32,7 +34,7 @@ public class SkillController extends AbstractModelController<Skill> {
     }
 
     /**
-     *
+     * The method prints menu of this controller
      */
     @Override
     protected void printMenu() {
